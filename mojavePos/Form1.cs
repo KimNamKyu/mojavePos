@@ -29,6 +29,10 @@ namespace mojavePos
             패널.BackColor = Color.Aqua;
             btnSet btn1 = new btnSet(this, "btn1", "버튼", 50, 50, 100, 70, btn_Click);
             Button button = ct.btn(btn1);
+            tbSet tx1 = new tbSet(this, "txt1", 100, 30, 60, 90);
+            TextBox test = ct.txtbox(tx1);
+
+            Controls.Add(test);
 
             Controls.Add(button);
             패널.Controls.Add(라벨1);

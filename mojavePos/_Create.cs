@@ -43,6 +43,16 @@ namespace mojavePos
             return panel;
         }
 
+        public TextBox txtbox(tbSet ts)
+        {
+            TextBox txtbox = new TextBox();
+            txtbox.Name = ts.Name;
+            txtbox.Size = new Size(ts.SX,ts.SY);
+            txtbox.Location = new Point(ts.PX,ts.PY);
+            return txtbox;
+        }
+
+
        
     }
 }
