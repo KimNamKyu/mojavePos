@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="btnSet.cs" />
+    <Compile Include="comboboxSet.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +55,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="lbSet.cs" />
+    <Compile Include="lvSet.cs" />
+    <Compile Include="pictureBoxSet.cs" />
     <Compile Include="pnSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
