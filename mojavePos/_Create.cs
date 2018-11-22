@@ -10,7 +10,6 @@ namespace mojavePos
 {
     class _Create
     {
-        //버튼
         public Button btn(btnSet bS)
         {
             Button btn = new Button();
@@ -24,7 +23,6 @@ namespace mojavePos
             return btn;
         }
 
-        //라벨
         public Label lable(lbSet lb)
         {
             Label label = new Label();
@@ -37,7 +35,6 @@ namespace mojavePos
             return label;
         }
 
-        //패널
         public Panel panel(pnSet pn)
         {
             Panel panel = new Panel();
@@ -45,7 +42,7 @@ namespace mojavePos
             panel.Location = new Point(pn.PX,pn.PY);
             return panel;
         }
-        
+
        
     }
 }
