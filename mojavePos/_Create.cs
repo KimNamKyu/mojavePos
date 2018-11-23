@@ -19,10 +19,24 @@ namespace mojavePos
             btn.Text = bS.Text;
             btn.Size = new Size(bS.SX,bS.SY);
             btn.Location = new Point(bS.PX,bS.PY);
-            btn.BackColor = Color.Gainsboro;
+            btn.BackColor = Color.White;
             btn.Cursor = Cursors.Hand;
             btn.Click += bS.eh_btn;
             return btn;
+        }
+
+        public void btn1(btnSet bS)
+        {
+            Button btn1 = new Button();
+            btn1.DialogResult = DialogResult.OK;
+            btn1.Name = bS.Name;
+            btn1.Text = bS.Text;
+            btn1.Size = new Size(bS.SX, bS.SY);
+            btn1.Location = new Point(bS.PX, bS.PY);
+            btn1.BackColor = Color.White;
+            btn1.Cursor = Cursors.Hand;
+            btn1.Click += bS.eh_btn;
+            bS.Form.Controls.Add(btn1);
         }
         //라벨
         public Label lable(lbSet lb)

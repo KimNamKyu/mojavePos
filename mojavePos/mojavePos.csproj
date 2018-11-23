@@ -56,6 +56,12 @@
     </Compile>
     <Compile Include="lbSet.cs" />
     <Compile Include="lvSet.cs" />
+    <Compile Include="MainPos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainPos.Designer.cs">
+      <DependentUpon>MainPos.cs</DependentUpon>
+    </Compile>
     <Compile Include="pictureBoxSet.cs" />
     <Compile Include="pnSet.cs" />
     <Compile Include="Program.cs" />
