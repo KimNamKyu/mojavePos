@@ -22,22 +22,10 @@ namespace mojavePos
             btn.BackColor = Color.White;
             btn.Cursor = Cursors.Hand;
             btn.Click += bS.eh_btn;
+            bS.Form.Controls.Add(btn);
             return btn;
         }
-
-        public void btn1(btnSet bS)
-        {
-            Button btn1 = new Button();
-            btn1.DialogResult = DialogResult.OK;
-            btn1.Name = bS.Name;
-            btn1.Text = bS.Text;
-            btn1.Size = new Size(bS.SX, bS.SY);
-            btn1.Location = new Point(bS.PX, bS.PY);
-            btn1.BackColor = Color.White;
-            btn1.Cursor = Cursors.Hand;
-            btn1.Click += bS.eh_btn;
-            bS.Form.Controls.Add(btn1);
-        }
+        
         //라벨
         public Label lable(lbSet lb)
         {
@@ -48,6 +36,7 @@ namespace mojavePos
             label.Size = new Size(lb.SX, lb.SY);
             label.Location = new Point(lb.PX, lb.PY);
             //label.BackColor = Color.Transparent;
+            lb.Form.Controls.Add(label);
             return label;
         }
 
@@ -57,6 +46,7 @@ namespace mojavePos
             Panel panel = new Panel();
             panel.Size = new Size(pn.SX,pn.SY);
             panel.Location = new Point(pn.PX,pn.PY);
+            //pn.Form.Controls.Add(panel);
             return panel;
         }
 
@@ -67,6 +57,7 @@ namespace mojavePos
             txtbox.Name = ts.Name;
             txtbox.Size = new Size(ts.SX,ts.SY);
             txtbox.Location = new Point(ts.PX,ts.PY);
+            ts.Form.Controls.Add(txtbox);
             return txtbox;
         }
         //리스트뷰
@@ -75,9 +66,11 @@ namespace mojavePos
             ListView listView = new ListView();
             listView.View = View.Details;
             listView.GridLines = true;
+            listView.FullRowSelect = true;
             listView.Size = new Size(lv.SX, lv.SY);
             listView.Location = new Point(lv.PX,lv.PY);
             listView.MouseClick += lv.listview;
+            lv.Form.Controls.Add(listView);
             return listView;
         }
         //픽쳐박스
@@ -88,6 +81,7 @@ namespace mojavePos
             picture.Image = (Bitmap)Properties.Resources.ResourceManager.GetObject(pb.ImageRoute);
             picture.Size = new Size(pb.SX, pb.SY);
             picture.Location = new Point(pb.PX, pb.PY);
+            pb.Form.Controls.Add(picture);
             return picture;
         }
         
