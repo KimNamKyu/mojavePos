@@ -72,8 +72,15 @@ namespace mojavePos
         {
             ArrayList arrayList = new ArrayList();
 
-            arrayList.Add(new btnSet(this,"table1"," ", 200,300,100,150,btn_Click));
-            for(int i = 0; i<arrayList.Count; i++)
+            for( int i  = 0; i<arrayList.Count; i++)
+            {
+
+            }
+            arrayList.Add(new btnSet(this, "table1", " ", 200, 300, 100, 150, btn_Click));
+            arrayList.Add(new btnSet(this, "table1", " ", 200, 300, 100, 550, btn_Click));
+            arrayList.Add(new btnSet(this, "table1", " ", 200, 300, 400, 150, btn_Click));
+            arrayList.Add(new btnSet(this, "table1", " ", 200, 300, 400, 550, btn_Click));
+            for (int i = 0; i<arrayList.Count; i++)
             {
                 ct.btn1((btnSet)arrayList[i]);
             }
