@@ -54,6 +54,7 @@ namespace mojavePos
         public TextBox txtbox(tbSet ts)
         {
             TextBox txtbox = new TextBox();
+            txtbox.Multiline = true;
             txtbox.Name = ts.Name;
             txtbox.Size = new Size(ts.SX,ts.SY);
             txtbox.Location = new Point(ts.PX,ts.PY);

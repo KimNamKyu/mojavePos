@@ -18,12 +18,16 @@ namespace mojavePos
         {
             InitializeComponent();
             Load += MainPos_Load;
+           
+            //this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void MainPos_Load(object sender, EventArgs e)
         {
             ClientSize = new Size(1500, 900);
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             Mainup_Load();
@@ -44,6 +48,13 @@ namespace mojavePos
             pnl.BackColor = Color.Blue;
             Controls.Add(pnl);
 
+            PictureBox mojave = new PictureBox();
+            mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("mojave");
+            mojave.SizeMode = PictureBoxSizeMode.StretchImage;
+            mojave.Size = new Size(300, 100);
+            mojave.Location = new Point(0, 0);
+            pnl.Controls.Add(mojave);
+
             Panel pnl2 = new Panel();
             pnl2 = ct.panel((pnSet)arr[1]);
             pnl2.BackColor = Color.Gainsboro;
@@ -51,7 +62,7 @@ namespace mojavePos
 
             Panel pnl3 = new Panel();
             pnl3 = ct.panel((pnSet)arr[2]);
-            pnl3.BackColor = Color.Green;
+            pnl3.BackColor = Color.Silver;
             pnl3.Click += Pnl3_Click;
             Controls.Add(pnl3);
 
@@ -107,6 +118,7 @@ namespace mojavePos
             cv.FormBorderStyle = FormBorderStyle.FixedSingle;
             cv.MaximizeBox = false;
             cv.MinimizeBox = false;
+            cv.StartPosition = FormStartPosition.CenterParent;
             cv.Show();
         }
     }

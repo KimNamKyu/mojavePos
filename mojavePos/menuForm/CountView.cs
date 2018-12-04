@@ -1,4 +1,5 @@
 ﻿using mojavePos.menuForm;
+using mojavePos.Modal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -79,17 +80,30 @@ namespace mojavePos
 
         private void btn_Click(object sender, EventArgs e)
         {
-
+            Button btn = (Button)sender;
+            switch (btn.Name)
+            {
+                case "btn1":
+                    
+                    break;
+                case "btn2":
+                    Cash cash = new Cash();
+                    cash.StartPosition = FormStartPosition.CenterParent;
+                    cash.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void menu_view()
         {
-            pnSet pn1 = new pnSet(this, 100, 700, 700, 50);
+            pnSet pn1 = new pnSet(this, 100, 800, 700, 50);
             Panel panel = ct.panel(pn1);
             Controls.Add(panel);
-            pnSet pn2 = new pnSet(this, 600, 700, 800, 50);
+            pnSet pn2 = new pnSet(this, 600, 800, 800, 50);
             panel2 = ct.panel(pn2);
-            panel2.BackColor = Color.Yellow;
+            panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
             
             ArrayList arrayList = new ArrayList();
@@ -100,18 +114,11 @@ namespace mojavePos
             arrayList.Add(new btnSet(this, "menu5", "디저트", 100, 100, 0, 400, menu_Click));
             arrayList.Add(new btnSet(this, "menu6", "사이드메뉴", 100, 100, 0, 500, menu_Click));
 
-            Button button = ct.btn((btnSet)arrayList[0]);
-            Button button1 = ct.btn((btnSet)arrayList[1]);
-            Button button2 = ct.btn((btnSet)arrayList[2]);
-            Button button3 = ct.btn((btnSet)arrayList[3]);
-            Button button4 = ct.btn((btnSet)arrayList[4]);
-            Button button5 = ct.btn((btnSet)arrayList[5]);
-            panel.Controls.Add(button);
-            panel.Controls.Add(button1);
-            panel.Controls.Add(button2);
-            panel.Controls.Add(button3);
-            panel.Controls.Add(button4);
-            panel.Controls.Add(button5);
+            for( int i = 0; i < arrayList.Count; i++)
+            {
+                Button button = ct.btn((btnSet)arrayList[i]);
+                panel.Controls.Add(button);
+            }
         }
         
         private void menu_Click(object sender, EventArgs e)
