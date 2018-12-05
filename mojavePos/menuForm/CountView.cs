@@ -89,7 +89,8 @@ namespace mojavePos
                 case "btn2":
                     Cash cash = new Cash();
                     cash.StartPosition = FormStartPosition.CenterParent;
-                    cash.ShowDialog();
+                    cash.BackColor = Color.Silver;
+                    cash.Show();
                     break;
                 default:
                     break;
