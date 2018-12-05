@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace mojavePos.Han
 {
@@ -22,6 +23,17 @@ namespace mojavePos.Han
         {
             ClientSize = new Size(1500, 800);
             this.BackColor = Color.Coral;
+        }
+
+        private void UserView()
+        {
+            ArrayList list = new ArrayList();
+            list.Add(new lvSet(this, "", 500, 300, 50, 50, list_Click));
+            
+        }
+        private void list_Click(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
