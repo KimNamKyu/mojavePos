@@ -99,6 +99,7 @@ namespace mojavePos
 
         private void menu_view()
         {
+            this.Visible = true;
             pnSet pn1 = new pnSet(this, 100, 800, 700, 50);
             Panel panel = ct.panel(pn1);
             Controls.Add(panel);
