@@ -28,7 +28,7 @@ namespace mojavePos.menuForm
             arr.Add(new btnSet(this, "btn3", "쿼리 아란치미", 200, 100, 400, 0, btn_Click));
             arr.Add(new btnSet(this, "btn4", "오늘의 스프", 200, 100, 0, 100, btn_Click));
             arr.Add(new btnSet(this, "btn5", "감바스 알아히요", 200, 100, 200, 100, btn_Click));
-
+             
             for( int i = 0; i<arr.Count; i++)
             {
                 ct.btn((btnSet)arr[i]);
