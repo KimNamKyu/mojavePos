@@ -90,7 +90,7 @@ namespace mojavePos
                     Cash cash = new Cash();
                     cash.StartPosition = FormStartPosition.CenterParent;
                     cash.BackColor = Color.Silver;
-                    cash.ShowDialog();
+                    cash.Show();
                     break;
                 default:
                     break;

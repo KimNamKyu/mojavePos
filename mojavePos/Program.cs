@@ -17,7 +17,7 @@ namespace mojavePos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Cash());
+            Application.Run(new MainPos());
         }
     }
 }
