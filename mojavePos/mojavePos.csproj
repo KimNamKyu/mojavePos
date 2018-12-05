@@ -35,6 +35,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +53,30 @@
     <Compile Include="btnSet.cs" />
     <Compile Include="comboboxSet.cs" />
     <Compile Include="Commons.cs" />
+    <Compile Include="Han\ManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Han\ManagerForm.Designer.cs">
+      <DependentUpon>ManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Han\MenuForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Han\MenuForm.Designer.cs">
+      <DependentUpon>MenuForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Han\MoneyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Han\MoneyForm.Designer.cs">
+      <DependentUpon>MoneyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Han\UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Han\UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuForm\beverageForm.cs">
       <SubType>Form</SubType>
     </Compile>
