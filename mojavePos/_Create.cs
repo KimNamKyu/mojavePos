@@ -85,7 +85,15 @@ namespace mojavePos
             pb.Form.Controls.Add(picture);
             return picture;
         }
-        
+        public DateTimePicker datepic(DateSet ds)
+        {
+            DateTimePicker datepic = new DateTimePicker();
+            datepic.Name = ds.Name;
+            datepic.Location = new Point(ds.PX, ds.PY);
+            datepic.Size = new Size(ds.SX, ds.SY);
+            ds.Form.Controls.Add(datepic);
+            return datepic;
+        }
         //콤보박스
         /*
         public ComboBox combobox(comboboxSet cbox)

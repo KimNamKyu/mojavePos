@@ -54,6 +54,7 @@
     <Compile Include="btnSet.cs" />
     <Compile Include="comboboxSet.cs" />
     <Compile Include="Commons.cs" />
+    <Compile Include="DateSet.cs" />
     <Compile Include="Han\ManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
