@@ -1,4 +1,4 @@
-﻿using mojavePos.Modal;
+﻿using mojavePos.Han;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace mojavePos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainPos());
+            Application.Run(new ManagerForm());
         }
     }
 }
