@@ -17,7 +17,7 @@ namespace mojavePos
         ///////// 좌표 체크시 추가 /////////
         static ToolStripStatusLabel StripLb;
         StatusStrip statusStrip;
-        ///////////////////////////////////
+        /////////////////////////////////////
   
 
 
