@@ -24,6 +24,7 @@ namespace mojavePos.Modal
 
         private void Cash_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.Silver;
             ClientSize = new Size(900,500);
             pnSet pn = new pnSet(this, 800, 400, 50, 50);
             Panel panel = ct.panel(pn);
