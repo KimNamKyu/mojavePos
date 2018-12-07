@@ -17,7 +17,7 @@ namespace mojavePos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InsertForm());
+            Application.Run(new ManagerForm());
         }
     }
 }

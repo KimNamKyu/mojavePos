@@ -118,7 +118,8 @@ namespace mojavePos.Han
 
         private void insert_Click(object sender, EventArgs e) //추가버튼
         {
-            
+            InsertForm insert = new InsertForm();
+            insert.ShowDialog();
         }
 
         private void search_Click(object sender, EventArgs e) //검색버튼
