@@ -103,12 +103,16 @@ namespace mojavePos
 
         private void btn_Click(object sender, EventArgs e)
         {
-
+            FORM_03 F3 = new FORM_03();
+            this.Dispose(false);
+            F3.Show();
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-
+            FORM_02 F2 = new FORM_02();
+            this.Dispose(false);
+            F2.Show();
         }
 
         ///////////////////////// 좌표 체크시 추가 /////////////////////////////

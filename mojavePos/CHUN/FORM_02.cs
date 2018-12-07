@@ -70,6 +70,14 @@ namespace mojavePos
             TextBox 시리얼택박 = ct.txtbox(tx4);
             Controls.Add(시리얼택박);
 
+            btnSet Btn1_pn1 = new btnSet(this, "Btn1_pn1", "가입", 80, 30, 55, 330, btn_Click);
+            Button 가입버튼 = ct.btn(Btn1_pn1);
+            Controls.Add(가입버튼);
+
+            btnSet Btn2_pn1 = new btnSet(this, "Btn2_pn1", "취소", 80, 30, 155, 330, btn2_Click);
+            Button 취소버튼 = ct.btn(Btn2_pn1);
+            Controls.Add(취소버튼);
+
             //왼쪽 패널 출력
             pnSet pn1 = new pnSet(this, 240, 370, 30, 30);
             Panel 패널 = ct.panel(pn1);
@@ -142,7 +150,19 @@ namespace mojavePos
             패널2.Controls.Add(라벨13);
             패널2.Controls.Add(라벨14);
         }
+        private void btn_Click(object sender, EventArgs e)
+        {
+            FORM_01 F1 = new FORM_01();
+            this.Dispose(false);
+            F1.Show();
+        }
 
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            FORM_01 F1 = new FORM_01();
+            this.Dispose(false);
+            F1.Show();
+        }
 
         ///////////////////////// 좌표 체크시 추가 /////////////////////////////
 
