@@ -62,6 +62,7 @@ namespace mojavePos
                 else if(typeof(lvSet) == arr[i].GetType())
                 {
                     ListView lv = ct.listview((lvSet)arr[i]);
+                    lv.BackColor = Color.WhiteSmoke;
                     panel.Controls.Add(lv);
                     lv.Columns.Add("No", 40, HorizontalAlignment.Center);
                     lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);

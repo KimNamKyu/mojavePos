@@ -56,7 +56,7 @@ namespace mojavePos.Modal
                 {
                     ListView listView = ct.listview((lvSet)arr[i]);
                     panel.Controls.Add(listView);
-                    
+                    listView.BackColor = Color.WhiteSmoke;
                     listView.Columns.Add("전화번호", 120, HorizontalAlignment.Center);
                     listView.Columns.Add("쿠폰", 150, HorizontalAlignment.Center);
                     listView.Columns.Add("기간", 160, HorizontalAlignment.Center);
