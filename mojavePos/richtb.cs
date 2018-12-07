@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Collections;
+
 namespace mojavePos
 {
-    class comboboxSet
+    class Richtb
     {
         Form form;
         string name;
         int sX, sY, pX, pY;
-        public MouseEventHandler eh_cbox;
-        
-        public comboboxSet(Form form, string name, int sX, int sY, int pX, int pY)
+        public Richtb(Form form, string name, int sX, int sY, int pX, int pY)
         {
             this.form = form;
             this.name = name;
@@ -22,8 +20,6 @@ namespace mojavePos
             this.sY = sY;
             this.pX = pX;
             this.pY = pY;
-            
-            
         }
         public Form Form
         {

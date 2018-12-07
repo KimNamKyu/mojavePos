@@ -53,7 +53,6 @@ namespace mojavePos.Han
                 head.Controls.Add(button);
             }
 
-
         }
         private void Main_Click(object sender, EventArgs e)
         {
@@ -90,6 +89,6 @@ namespace mojavePos.Han
                     break;
             }
         }
-
+  
     }
 }
