@@ -103,23 +103,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_01.cs">
+    <Compile Include="CHUN\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_01.Designer.cs">
-      <DependentUpon>FORM_01.cs</DependentUpon>
+    <Compile Include="CHUN\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_02.cs">
+    <Compile Include="CHUN\SignInForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_02.Designer.cs">
-      <DependentUpon>FORM_02.cs</DependentUpon>
+    <Compile Include="CHUN\SignInForm.Designer.cs">
+      <DependentUpon>SignInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_03.cs">
+    <Compile Include="CHUN\Pos_ManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_03.Designer.cs">
-      <DependentUpon>FORM_03.cs</DependentUpon>
+    <Compile Include="CHUN\Pos_ManagerForm.Designer.cs">
+      <DependentUpon>Pos_ManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="lbSet.cs" />
     <Compile Include="lvSet.cs" />
