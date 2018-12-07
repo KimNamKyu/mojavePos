@@ -61,6 +61,17 @@ namespace mojavePos
             ts.Form.Controls.Add(txtbox);
             return txtbox;
         }
+        //리치텍스트박스
+        public RichTextBox richbox(Richtb rt)
+        {
+            RichTextBox rtxtbox = new RichTextBox();
+            rtxtbox.Multiline = true;
+            rtxtbox.Name = rt.Name;
+            rtxtbox.Size = new Size(rt.SX, rt.SY);
+            rtxtbox.Location = new Point(rt.PX, rt.PY);
+            rt.Form.Controls.Add(rtxtbox);
+            return rtxtbox;
+        }
         //리스트뷰
         public ListView listview(lvSet lv)
         {
@@ -85,19 +96,28 @@ namespace mojavePos
             pb.Form.Controls.Add(picture);
             return picture;
         }
-        
+        public DateTimePicker datepic(DateSet ds)
+        {
+            DateTimePicker datepic = new DateTimePicker();
+            datepic.Name = ds.Name;
+            datepic.Location = new Point(ds.PX, ds.PY);
+            datepic.Size = new Size(ds.SX, ds.SY);
+            ds.Form.Controls.Add(datepic);
+            return datepic;
+        }
         //콤보박스
-        /*
+        
         public ComboBox combobox(comboboxSet cbox)
         {
             ComboBox combobox = new ComboBox();
-            for(int i = 0; i< cbox.)
             combobox.Name = cbox.Name;
             combobox.Location = new Point(cbox.PX, cbox.PY);
             combobox.Size = new Size(cbox.SX, cbox.SY);
+            combobox.DisplayMember = "1";
+            combobox.ValueMember = "2";
             combobox.MouseClick += cbox.eh_cbox;
             return combobox;
         }
-        */
+        
     }
 }
