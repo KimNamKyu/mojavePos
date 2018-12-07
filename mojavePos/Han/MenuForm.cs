@@ -12,6 +12,8 @@ namespace mojavePos.Han
 {
     public partial class MenuForm : Form
     {
+        private Graphics gr;
+
         public MenuForm()
         {
             InitializeComponent();
@@ -53,6 +55,24 @@ namespace mojavePos.Han
             메뉴픽쳐.BackColor = Color.Green;
             Controls.Add(메뉴픽쳐);
 
+
+
+            gr = this.CreateGraphics();
+            Pen pen1 = new Pen(Color.Black, 2);
+
+            pen1.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
+            Point First = new Point(0, 150);
+            Point Second = new Point(100, 150);
+            
+            gr.DrawLine(pen1, First, Second);
+            // pictureBox1 내부에 그리기
+
+            gr = this.CreateGraphics();
+
+            gr.DrawLine(pen1, First, Second);
+        // Form1에 그리기
+
+            
         }
         private void btn_Click(object sender, EventArgs e)
         {
