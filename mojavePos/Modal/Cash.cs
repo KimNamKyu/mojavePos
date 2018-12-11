@@ -24,6 +24,7 @@ namespace mojavePos.Modal
 
         private void Cash_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.Silver;
             ClientSize = new Size(900,500);
             pnSet pn = new pnSet(this, 800, 400, 50, 50);
             Panel panel = ct.panel(pn);
@@ -50,7 +51,7 @@ namespace mojavePos.Modal
             arr.Add(new tbSet(this, "tb1", 200, 30, 150, 100));
             //arr.Add(new tbSet(this, "tb2", 200, 30, 150, 180));
             arr.Add(new tbSet(this, "tb3", 200, 30, 150, 260));
-            arr.Add(new btnSet(this, "button", "결제완료", 315, 40, 35, 330, btn_Click));
+            arr.Add(new btnSet(this, "결제완료", "결제완료", 315, 40, 35, 330, btn1_Click));
 
             //계산기
             //arr.Add(new tbSet(this, "tb4", 300, 30, 460, 100));
@@ -105,12 +106,21 @@ namespace mojavePos.Modal
                     textbox1.Clear();
                     break;
                 case "DEL":
-                    textbox1.Text = textbox1.Text.Substring(0, textbox1.Text.Length - 1);
+                    if(textbox1.Text.Length < 0)
+                    {
+                        textbox1.Text.Substring(textbox1.Text.Length + 1);
+                    }
+                    else if(textbox1.Text.Length > 0)
+                    {
+                        textbox1.Text = textbox1.Text.Substring(0,textbox1.Text.Length - 1);
+                    }
                     break;
                 case "ENTER":
                     textbox2.Text = textbox1.Text;
                     break;
-
+                case "결제완료":
+                    Dispose();
+                    break;
             }
         }
 

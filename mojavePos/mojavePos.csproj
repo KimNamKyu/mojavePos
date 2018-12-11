@@ -165,6 +165,12 @@
     <Compile Include="Modal\Cash.Designer.cs">
       <DependentUpon>Cash.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\Coupon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\Coupon.Designer.cs">
+      <DependentUpon>Coupon.cs</DependentUpon>
+    </Compile>
     <Compile Include="pictureBoxSet.cs" />
     <Compile Include="pnSet.cs" />
     <Compile Include="Program.cs" />

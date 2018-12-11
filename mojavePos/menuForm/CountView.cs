@@ -17,6 +17,7 @@ namespace mojavePos
     {
         _Create ct = new _Create();
         Panel panel2;
+        private Panel panel;
 
         public CountView()
         {
@@ -37,28 +38,51 @@ namespace mojavePos
         private void listView()
         {
             ArrayList arr = new ArrayList();
-            arr.Add(new lvSet(this, "", 500, 300, 50, 50, list_Click));
-            ListView lv = ct.listview((lvSet)arr[0]);
-            Controls.Add(lv);
+            arr.Add(new pnSet(this,600,800,50,50));
+            arr.Add(new lvSet(this, "", 500, 300, 50, 30, list_Click));
+            arr.Add(new lbSet(this, "lb1", "판매액", 150, 30, 100, 370, 20));
+            arr.Add(new lbSet(this, "lb1", "할인", 150, 30, 110, 420, 20));
+            arr.Add(new lbSet(this, "lb1", "총금액", 150, 30, 100, 470, 20));
+            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 370, 20));
+            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 420, 20));
+            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 470, 20));
+            arr.Add(new btnSet(this, "btn1", "할인쿠폰", 230, 100, 50, 570, btn_Click));
+            arr.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 570, btn_Click));
+            arr.Add(new btnSet(this, "btn3", "주문", 230, 100, 50, 680, btn_Click));
+            arr.Add(new btnSet(this, "btn4", "카드결제", 230, 100, 320, 680, btn_Click));
 
-            lv.Columns.Add("No",40,HorizontalAlignment.Center);
-            lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);
-            lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
-
-            ListView lv2 = new ListView();
-            lv2.View = View.Details;
-            lv2.GridLines = true;
-            lv2.Alignment = ListViewAlignment.Left;
-            lv2.Size = new Size(500, 200);
-            lv2.Location = new Point(50, 380);
-            Controls.Add(lv2);
-
-            lv2.Columns.Add("총금액", 100, HorizontalAlignment.Center);
-            lv2.Columns.Add("메뉴명", 100, HorizontalAlignment.Center);
-            lv2.Columns.Add("단가", 100, HorizontalAlignment.Center);
-        }
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if (typeof(pnSet) == arr[i].GetType())
+                {
+                    panel = ct.panel((pnSet)arr[i]);
+                    panel.BackColor = Color.Gainsboro;
+                    Controls.Add(panel);
+                }
+                else if(typeof(lvSet) == arr[i].GetType())
+                {
+                    ListView lv = ct.listview((lvSet)arr[i]);
+                    lv.BackColor = Color.WhiteSmoke;
+                    panel.Controls.Add(lv);
+                    lv.Columns.Add("No", 40, HorizontalAlignment.Center);
+                    lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);
+                    lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
+                    lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
+                    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                }
+                else if(typeof(btnSet) == arr[i].GetType())
+                {
+                    Button button = ct.btn((btnSet)arr[i]);
+                    panel.Controls.Add(button);
+                }
+                else if(typeof(lbSet) == arr[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr[i]);
+                    if (label.Name == "lb2") label.BackColor = Color.White;
+                    panel.Controls.Add(label);
+                }
+            }
+         }
 
         private void list_Click(object sender, MouseEventArgs e)
         {
@@ -68,10 +92,7 @@ namespace mojavePos
         private void btn_load()
         {
             ArrayList arr2 = new ArrayList();
-            arr2.Add(new btnSet(this, "btn1", "할인쿠폰", 230, 100, 50, 630, btn_Click));
-            arr2.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 630, btn_Click));
-            arr2.Add(new btnSet(this, "btn3", "주문", 230, 100, 50, 750, btn_Click));
-            arr2.Add(new btnSet(this, "btn3", "카드결제", 230, 100, 320, 750, btn_Click));
+           
             for (int i = 0; i < arr2.Count; i++)
             {
                 ct.btn((btnSet)arr2[i]);
@@ -84,21 +105,27 @@ namespace mojavePos
             switch (btn.Name)
             {
                 case "btn1":
-                    
+                    Coupon cp = new Coupon();
+                    cp.StartPosition = FormStartPosition.CenterParent;
+                    cp.Show();
                     break;
                 case "btn2":
                     Cash cash = new Cash();
                     cash.StartPosition = FormStartPosition.CenterParent;
-                    cash.BackColor = Color.Silver;
                     cash.Show();
                     break;
-                default:
+                case "btn3":
+                    this.Visible = false;
+                    break;
+                case "btn4":
+                    MessageBox.Show("서비스준비중입니다.","알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
         }
 
         private void menu_view()
         {
+            this.Visible = true;
             pnSet pn1 = new pnSet(this, 100, 800, 700, 50);
             Panel panel = ct.panel(pn1);
             Controls.Add(panel);
