@@ -220,7 +220,7 @@ namespace mojavePos
         {
             MainPos MP = new MainPos();
             pn4_lb = pn5_lb; //바뀌어야함
-            
+            this.Dispose();
             MP.Show();
         }
 

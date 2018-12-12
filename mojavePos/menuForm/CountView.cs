@@ -28,8 +28,7 @@ namespace mojavePos
         private void CountView_Load(object sender, EventArgs e)
         {
             this.IsMdiContainer = true;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.BackColor = Color.Gainsboro;
+            this.BackColor = Color.White;
             listView();
             btn_load();
             menu_view();
@@ -38,7 +37,7 @@ namespace mojavePos
         private void listView()
         {
             ArrayList arr = new ArrayList();
-            arr.Add(new pnSet(this,600,800,50,50));
+            arr.Add(new pnSet(this,600,800,50,10));
             arr.Add(new lvSet(this, "", 500, 300, 50, 30, list_Click));
             arr.Add(new lbSet(this, "lb1", "판매액", 150, 30, 100, 370, 20));
             arr.Add(new lbSet(this, "lb1", "할인", 150, 30, 110, 420, 20));
@@ -126,10 +125,10 @@ namespace mojavePos
         private void menu_view()
         {
             this.Visible = true;
-            pnSet pn1 = new pnSet(this, 100, 800, 700, 50);
+            pnSet pn1 = new pnSet(this, 100, 800, 700, 10);
             Panel panel = ct.panel(pn1);
             Controls.Add(panel);
-            pnSet pn2 = new pnSet(this, 600, 800, 800, 50);
+            pnSet pn2 = new pnSet(this, 600, 800, 800, 10);
             panel2 = ct.panel(pn2);
             panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
@@ -147,6 +146,7 @@ namespace mojavePos
                 Button button = ct.btn((btnSet)arrayList[i]);
                 panel.Controls.Add(button);
             }
+            
         }
         
         private void menu_Click(object sender, EventArgs e)
