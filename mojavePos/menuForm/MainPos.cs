@@ -81,8 +81,9 @@ namespace mojavePos
             pn4 = new Panel();
             pn4.Name = "contents";
             pn4 = ct.panel((pnSet)arr[5]);
-            pn4.BackColor = Color.White;
+            pn4.BackColor = Color.Beige;
             Controls.Add(pn4);
+
         }
         //종료버튼 클릭시 이벤트
         private void Pnl3_Click(object sender, EventArgs e)

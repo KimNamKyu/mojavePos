@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using mojavePos.Modal;
+using mojavePos.menuForm;
+
 namespace mojavePos
 {
     static class Program
