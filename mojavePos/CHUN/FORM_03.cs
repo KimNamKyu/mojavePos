@@ -19,15 +19,21 @@ namespace mojavePos
         StatusStrip statusStrip;
         lbSet pn4_lb;
         lbSet pn5_lb;
+        Label 시간;
+        Label 날짜;
+        Timer timer;
 
         public FORM_03()
         {
             InitializeComponent();
             Load += FORM_03_Load;
+          
         }
 
-        private void FORM_03_Load(object sender, EventArgs e)
+        public void FORM_03_Load(object sender, EventArgs e)
         {
+            
+
             ClientSize = new Size(sX, sY);
             _Create ct = new _Create();
             this.StartPosition = FormStartPosition.Manual;
@@ -111,13 +117,17 @@ namespace mojavePos
 
             //날짜라벨
             lbSet pn1_lb5 = new lbSet(this, "pn1_lb5", "//날짜", 370, 30, 50, 630, 15);
-            Label 날짜 = ct.lable(pn1_lb5);
+            날짜 = ct.lable(pn1_lb5);
             날짜.TextAlign = ContentAlignment.MiddleCenter;
+            
+            Controls.Add(날짜);
 
+            
             //시간라벨
             lbSet pn1_lb6 = new lbSet(this, "pn1_lb6", "//시간", 370, 30, 50, 680, 15);
-            Label 시간 = ct.lable(pn1_lb6);
+            시간 = ct.lable(pn1_lb6);
             시간.TextAlign = ContentAlignment.MiddleCenter;
+
             Controls.Add(시간);
 
             //왼쪽 부분 패널
@@ -137,7 +147,7 @@ namespace mojavePos
             패널1.Controls.Add(이번달매출액);
             패널1.Controls.Add(이번달매출액숫자);
             패널1.Controls.Add(이번달매출액원);
-            
+
             패널1.Controls.Add(누적계산서수);
             패널1.Controls.Add(누적계산서숫자);
             패널1.Controls.Add(누적계산서갯수);
@@ -168,7 +178,7 @@ namespace mojavePos
             TextBox 준비금텍스트박스 = ct.txtbox(pn2_txbox);
             Controls.Add(준비금텍스트박스);
             준비금텍스트박스.TextAlign = HorizontalAlignment.Center;
-            
+
             //영업시작 패널
             pnSet pn2 = new pnSet(this, 400, 350, 570, 200);
             Panel 패널2 = ct.panel(pn2);
@@ -182,7 +192,7 @@ namespace mojavePos
             //관리자 시작 파트
             //관리자 버튼
             btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", "//사진으로 대체", 130, 130, 140, 70, btn1_Click);
-            Button 관리자버튼= ct.btn(pn3_btn_1);
+            Button 관리자버튼 = ct.btn(pn3_btn_1);
             Controls.Add(관리자버튼);
 
             //관리자 라벨
@@ -198,8 +208,8 @@ namespace mojavePos
             Controls.Add(패널3);   //패널 화면 출력
             패널3.Controls.Add(관리자버튼);
             패널3.Controls.Add(관리자);
-            
-        
+
+
             //경고문 라벨
             pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 385, 27, 20);
             Label 경고문 = ct.lable(pn4_lb);
@@ -211,16 +221,32 @@ namespace mojavePos
             pnSet pn4 = new pnSet(this, 1500, 150, 0, 800);
             Panel 패널4 = ct.panel(pn4);
             패널4.BackColor = Color.LightGray;
-            Controls.Add(패널4);   
+            Controls.Add(패널4);
             패널4.Controls.Add(경고문);
+
+            Control_Init();
         }
+
+        private void Control_Init()
+        {
+            timer = new Timer();
+            timer.Tick += Timer_Tick1;
+            timer.Start();
+        }
+
+        private void Timer_Tick1(object sender, EventArgs e)
+        {
+            시간.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
+            날짜.Text = string.Format("{0:yyyy.MM.dd (dddd)}", DateTime.Now);
+        }
+        
 
         //시작버튼 효과
         private void btn_Click(object sender, EventArgs e)
         {
             MainPos MP = new MainPos();
             pn4_lb = pn5_lb; //바뀌어야함
-            
+
             MP.Show();
         }
 
