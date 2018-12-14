@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.DataVisualization" />
@@ -52,6 +53,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="btnSet.cs" />
+    <Compile Include="CHUN\test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CHUN\test.Designer.cs">
+      <DependentUpon>test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CHUN\Menu_modal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CHUN\Menu_modal.Designer.cs">
+      <DependentUpon>Menu_modal.cs</DependentUpon>
+    </Compile>
     <Compile Include="comboboxSet.cs" />
     <Compile Include="Commons.cs" />
     <Compile Include="DateSet.cs" />
@@ -215,6 +228,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mojave.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
