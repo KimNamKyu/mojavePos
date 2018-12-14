@@ -113,7 +113,7 @@ namespace mojavePos.Han
 
         private void update_Click(object sender, EventArgs e) //변경버튼
         {
-            
+            //
         }
 
         private void insert_Click(object sender, EventArgs e) //추가버튼
