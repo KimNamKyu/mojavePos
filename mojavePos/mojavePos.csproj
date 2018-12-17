@@ -148,6 +148,12 @@
     <Compile Include="menuForm\MainPos.Designer.cs">
       <DependentUpon>MainPos.cs</DependentUpon>
     </Compile>
+    <Compile Include="menuForm\MenuView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="menuForm\MenuView.Designer.cs">
+      <DependentUpon>MenuView.cs</DependentUpon>
+    </Compile>
     <Compile Include="menuForm\pastaForm.cs">
       <SubType>Form</SubType>
     </Compile>
