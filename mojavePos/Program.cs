@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using mojavePos.Modal;
-using mojavePos.menuForm;
+using mojavePos.CHUN;
 
 namespace mojavePos
 {
@@ -19,7 +19,7 @@ namespace mojavePos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainPos());
+            Application.Run(new FORM_03());
         }
     }
 }

@@ -1,24 +1,30 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing; //글꼴
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+/*===========================================================================================================================================
+
+// 클릭시 버튼 색상 변경해줘야 함.
+// 아래 클릭버튼 주석 관련된것 해줘야함.
+
+ =============================================================================================================================================*/
 
 namespace mojavePos
 {
     //로그인 화면
     public partial class FORM_01 : Form
     {
-        int sX = 750, sY = 450; // 폼 사이즈 지정.
-        ///////// 좌표 체크시 추가 /////////
-        static ToolStripStatusLabel StripLb;
-        StatusStrip statusStrip;
-        /////////////////////////////////////
-
+        _Create ct = new _Create();
+        TextBox textbox , 텍스트박스1 , 텍스트박스2;
+        FORM_01 F1;
+        FORM_03 F3;
         public FORM_01()
         {
             InitializeComponent();
@@ -27,118 +33,109 @@ namespace mojavePos
 
         private void FORM_01_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(sX, sY);  // 폼 사이즈 지정
-
-            _Create ct = new _Create();
-            Point_Print();
-
-            // 제목라벨
-            lbSet lb1 = new lbSet(this, "label1", "ELBON", 500, 50, 275, 10, 40);
-            Label 라벨 = ct.lable(lb1);
-            Controls.Add(라벨);
-            
-            // 제목라벨2
-            lbSet lb2 = new lbSet(this, "label2", "the table", 300, 50, 320, 70, 20);
-            Label 라벨2 = ct.lable(lb2);
-            Controls.Add(라벨2);
+            ClientSize = new Size(750, 430);  // 폼 사이즈 지정
+            //this.ControlBox = false;
+            BackColor = Color.Black;
 
             // 제목 패널
             pnSet pn1 = new pnSet(this, 750, 110, 0, 0);
             Panel 패널 = ct.panel(pn1);
-            패널.BackColor = Color.CadetBlue;
+            패널.BackColor = Color.FromArgb(52, 152, 219);
             Controls.Add(패널);   //패널 화면 출력
-            패널.Controls.Add(라벨);    //패널 위에 라벨 출력
-            패널.Controls.Add(라벨2);
 
-            //아이디 라벨
-            lbSet lb3 = new lbSet(this, "label3", "Name / Position", 150, 20, 190,50, 15);
-            Label 라벨3 = ct.lable(lb3);
-            라벨3.BackColor = Color.White;
-            Controls.Add(라벨3);
+            ArrayList arr = new ArrayList();
 
-            //비밀번호 라벨
-            lbSet lb4 = new lbSet(this, "label4", "Password", 150, 20, 190, 100, 15);
-            Label 라벨4 = ct.lable(lb4);
-            라벨4.BackColor = Color.White;
-            Controls.Add(라벨4);
+            arr.Add(new lbSet(this, "lb1", "ELBON", 500, 35, 330, 10, 40));
+            arr.Add(new lbSet(this, "lb2", "the table", 300, 70, 260, 30, 20));
 
-            //아이디 텍스트박스
-            tbSet tx1 = new tbSet(this, "txt1", 200, 35, 370, 50);
-            TextBox test = ct.txtbox(tx1);
-            Controls.Add(test);
-
-            //비밀번호 텍스트박스
-            tbSet tx2 = new tbSet(this, "txt2", 200, 35, 370, 100);
-            TextBox test2 = ct.txtbox(tx2);
-            Controls.Add(test2);
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if (typeof(lbSet) == arr[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr[i]);
+                    if(i==1) label.Font = new Font("Tahoma", 40, FontStyle.Bold); //글꼴설정
+                    else label.Font = new Font("Tahoma", 20, FontStyle.Bold);
+                    패널.Controls.Add(label);
+                }
+            }
 
             //로그인 패널
-            pnSet pn2 = new pnSet(this, 750, 170, 0, 110);
+            pnSet pn2 = new pnSet(this, 750, 169, 0, 110);
             Panel 패널2 = ct.panel(pn2);
             패널2.BackColor = Color.White;
-            Controls.Add(패널2);   //패널 화면 출력
-            패널2.Controls.Add(라벨3);    //패널 위에 라벨 출력
-            패널2.Controls.Add(라벨4);
-            패널2.Controls.Add(test);
-            패널2.Controls.Add(test2);
+            Controls.Add(패널2);
 
-            //로그인 버튼
-            btnSet 버튼객체1 = new btnSet(this, "button", "로그인", 250, 40, 260, 40,btn_Click);
-            Button 버튼생성1 = ct.btn(버튼객체1);
-            Controls.Add(버튼생성1);
+            
+            ArrayList arr1 = new ArrayList();
+            arr1.Add(new lbSet(this, "lb3", "Name ", 150, 20, 190, 50,15));
+            arr1.Add(new lbSet(this, "lb4", "Password", 150, 20, 190, 100, 15));
+            arr1.Add(new tbSet(this, "tb1", 200, 35, 370, 50));
+            arr1.Add(new tbSet(this, "tb2", 200, 35, 370, 100));
 
-            //계정만들기 버튼
-            btnSet 버튼객체2 = new btnSet(this, "button", "계정만들기", 130, 30, 320, 90,btn2_Click);
-            Button 버튼생성2 = ct.btn(버튼객체2);
-            Controls.Add(버튼생성2);
-
+            for (int i = 0; i < arr1.Count; i++)
+            {
+                if (typeof(lbSet) == arr1[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr1[i]);
+                    label.Font = new Font("Tahoma", 15, FontStyle.Bold);
+                    패널2.Controls.Add(label);
+                }
+                else if (typeof(tbSet) == arr1[i].GetType())
+                {
+                    textbox = ct.txtbox((tbSet)arr1[i]);
+                    if(i == 1) 텍스트박스1 = textbox ;
+                    else 텍스트박스2 = textbox ;    
+                    패널2.Controls.Add(텍스트박스1);
+                    패널2.Controls.Add(텍스트박스2);
+                }
+            }
             //끝 패널
-            pnSet pn3 = new pnSet(this, 750, 150, 0, 280);
+            pnSet pn3 = new pnSet(this, 750, 160, 0, 280);
             Panel 패널3 = ct.panel(pn3);
             패널3.BackColor = Color.White;
             Controls.Add(패널3);   //패널 화면 출력
-            패널3.Controls.Add(버튼생성1);
-            패널3.Controls.Add(버튼생성2);
+
+            ArrayList arr2 = new ArrayList();
+            arr2.Add(new btnSet(this, "button", "로그인", 250, 40, 260, 35, btn_Click));
+            arr2.Add(new btnSet(this, "button", "계정만들기", 130, 30, 320, 85, btn2_Click));
+            for (int i = 0; i < arr2.Count; i++)
+            {
+                if (typeof(btnSet) == arr2[i].GetType())
+                {
+                    Button button = ct.btn((btnSet)arr2[i]);
+                    button.Font = new Font("Tahoma", 8, FontStyle.Regular);
+                    패널3.Controls.Add(button);
+                }
+            }
         }
 
-        private void btn_Click(object sender, EventArgs e)
+        private void btn_Click(object sender, EventArgs e) //클릭버튼 수정할것.
         {
-            FORM_03 F3 = new FORM_03();
-            this.Dispose(false);
-            F3.Show();
+            //(textBox_Results != null && !string.IsNullOrWhiteSpace(textBox_Results.Text))
+            F3 = new FORM_03();
+            F1 = new FORM_01();
+            //입력값이 없으면 메세지박스(입력해주세요) 나오게할것,
+          if(텍스트박스1.Text != null && string.IsNullOrWhiteSpace(텍스트박스1.Text) || 텍스트박스2.Text != null && string.IsNullOrWhiteSpace(텍스트박스2.Text))// || 텍스트박스2.Text == null)
+                {
+                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
+                F1.Show();
+                }
+          else F3.Show();
+           
+            //입력값이 DB의 값과 틀렸을때(틀렸습니다. 다시입력해주세요) 나오게 할것.
+            //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.
+            //입력값이 맞다면 F3 로 넘어갈것.
+            
+            //this.Dispose(false);
+            //F3.Show();
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
             FORM_02 F2 = new FORM_02();
-            this.Dispose(false);
+            //this.Dispose(false);
             F2.Show();
         }
 
-        ///////////////////////// 좌표 체크시 추가 /////////////////////////////
-
-        private void Point_Print()
-        {
-
-            MouseMove += new MouseEventHandler(this.Current_FORM_MouseMove);
-            statusStrip = new StatusStrip();
-            StripLb = new ToolStripStatusLabel();
-            statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { StripLb });
-            statusStrip.Location = new Point(0, sY);
-            statusStrip.Name = "statusStrip1";
-            statusStrip.Size = new Size(sX, 22);
-            statusStrip.TabIndex = 0;
-            statusStrip.Text = "statusStrip1";
-            // toolStripStatusLabel1
-            StripLb.Name = "StripLb1";
-            StripLb.Size = new Size(121, 17);
-            StripLb.Text = "StripLb1";
-            Controls.Add(statusStrip);
-        }
-        private void Current_FORM_MouseMove(object sender, MouseEventArgs e)
-        {
-            StripLb.Text = "(" + e.X + ", " + e.Y + ")";
-        }
-        ///////////////////////////////////////////////////////////////////////
     }
 }

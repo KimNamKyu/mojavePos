@@ -23,8 +23,8 @@ namespace mojavePos.Han
         private void MenuForm_Load(object sender, EventArgs e)
         {
             ClientSize = new Size(1500, 800);
-            this.BackColor = Color.BurlyWood;
 
+            this.BackColor = Color.BurlyWood;
             _Create ct = new _Create();
 
             lbSet lb1 = new lbSet(this, "lb1", "Category", 200, 35, 350, 80, 25);
@@ -54,15 +54,13 @@ namespace mojavePos.Han
             PictureBox 메뉴픽쳐 = ct.picture(picturebox_2);
             메뉴픽쳐.BackColor = Color.Green;
             Controls.Add(메뉴픽쳐);
-
-
-
+                        
             gr = this.CreateGraphics();
-            Pen pen1 = new Pen(Color.Black, 2);
+            Pen pen1 = new Pen(Color.Black, 1);
 
             pen1.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            Point First = new Point(0, 150);
-            Point Second = new Point(100, 150);
+            Point First = new Point(300, 200);
+            Point Second = new Point(1200, 200);
             
             gr.DrawLine(pen1, First, Second);
             // pictureBox1 내부에 그리기
