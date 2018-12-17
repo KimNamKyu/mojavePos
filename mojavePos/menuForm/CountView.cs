@@ -86,7 +86,10 @@ namespace mojavePos
 
         private void list_Click(object sender, MouseEventArgs e)
         {
-            
+            ListView lv = (ListView)sender;
+            lv.FullRowSelect = true; 
+            ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
+            ListViewItem item = itemGroup[0];
         }
 
         private void btn_load()
