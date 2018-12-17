@@ -14,15 +14,13 @@ namespace mojavePos
 {
     public partial class FORM_03 : Form
     {
-        int sX = 1500, sY = 900;
-        static ToolStripStatusLabel StripLb;
-        StatusStrip statusStrip;
+       
         lbSet pn4_lb;
         lbSet pn5_lb;
         Label 시간;
         Label 날짜;
         Timer timer;
-
+        _Create ct;
         public FORM_03()
         {
             InitializeComponent();
@@ -33,156 +31,129 @@ namespace mojavePos
         public void FORM_03_Load(object sender, EventArgs e)
         {
             
-
-            ClientSize = new Size(sX, sY);
-            _Create ct = new _Create();
+            ClientSize = new Size(750, 430);
+            ct = new _Create();
+            BackColor = Color.FromArgb(191, 191, 191);
             this.StartPosition = FormStartPosition.Manual;
-            Point_Print();
-
+            
             //오늘매출액 파트 라벨
-            lbSet pn1_lb1 = new lbSet(this, "label1", "오늘매출액", 120, 30, 50, 180, 15);
+            lbSet pn1_lb1 = new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 70, 10);
             Label 오늘매출액 = ct.lable(pn1_lb1);
             오늘매출액.TextAlign = ContentAlignment.MiddleCenter;
             오늘매출액.BackColor = Color.LightGreen;
+             오늘매출액.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(오늘매출액);
 
-            lbSet pn1_lb1_1 = new lbSet(this, "label1_1", "-", 200, 30, 170, 180, 15);
+            lbSet pn1_lb1_1 = new lbSet(this, "label1_1", "10,000,000", 100, 25, 60, 100, 10);
             Label 오늘매출액숫자 = ct.lable(pn1_lb1_1);
             오늘매출액숫자.TextAlign = ContentAlignment.MiddleCenter;
-            오늘매출액숫자.BackColor = Color.LightGray;
+            //오늘매출액숫자.BackColor = Color.LightGray;
+            오늘매출액숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(오늘매출액숫자);
 
-            lbSet pn1_lb1_2 = new lbSet(this, "label1_2", "원", 50, 30, 370, 180, 15);
+            lbSet pn1_lb1_2 = new lbSet(this, "label1_2", "원", 20, 25, 160, 100, 10);
             Label 오늘매출액원 = ct.lable(pn1_lb1_2);
-            오늘매출액원.TextAlign = ContentAlignment.MiddleCenter;
-            오늘매출액원.BackColor = Color.LightGray;
+            오늘매출액원.TextAlign = ContentAlignment.MiddleLeft;
+            //오늘매출액원.BackColor = Color.LightGreen;
+            오늘매출액원.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(오늘매출액원);
 
             //오늘계산서수 파트 라벨
-            lbSet pn1_lb2 = new lbSet(this, "pn1_lb2", "오늘계산서수", 120, 30, 50, 300, 15);
+            lbSet pn1_lb2 = new lbSet(this, "pn1_lb2", "분기 총 매출액", 110, 25, 90, 140, 10);
             Label 오늘계산서수 = ct.lable(pn1_lb2);
             오늘계산서수.TextAlign = ContentAlignment.MiddleCenter;
+            오늘계산서수.Font = new Font("Tahoma", 10, FontStyle.Bold);
             오늘계산서수.BackColor = Color.LightYellow;
             Controls.Add(오늘계산서수);
 
-            lbSet pn1_lb2_1 = new lbSet(this, "pn1_lb2_1", "-", 200, 30, 170, 300, 15);
+            lbSet pn1_lb2_0 = new lbSet(this, "pn1_lb2_0", "-", 20, 25, 70, 140, 10);
+            Label 분기숫자 = ct.lable(pn1_lb2_0);
+            분기숫자.TextAlign = ContentAlignment.MiddleCenter;
+             분기숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            //분기숫자.BackColor = Color.LightGray;
+            Controls.Add(분기숫자);
+
+            lbSet pn1_lb2_1 = new lbSet(this, "pn1_lb2_1", "10,000,000", 100, 25, 60, 170, 10);
             Label 오늘계산서숫자 = ct.lable(pn1_lb2_1);
             오늘계산서숫자.TextAlign = ContentAlignment.MiddleCenter;
-            오늘계산서숫자.BackColor = Color.LightGray;
+            오늘계산서숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            //오늘계산서숫자.BackColor = Color.LightGray;
             Controls.Add(오늘계산서숫자);
 
-            lbSet pn1_lb2_2 = new lbSet(this, "pn1_lb2_2", "개", 50, 30, 370, 300, 15);
+            lbSet pn1_lb2_2 = new lbSet(this, "pn1_lb2_2", "원", 20, 25, 160, 170, 10);
             Label 오늘계산서갯수 = ct.lable(pn1_lb2_2);
             오늘계산서갯수.TextAlign = ContentAlignment.MiddleCenter;
-            오늘계산서갯수.BackColor = Color.LightGray;
+            오늘계산서갯수.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            //오늘계산서갯수.BackColor = Color.LightGray;
             Controls.Add(오늘계산서갯수);
 
-            //이번달매출액 파트 라벨
-            lbSet pn1_lb3 = new lbSet(this, "label3", "이번달매출액", 150, 30, 50, 420, 15);
-            Label 이번달매출액 = ct.lable(pn1_lb3);
-            이번달매출액.TextAlign = ContentAlignment.MiddleCenter;
-            이번달매출액.BackColor = Color.LightGreen;
-            Controls.Add(이번달매출액);
-
-            lbSet pn1_lb3_1 = new lbSet(this, "pn1_lb3_1", "-", 200, 30, 170, 420, 15);
-            Label 이번달매출액숫자 = ct.lable(pn1_lb3_1);
-            이번달매출액숫자.TextAlign = ContentAlignment.MiddleCenter;
-            이번달매출액숫자.BackColor = Color.LightGray;
-            Controls.Add(이번달매출액숫자);
-
-            lbSet pn1_lb3_2 = new lbSet(this, "pn1_lb3_2", "원", 50, 30, 370, 420, 15);
-            Label 이번달매출액원 = ct.lable(pn1_lb3_2);
-            이번달매출액원.TextAlign = ContentAlignment.MiddleCenter;
-            이번달매출액원.BackColor = Color.LightGray;
-            Controls.Add(이번달매출액원);
-
-            //누적계산서 파트 라벨
-            lbSet pn1_lb4 = new lbSet(this, "label2", "누적계산서수", 120, 30, 50, 540, 15);
-            Label 누적계산서수 = ct.lable(pn1_lb4);
-            누적계산서수.TextAlign = ContentAlignment.MiddleCenter;
-            누적계산서수.BackColor = Color.LightYellow;
-            Controls.Add(누적계산서수);
-
-            lbSet pn1_lb4_1 = new lbSet(this, "pn1_lb4_1", "-", 200, 30, 170, 540, 15);
-            Label 누적계산서숫자 = ct.lable(pn1_lb4_1);
-            누적계산서숫자.TextAlign = ContentAlignment.MiddleCenter;
-            누적계산서숫자.BackColor = Color.LightGray;
-            Controls.Add(누적계산서숫자);
-
-            lbSet pn1_lb4_2 = new lbSet(this, "pn1_lb4_2", "개", 50, 30, 370, 540, 15);
-            Label 누적계산서갯수 = ct.lable(pn1_lb4_2);
-            누적계산서갯수.TextAlign = ContentAlignment.MiddleCenter;
-            누적계산서갯수.BackColor = Color.LightGray;
-            Controls.Add(누적계산서갯수);
-
+           
             //날짜라벨
-            lbSet pn1_lb5 = new lbSet(this, "pn1_lb5", "//날짜", 370, 30, 50, 630, 15);
+            lbSet pn1_lb5 = new lbSet(this, "pn1_lb5", "//날짜", 250, 30, 5, 240, 15);
             날짜 = ct.lable(pn1_lb5);
             날짜.TextAlign = ContentAlignment.MiddleCenter;
-            
+            날짜.Font = new Font("Tahoma", 15, FontStyle.Bold);
+
             Controls.Add(날짜);
 
             
             //시간라벨
-            lbSet pn1_lb6 = new lbSet(this, "pn1_lb6", "//시간", 370, 30, 50, 680, 15);
+            lbSet pn1_lb6 = new lbSet(this, "pn1_lb6", "//시간", 170, 30, 45, 270, 15);
             시간 = ct.lable(pn1_lb6);
             시간.TextAlign = ContentAlignment.MiddleCenter;
-
+            시간.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(시간);
 
             //왼쪽 부분 패널
-            pnSet pn1 = new pnSet(this, 500, 750, 0, 0);
+            pnSet pn1 = new pnSet(this, 250, 350, 0, 0);
             Panel 패널1 = ct.panel(pn1);
-            패널1.BackColor = Color.LightBlue;
+            패널1.BackColor = Color.FromArgb(52, 152, 219);
             Controls.Add(패널1);   //패널 화면 출력
             패널1.Controls.Add(오늘매출액);
             패널1.Controls.Add(오늘매출액숫자);
             패널1.Controls.Add(오늘매출액원);
 
+            패널1.Controls.Add(분기숫자);
             패널1.Controls.Add(오늘계산서수);
             패널1.Controls.Add(오늘계산서숫자);
             패널1.Controls.Add(오늘계산서갯수);
-
-
-            패널1.Controls.Add(이번달매출액);
-            패널1.Controls.Add(이번달매출액숫자);
-            패널1.Controls.Add(이번달매출액원);
-
-            패널1.Controls.Add(누적계산서수);
-            패널1.Controls.Add(누적계산서숫자);
-            패널1.Controls.Add(누적계산서갯수);
 
             패널1.Controls.Add(날짜);
             패널1.Controls.Add(시간);
 
             //영업시작 파트
             //영업시작 버튼
-            btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", "//사진으로 대체", 130, 130, 140, 70, btn_Click);
+            btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", "//사진으로 대체", 80, 80, 50, 30, btn_Click);
             Button 영업시작버튼 = ct.btn(pn2_btn_1);
+            영업시작버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
-            lbSet pn2_lb1 = new lbSet(this, "pn2_lb1", "영업시작", 200, 33, 110, 210, 25);
+            lbSet pn2_lb1 = new lbSet(this, "pn2_lb1", "영업시작",  130, 30, 30, 120, 20);
             Label 영업시작 = ct.lable(pn2_lb1);
             영업시작.TextAlign = ContentAlignment.MiddleCenter;
+             영업시작.Font = new Font("Tahoma", 20, FontStyle.Bold);
             Controls.Add(영업시작);
 
             //준비금 라벨
-            lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 200, 15, 180, 255, 10);
+            lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,60, 155, 10);
             Label 준비금 = ct.lable(pn2_lb2);
-            영업시작.TextAlign = ContentAlignment.MiddleCenter;
+            준비금.TextAlign = ContentAlignment.MiddleCenter;
+            준비금.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(준비금);
 
             //준비금 텍스트박스
-            tbSet pn2_txbox = new tbSet(this, "pn2_txbox", 120, 20, 150, 270);
+            tbSet pn2_txbox = new tbSet(this, "pn2_txbox", 120, 20, 33, 175);
             TextBox 준비금텍스트박스 = ct.txtbox(pn2_txbox);
-            Controls.Add(준비금텍스트박스);
+            준비금텍스트박스.Font = new Font("Tahoma", 10, FontStyle.Bold);
             준비금텍스트박스.TextAlign = HorizontalAlignment.Center;
+            Controls.Add(준비금텍스트박스);
+            
 
             //영업시작 패널
-            pnSet pn2 = new pnSet(this, 400, 350, 570, 200);
+            pnSet pn2 = new pnSet(this, 180, 220, 300, 70);
             Panel 패널2 = ct.panel(pn2);
-            패널2.BackColor = Color.LightGray;
+            패널2.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널2);   //패널 화면 출력
             패널2.Controls.Add(영업시작버튼);
             패널2.Controls.Add(영업시작);
@@ -191,36 +162,39 @@ namespace mojavePos
 
             //관리자 시작 파트
             //관리자 버튼
-            btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", "//사진으로 대체", 130, 130, 140, 70, btn1_Click);
+            btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", "//사진으로 대체", 80, 80, 50, 30, btn1_Click);
             Button 관리자버튼 = ct.btn(pn3_btn_1);
+            관리자버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(관리자버튼);
 
             //관리자 라벨
-            lbSet pn3_lb1 = new lbSet(this, "pn3_lb1", "관리자", 200, 33, 150, 210, 25);
+            lbSet pn3_lb1 = new lbSet(this, "pn3_lb1", "관리자", 100, 35, 45, 120, 20);
             Label 관리자 = ct.lable(pn3_lb1);
+             관리자.Font = new Font("Tahoma", 20, FontStyle.Bold);
             영업시작.TextAlign = ContentAlignment.MiddleCenter;
             Controls.Add(관리자);
 
             //관리자 패널
-            pnSet pn3 = new pnSet(this, 400, 350, 1040, 200);
+            pnSet pn3 = new pnSet(this, 180, 220, 520, 70);
             Panel 패널3 = ct.panel(pn3);
-            패널3.BackColor = Color.LightGray;
+            패널3.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널3);   //패널 화면 출력
             패널3.Controls.Add(관리자버튼);
             패널3.Controls.Add(관리자);
 
 
             //경고문 라벨
-            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 385, 27, 20);
+            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 90, 12, 15);
             Label 경고문 = ct.lable(pn4_lb);
+            경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(경고문);
 
             pn5_lb = new lbSet(this, "label2", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 385, 27, 20);
 
             //하단부 패널
-            pnSet pn4 = new pnSet(this, 1500, 150, 0, 800);
+            pnSet pn4 = new pnSet(this, 750, 50, 0,380);
             Panel 패널4 = ct.panel(pn4);
-            패널4.BackColor = Color.LightGray;
+            패널4.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널4);
             패널4.Controls.Add(경고문);
 
@@ -258,30 +232,6 @@ namespace mojavePos
             MF.Show();
 
         }
-        ///////////////////////// 좌표 체크시 추가 /////////////////////////////
-
-        private void Point_Print()
-        {
-
-            MouseMove += new MouseEventHandler(this.Current_FORM_MouseMove);
-            statusStrip = new StatusStrip();
-            StripLb = new ToolStripStatusLabel();
-            statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { StripLb });
-            statusStrip.Location = new Point(0, sY);
-            statusStrip.Name = "statusStrip1";
-            statusStrip.Size = new Size(sX, 22);
-            statusStrip.TabIndex = 0;
-            statusStrip.Text = "statusStrip1";
-            // toolStripStatusLabel1
-            StripLb.Name = "StripLb1";
-            StripLb.Size = new Size(121, 17);
-            StripLb.Text = "StripLb1";
-            Controls.Add(statusStrip);
-        }
-        private void Current_FORM_MouseMove(object sender, MouseEventArgs e)
-        {
-            StripLb.Text = "(" + e.X + ", " + e.Y + ")";
-        }
-        ///////////////////////////////////////////////////////////////////////
+      
     }
 }
