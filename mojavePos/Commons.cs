@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Forms.DataVisualization.Charting;
 namespace mojavePos
 {
     class Commons
@@ -20,7 +20,31 @@ namespace mojavePos
             panel.Name = hashtable["name"].ToString(); 
             return panel;
         }
+         public Chart getChart(Hashtable hashtable, Control parentDomain)
+        {
+            Chart chart = new Chart();
+            ChartArea chartArea1 = new ChartArea();
+            Legend legend1 = new Legend();
+            Series series1 = new Series();
 
+            chartArea1.Name = hashtable["areaname"].ToString();
+            legend1.Name = hashtable["legname"].ToString();
+            series1.ChartArea = hashtable["areaname"].ToString();
+            series1.ChartType = SeriesChartType.Doughnut;
+            series1.Legend = hashtable["legname"].ToString();
+            series1.Name = hashtable["seriname"].ToString();
+            // 차트 기본
+            chart.Name = hashtable["chartname"].ToString();
+            chart.Dock = DockStyle.Fill;
+            chart.Text = hashtable["text"].ToString();
+            chart.ChartAreas.Add(chartArea1);
+            chart.Legends.Add(legend1);
+            chart.Series.Add(series1);
+            chart.Series[series1.Name].IsValueShownAsLabel = false;
+
+            parentDomain.Controls.Add(chart);
+            return chart;
+        }
         public Button getButton(Hashtable hashtable)
         {
             Button btn = new Button();
