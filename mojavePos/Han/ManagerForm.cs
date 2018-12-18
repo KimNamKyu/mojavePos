@@ -86,12 +86,13 @@ namespace mojavePos.Han
             bottom.BackColor = Color.BurlyWood;
             /*----------------------------*/
             ArrayList btn_list = new ArrayList();
-            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 375, 100, 0, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "money", "매출관리", 375, 100, 375, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "user", "회원관리", 375, 100, 750, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "exit", "종료", 375, 100, 1125, 0, Main_Click));
-            
-            for(int i=0; i < btn_list.Count; i++)
+            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 300, 100, 0, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "money", "매출관리", 300, 100, 300, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "rank", "메뉴순위", 300, 100, 600, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "user", "회원관리", 300, 100, 900, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "exit", "종료", 300, 100, 1200, 0, Main_Click));
+
+            for (int i=0; i < btn_list.Count; i++)
             {
                 Button button = ct.btn((btnSet)btn_list[i]);
                 head.Controls.Add(button);
@@ -127,6 +128,14 @@ namespace mojavePos.Han
                     user.FormBorderStyle = FormBorderStyle.None;
                     bottom.Controls.Add(user);
                     user.Show();
+                    break;
+                case "rank":
+                    RankForm rf = new RankForm();
+                    rf.MdiParent = this;
+                    rf.WindowState = FormWindowState.Maximized;
+                    rf.FormBorderStyle = FormBorderStyle.None;
+                    bottom.Controls.Add(rf);
+                    rf.Show();
                     break;
                 case "exit":
                     FORM_03 F3 = new FORM_03();

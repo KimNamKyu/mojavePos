@@ -92,6 +92,12 @@
     <Compile Include="Han\MoneyForm.Designer.cs">
       <DependentUpon>MoneyForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Han\RankForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Han\RankForm.Designer.cs">
+      <DependentUpon>RankForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Han\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
