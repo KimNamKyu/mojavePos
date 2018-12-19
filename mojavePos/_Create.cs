@@ -102,6 +102,8 @@ namespace mojavePos
             datepic.Name = ds.Name;
             datepic.Location = new Point(ds.PX, ds.PY);
             datepic.Size = new Size(ds.SX, ds.SY);
+            datepic.CustomFormat = "yyyy-MM-dd dddd";
+            datepic.Format = DateTimePickerFormat.Custom;
             ds.Form.Controls.Add(datepic);
             return datepic;
         }
