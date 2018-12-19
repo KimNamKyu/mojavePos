@@ -186,17 +186,17 @@ namespace mojavePos.Han
             tb.Text = "연도";
             tb.ForeColor = Color.Gray;
         }
-        int init = 0;
 
 
         private void Tb_MouseClick(object sender, MouseEventArgs e)
         {
+            bool init = true;
             TextBox tb = (TextBox)sender;
 
-            if (init == 0)
+            if (init)
             {
                 tb.Text = "";
-                init = 1;
+                init = false;
             }
         }
 
