@@ -123,9 +123,10 @@ namespace mojavePos
 
             //영업시작 파트
             //영업시작 버튼
-            btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", "//사진으로 대체", 80, 80, 50, 30, btn_Click);
+            btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", " ", 80, 80, 50, 30, btn_Click);
             Button 영업시작버튼 = ct.btn(pn2_btn_1);
             영업시작버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            영업시작버튼.Image = Image.FromFile("C:\\github\\Images\\test2.jpg"); //진욱이한테 물어보기
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
@@ -136,7 +137,7 @@ namespace mojavePos
             Controls.Add(영업시작);
 
             //준비금 라벨
-            lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,60, 155, 10);
+            lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,65, 155, 10);
             Label 준비금 = ct.lable(pn2_lb2);
             준비금.TextAlign = ContentAlignment.MiddleCenter;
             준비금.Font = new Font("Tahoma", 10, FontStyle.Bold);
@@ -160,11 +161,13 @@ namespace mojavePos
             패널2.Controls.Add(준비금);
             패널2.Controls.Add(준비금텍스트박스);
 
+            
             //관리자 시작 파트
             //관리자 버튼
-            btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", "//사진으로 대체", 80, 80, 50, 30, btn1_Click);
+            btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", " ", 80, 80, 50, 30, btn1_Click);
             Button 관리자버튼 = ct.btn(pn3_btn_1);
             관리자버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            관리자버튼.Image = Image.FromFile("C:\\github\\Images\\test2.jpg"); //진욱이한테 물어보기
             Controls.Add(관리자버튼);
 
             //관리자 라벨
@@ -184,12 +187,13 @@ namespace mojavePos
 
 
             //경고문 라벨
-            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 90, 12, 15);
+            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 125, 12, 15);
+            pn5_lb = new lbSet(this, "label2", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 90, 12, 15);
             Label 경고문 = ct.lable(pn4_lb);
             경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(경고문);
 
-            pn5_lb = new lbSet(this, "label2", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 385, 27, 20);
+            
 
             //하단부 패널
             pnSet pn4 = new pnSet(this, 750, 50, 0,380);
@@ -219,8 +223,8 @@ namespace mojavePos
         private void btn_Click(object sender, EventArgs e)
         {
             MainPos MP = new MainPos();
-            pn4_lb = pn5_lb; //바뀌어야함
-
+            
+            
             MP.Show();
         }
 
