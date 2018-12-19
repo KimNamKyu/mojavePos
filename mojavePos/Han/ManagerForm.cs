@@ -139,6 +139,7 @@ namespace mojavePos.Han
                     break;
                 case "exit":
                     FORM_03 F3 = new FORM_03();
+                    Close();
                     F3.Show(); // exit하면 MANAGERFORM이 꺼져야하는 기능 추가해야 함
                     break;
             }
