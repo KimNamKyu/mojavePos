@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="btnSet.cs" />
+    <Compile Include="CHUN\Module.cs" />
     <Compile Include="CHUN\test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,6 +238,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\aa.bmp" />
+    <Content Include="Resources\edbeafa0-3460-47e9-9fd9-f5f6db7cdd00.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

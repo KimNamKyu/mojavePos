@@ -114,13 +114,17 @@ namespace mojavePos
             //(textBox_Results != null && !string.IsNullOrWhiteSpace(textBox_Results.Text))
             F3 = new FORM_03();
             F1 = new FORM_01();
+            F3.Show();
             //입력값이 없으면 메세지박스(입력해주세요) 나오게할것,
-          if(텍스트박스1.Text != null && string.IsNullOrWhiteSpace(텍스트박스1.Text) || 텍스트박스2.Text != null && string.IsNullOrWhiteSpace(텍스트박스2.Text))// || 텍스트박스2.Text == null)
-                {
-                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
-                F1.Show();
-                }
-          else F3.Show();
+            //if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)// || 텍스트박스2.Text == null)
+            //{
+            //    MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
+            //    //F1.Show();
+            //}
+            //else
+            //{
+            //    F3.Show();
+            //}
            
             //입력값이 DB의 값과 틀렸을때(틀렸습니다. 다시입력해주세요) 나오게 할것.
             //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.

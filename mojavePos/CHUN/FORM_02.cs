@@ -1,4 +1,6 @@
-﻿using System;
+﻿using mojavePos.CHUN;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,11 +20,15 @@ namespace mojavePos
 {
     public partial class FORM_02 : Form
     {
-        int sX = 750, sY = 430;
+        
+        private DataBase db;
 
-        static ToolStripStatusLabel StripLb;
-        StatusStrip statusStrip;
-         _Create ct;
+        //static ToolStripStatusLabel StripLb;
+        //StatusStrip statusStrip;
+        _Create ct;
+        TextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
+        FORM_01 F1;
+        private string PS_No;
 
         public FORM_02()
         {
@@ -32,10 +38,10 @@ namespace mojavePos
 
         private void FORM_02_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(sX, sY);  //폼 사이즈
+            ClientSize = new Size(750, 430);  //폼 사이즈
             this.ControlBox = false;        //최소화 최대화 버튼 없애기
-          
-           ct = new _Create();
+
+            ct = new _Create();
 
             //Name 라벨 출력
             lbSet lb1 = new lbSet(this, "label1", "Name", 50, 15, 90, 50, 10);
@@ -45,40 +51,40 @@ namespace mojavePos
 
             //Name 텍스트박스 출력
             tbSet tx1 = new tbSet(this, "txt1", 170, 30, 30, 70);
-            TextBox 네임택박 = ct.txtbox(tx1);
+            네임택박 = ct.txtbox(tx1);
             Controls.Add(네임택박);
 
             //Postion 라벨 출력
             lbSet lb2 = new lbSet(this, "label2", "Postion", 100, 15, 80, 110, 10);
             Label 라벨2 = ct.lable(lb2);
-             라벨2.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            라벨2.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(라벨2);
 
             //Postion 텍스트박스 출력
             tbSet tx2 = new tbSet(this, "txt2", 170, 30, 30, 130);
-            TextBox 포지션택박 = ct.txtbox(tx2);
+            포지션택박 = ct.txtbox(tx2);
             Controls.Add(포지션택박);
 
             //Password 라벨 출력
-            lbSet lb3 = new lbSet(this,"label3", "Password", 100, 15, 70, 170, 10);
+            lbSet lb3 = new lbSet(this, "label3", "Password", 100, 15, 70, 170, 10);
             Label 라벨3 = ct.lable(lb3);
             라벨3.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(라벨3);
 
             //Password 텍스트박스 출력
             tbSet tx3 = new tbSet(this, "txt3", 170, 30, 30, 190);
-            TextBox 패스워드택박 = ct.txtbox(tx3);
+            패스워드택박 = ct.txtbox(tx3);
             Controls.Add(패스워드택박);
 
             //Serial 라벨 출력
             lbSet lb4 = new lbSet(this, "label4", "Serial Number", 100, 15, 85, 230, 10);
             Label 라벨4 = ct.lable(lb4);
-             라벨4.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            라벨4.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(라벨4);
 
             //Serial 텍스트박스 출력
             tbSet tx4 = new tbSet(this, "txt4", 170, 30, 30, 250);
-            TextBox 시리얼택박 = ct.txtbox(tx4);
+            시리얼택박 = ct.txtbox(tx4);
             Controls.Add(시리얼택박);
 
             btnSet Btn1_pn1 = new btnSet(this, "Btn1_pn1", "가입", 80, 30, 55, 330, btn_Click);
@@ -93,7 +99,7 @@ namespace mojavePos
             pnSet pn1 = new pnSet(this, 240, 370, 30, 30);
             Panel 패널 = ct.panel(pn1);
             패널.BackColor = Color.FromArgb(52, 152, 219);
-            
+
             Controls.Add(패널); //패널 안에 라벨 텍스트박스 출력
             패널.Controls.Add(라벨1);
             패널.Controls.Add(라벨2);
@@ -105,17 +111,17 @@ namespace mojavePos
             패널.Controls.Add(시리얼택박);
 
 
-            lbSet lb5 = new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 240, 15, 15,50, 10);
+            lbSet lb5 = new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 240, 15, 15, 50, 10);
             Label 라벨5 = ct.lable(lb5);
-             라벨5.Font = new Font("Tahoma", 10, FontStyle.Bold);
+            라벨5.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(라벨5);
 
             lbSet lb6 = new lbSet(this, "label6", "Mojave of Pos", 200, 25, 250, 43, 17);
             Label 라벨6 = ct.lable(lb6);
-             라벨6.Font = new Font("Tahoma", 15, FontStyle.Bold);
+            라벨6.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(라벨6);
 
-            lbSet lb7 = new lbSet(this,"label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 15, 80, 8);
+            lbSet lb7 = new lbSet(this, "label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 15, 80, 8);
             Label 라벨7 = ct.lable(lb7);
             라벨7.Font = new Font("Tahoma", 8, FontStyle.Bold);
             Controls.Add(라벨7);
@@ -150,7 +156,7 @@ namespace mojavePos
             라벨13.Font = new Font("Tahoma", 8, FontStyle.Bold);
             Controls.Add(라벨13);
 
-           
+
             //오른쪽 패널 출력
             pnSet pn2 = new pnSet(this, 420, 370, 300, 30);
             Panel 패널2 = ct.panel(pn2);
@@ -165,20 +171,88 @@ namespace mojavePos
             패널2.Controls.Add(라벨11);
             패널2.Controls.Add(라벨12);
             패널2.Controls.Add(라벨13);
-            
+
         }
         private void btn_Click(object sender, EventArgs e)
         {
-            FORM_01 F1 = new FORM_01();
-            this.Dispose(false);
-            F1.Show();
+            db = new DataBase();
+            F1 = new FORM_01();
+            //this.Dispose(false);
+
+            if (네임택박.Text.Length == 0 || 포지션택박.Text.Length == 0 || 패스워드택박.Text.Length == 0 || 시리얼택박.Text.Length == 0)
+            {
+                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주세요.");
+            }
+            else
+            {
+                if (시리얼택박.Text != "1111")
+
+                {
+                    MessageBox.Show("시리얼 번호가 맞지 않습니다. 다시 입력해주시기 바랍니다.");
+                }
+                else
+                {
+                    common(1);
+                    F1.Show();
+                }
+            }
         }
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            FORM_01 F1 = new FORM_01();
-            this.Dispose(false);
+            F1 = new FORM_01();
+            //this.Dispose(false);
             F1.Show();
+        }
+
+        private void listview_Click(object o, EventArgs e)
+        {
+            ListView lv = (ListView)o;
+            ListView.SelectedListViewItemCollection slv = lv.SelectedItems;
+            for (int i = 0; i < slv.Count; i++)
+            {
+                ListViewItem item = slv[i];
+                //MessageBox.Show(item.SubItems[0].Text);
+                PS_No = item.SubItems[0].Text;
+                네임택박.Text = item.SubItems[1].Text;
+                포지션택박.Text = item.SubItems[2].Text;
+                패스워드택박.Text = item.SubItems[3].Text;
+                시리얼택박.Text = item.SubItems[4].Text;
+            }
+        }
+
+        //예외처리 PS_No >= 2 일때 DB에 넣어지면 안된다.
+
+        public void common(int type)
+        {
+            Hashtable ht = new Hashtable();
+            switch (type)
+            {
+                case 1:
+
+                    ht = new Hashtable();
+                    ht.Add("@PS_Id", 네임택박.Text);
+                    ht.Add("@PS_Rank", 포지션택박.Text);
+                    ht.Add("@PS_passwd", 패스워드택박.Text);
+                    ht.Add("@PS_code", 시리얼택박.Text);
+                    if (db.NonQuery("sp_insert_Pos", ht))
+                    {
+                        MessageBox.Show("입력이 정상 처리 되었습니다.");
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("입력이 실패 처리 되었습니다.");
+                    }
+
+
+                    //label1.Text = textBox1.Text;
+
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }
