@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using mojavePos.Modules;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,17 +16,26 @@ namespace mojavePos
     public partial class pastaForm : Form
     {
         _Create ct = new _Create();
+        private ListView lv;
+        private CountView cv;
+        private int tNo;
+        private int mNo;
+
         public pastaForm()
         {
             InitializeComponent();
             Load += PastForm_Load;
         }
-
+        public pastaForm(ListView lv)
+        {
+            this.lv = lv;
+        }
+        
         private void PastForm_Load(object sender, EventArgs e)
         {
             this.Size = new Size(600, 500);
             //BackColor = Color.Blue;
-
+            
             ArrayList arr = new ArrayList();
             arr.Add(new btnSet(this, "btn1", "봉골레파스타", 200, 100, 0, 0,btn_Click));
             arr.Add(new btnSet(this, "btn2", "대파알리오올리오", 200, 100, 200, 0, btn_Click));
@@ -39,47 +49,31 @@ namespace mojavePos
             for (int i = 0; i < arr.Count; i++)
             {
                 ct.btn((btnSet)arr[i]);
+               
             }
         }
 
         private void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            switch (btn.Name)
+            Commons(btn.Name);
+        }
+
+        public void Commons(string type)
+        {
+            WebAPI api = new WebAPI();
+            Hashtable ht = new Hashtable();
+            tNo = 2;
+             
+            switch (type)
             {
                 case "btn1":
-                    string host = "gudi.kr";
-                    string Port = "5002";
-                    string user = "gdc3";
-                    string pwd = "gdc3";
-                    string db = "gdc3_1";
-
-                    string connStr = string.Format(@"server={0}; Port={1}; user={2};password={3};database={4}", host, Port, user, pwd, db);
-                    MySqlConnection conn = new MySqlConnection(connStr);
-
-                    try
+                    ht.Add("tNo", tNo);
+                    ArrayList list = api.Select("http://localhost:5000/select",ht);
+                    if(list != null)
                     {
-                        MessageBox.Show("연결 성공?");
-                        conn.Open();
-                        string sql = "select ml.ml_No, m.m_Name, m.m_Price, ml.ml_Count, ml.ml_TotalCount from Menulist as ml inner join Menu as m on(ml.ml_mNo = m.m_No); ";
-                        MySqlCommand comm = new MySqlCommand(sql,conn);
-                        MySqlDataReader sdr = comm.ExecuteReader();
-                        string[] arr = new string[sdr.FieldCount];
-                        while (sdr.Read())
-                        {
-                            for(int i = 0; i<sdr.FieldCount; i++)
-                            {
-                                arr[i] = sdr.GetValue(i).ToString();
-                            }
-                        }
-                        MessageBox.Show(arr.ToString());
-                        conn.Close();
+                        api.ListView(lv, list);
                     }
-                    catch 
-                    {
-                        conn.Close();
-                    }
-
                     break;
                 case "btn2":
                     break;
@@ -88,6 +82,9 @@ namespace mojavePos
                 case "btn4":
                     break;
                 case "btn5":
+                    ht.Add("mNo", mNo);
+                    ht.Add("tNo", tNo);
+                    api.Post("http://localhost:5000/insert", ht);
                     break;
                 case "btn6":
                     break;
@@ -98,6 +95,6 @@ namespace mojavePos
                 case "btn9":
                     break;
             }
-        }
+        }  
     }
 }

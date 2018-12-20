@@ -20,35 +20,106 @@ namespace mojavePos.Modules
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public bool SelectListView(string url, ListView listView)
+        public ArrayList Select(string url, Hashtable ht)
         {
             try
             {
                 WebClient wc = new WebClient();
-                Stream stream = wc.OpenRead(url);
-                //출력
-                StreamReader sr = new StreamReader(stream);
-                string result = sr.ReadToEnd(); 
-                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);  
+                NameValueCollection param = new NameValueCollection();  // Key : Value 형식
+
+                foreach (DictionaryEntry data in ht)
+                {
+                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
+                    param.Add(data.Key.ToString(), data.Value.ToString());
+                }
+                
+                //byte로 반환
+                byte[] results = wc.UploadValues(url, "POST", param);
+                string resultStr = Encoding.UTF8.GetString(results);
+                MessageBox.Show(resultStr);
+                
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                
+                //MessageBox.Show("성공");
+                return list;
+            }
+            catch
+            {
+                //MessageBox.Show("실패");
+                return null;
+            }
+        }
+
+        public bool ListView(ListView listView, ArrayList list)
+        {
+            try
+            {
                 listView.Items.Clear();
-               
                 for (int i = 0; i < list.Count; i++)
                 {
-                    JArray ja = (JArray)list[i]; 
+                    JArray ja = (JArray)list[i];
                     string[] arr = new string[ja.Count];
-                    for (int j = 0; j < ja.Count; j++) 
+                    for (int j = 0; j < ja.Count; j++)
                     {
-                        //MessageBox.Show(list.Count.ToString());
+                        MessageBox.Show(list.Count.ToString());
                         //MessageBox.Show(ja[j].ToString());
                         arr[j] = ja[j].ToString();
                     }
                     listView.Items.Add(new ListViewItem(arr));
                 }
+                MessageBox.Show("성공");
                 return true;
             }
             catch
             {
+                MessageBox.Show("실패");
                 return false;
+            }            
+        }
+
+        public ArrayList Button(Form form, ArrayList list, EventHandler eh_btn)
+        {
+            ArrayList arrayList = new ArrayList();
+            try
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray ja = (JArray)list[i];
+                    string[] arr = new string[ja.Count];
+                    for (int j = 0; j < ja.Count; j++)
+                    {
+                        arr[j] = ja[j].ToString();
+                    }
+                    arrayList.Add(new btnSet(form, arr[0], arr[1], 100, 100, 0, (100 * i), eh_btn));
+                }                
+                return arrayList;
+            }
+            catch
+            {
+                return null;
+            }            
+        }
+
+        public ArrayList Button2(Control control, ArrayList list, EventHandler eh_btn)
+        {
+            ArrayList arrayList = new ArrayList();
+            try
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray ja = (JArray)list[i];
+                    string[] arr = new string[ja.Count];
+                    for (int j = 0; j < ja.Count; j++)
+                    {
+                        arr[j] = ja[j].ToString();
+                    }
+                    arrayList.Add(new btnSet(control, arr[0], arr[1], 200, 100, 0, (100 * i), eh_btn));
+                }
+                return arrayList;
+            }
+            catch
+            {
+                return null;
             }
         }
 
@@ -87,6 +158,7 @@ namespace mojavePos.Modules
             }
             catch
             {
+                MessageBox.Show("실패");
                 return false;
             }
         }
