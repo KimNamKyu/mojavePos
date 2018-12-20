@@ -135,6 +135,13 @@ namespace mojavePos
             cv.FormBorderStyle = FormBorderStyle.None;
             pn4.Controls.Add(cv);
             cv.Show();
+            Button btn = (Button)sender;
+            switch (btn.Name)
+            {
+                
+                default:
+                    break;
+            }
         }
     }
 }

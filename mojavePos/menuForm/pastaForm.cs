@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using mojavePos.Modules;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,17 +16,26 @@ namespace mojavePos
     public partial class pastaForm : Form
     {
         _Create ct = new _Create();
+        private ListView lv;
+        private CountView cv;
+        private int tNo;
+        private int mNo;
+
         public pastaForm()
         {
             InitializeComponent();
             Load += PastForm_Load;
         }
-
+        public pastaForm(ListView lv)
+        {
+            this.lv = lv;
+        }
+        
         private void PastForm_Load(object sender, EventArgs e)
         {
             this.Size = new Size(600, 500);
             //BackColor = Color.Blue;
-
+            
             ArrayList arr = new ArrayList();
             arr.Add(new btnSet(this, "btn1", "봉골레파스타", 200, 100, 0, 0,btn_Click));
             arr.Add(new btnSet(this, "btn2", "대파알리오올리오", 200, 100, 200, 0, btn_Click));
@@ -39,15 +49,31 @@ namespace mojavePos
             for (int i = 0; i < arr.Count; i++)
             {
                 ct.btn((btnSet)arr[i]);
+               
             }
         }
 
         private void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            switch (btn.Name)
+            Commons(btn.Name);
+        }
+
+        public void Commons(string type)
+        {
+            WebAPI api = new WebAPI();
+            Hashtable ht = new Hashtable();
+            tNo = 2;
+             
+            switch (type)
             {
                 case "btn1":
+                    ht.Add("tNo", tNo);
+                    ArrayList list = api.Select("http://localhost:5000/select",ht);
+                    if(list != null)
+                    {
+                        api.ListView(lv, list);
+                    }
                     break;
                 case "btn2":
                     break;
@@ -56,6 +82,9 @@ namespace mojavePos
                 case "btn4":
                     break;
                 case "btn5":
+                    ht.Add("mNo", mNo);
+                    ht.Add("tNo", tNo);
+                    api.Post("http://localhost:5000/insert", ht);
                     break;
                 case "btn6":
                     break;
@@ -66,6 +95,6 @@ namespace mojavePos
                 case "btn9":
                     break;
             }
-        }
+        }  
     }
 }
