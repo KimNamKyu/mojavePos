@@ -19,7 +19,7 @@ namespace mojavePos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu_modal());
+            Application.Run(new FORM_01());
         }
     }
 }
