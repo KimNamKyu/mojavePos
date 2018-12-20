@@ -71,6 +71,8 @@ namespace mojavePos.CHUN
                     api = new Module();
                     ht.Add("mc_Name", textbox1.Text);
                     api.post("http://localhost:5000/mc_insert", ht);
+
+
                     break;
 
 

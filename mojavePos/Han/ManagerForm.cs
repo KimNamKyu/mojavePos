@@ -44,6 +44,8 @@ namespace mojavePos.Han
             pnSet pn2 = new pnSet(this, 1500, 800, 0, 100);
             bottom = ct.panel(pn2); // 패널이름 : bottom
             Controls.Add(bottom);
+
+            
          
             ArrayList arr = new ArrayList();
 
@@ -53,6 +55,7 @@ namespace mojavePos.Han
             arr.Add(new lbSet(this, "lb2", "Menu", 200, 35, 1000, 80, 25));
             arr.Add(new btnSet(this, "btn_2", "//사진으로 대체", 30, 30, 1060, 125, btn2_Click));
             arr.Add(new pictureBoxSet(this, 40, 40, 1010, 120, " "));
+            //arr.Add(new lvSet(this, "리스트",100, 100, 350, 150,lv_mouseClick));
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -71,8 +74,12 @@ namespace mojavePos.Han
                     PictureBox picuturebox = ct.picture((pictureBoxSet)arr[i]);
                     picuturebox.BackColor = Color.Green;
                     bottom.Controls.Add(picuturebox);
-                    
                 }
+                //else if (typeof(lvSet) == arr[i].GetType())
+                //{
+                //    ListView listView = ct.listview((lvSet)arr[i]);
+                //    bottom.Controls.Add(listView);
+                //}
             }
             /*-----------*/
             gr = this.CreateGraphics();
@@ -91,6 +98,7 @@ namespace mojavePos.Han
             btn_list.Add(new btnSet(this, "user", "회원관리", 375, 100, 750, 0, Main_Click));
             btn_list.Add(new btnSet(this, "exit", "종료", 375, 100, 1125, 0, Main_Click));
             
+
             for(int i=0; i < btn_list.Count; i++)
             {
                 Button button = ct.btn((btnSet)btn_list[i]);
@@ -151,6 +159,10 @@ namespace mojavePos.Han
 
         }
         private void btn2_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void lv_mouseClick(object sender, EventArgs e)
         {
 
         }

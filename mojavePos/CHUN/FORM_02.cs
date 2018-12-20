@@ -21,7 +21,7 @@ namespace mojavePos
     public partial class FORM_02 : Form
     {
         
-        private DataBase db;
+        //private DataBase db;
 
         //static ToolStripStatusLabel StripLb;
         //StatusStrip statusStrip;
@@ -175,7 +175,7 @@ namespace mojavePos
         }
         private void btn_Click(object sender, EventArgs e)
         {
-            db = new DataBase();
+           
             F1 = new FORM_01();
             //this.Dispose(false);
 
@@ -235,15 +235,15 @@ namespace mojavePos
                     ht.Add("@PS_Rank", 포지션택박.Text);
                     ht.Add("@PS_passwd", 패스워드택박.Text);
                     ht.Add("@PS_code", 시리얼택박.Text);
-                    if (db.NonQuery("sp_insert_Pos", ht))
-                    {
-                        MessageBox.Show("입력이 정상 처리 되었습니다.");
+                    //if (db.NonQuery("sp_insert_Pos", ht))
+                    //{
+                    //    MessageBox.Show("입력이 정상 처리 되었습니다.");
 
-                    }
-                    else
-                    {
-                        MessageBox.Show("입력이 실패 처리 되었습니다.");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    MessageBox.Show("입력이 실패 처리 되었습니다.");
+                    //}
 
 
                     //label1.Text = textBox1.Text;
