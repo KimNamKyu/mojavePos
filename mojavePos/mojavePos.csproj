@@ -248,6 +248,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\test2.jpg" />
     <None Include="Resources\aa.bmp" />
     <Content Include="Resources\edbeafa0-3460-47e9-9fd9-f5f6db7cdd00.jpg" />
   </ItemGroup>
