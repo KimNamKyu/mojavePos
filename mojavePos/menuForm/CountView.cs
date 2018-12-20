@@ -128,7 +128,6 @@ namespace mojavePos
 
         private void menu_view()
         {
-            this.Visible = true;
             pnSet pn1 = new pnSet(this, 100, 780, 750, 10);
             Panel panel = ct.panel(pn1);
             panel.BackColor = Color.Gainsboro;
