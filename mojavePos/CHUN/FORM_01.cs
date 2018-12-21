@@ -1,13 +1,15 @@
-﻿using System;
+﻿using mojavePos.CHUN;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing; //글꼴
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp;
 
 /*===========================================================================================================================================
 
@@ -18,7 +20,6 @@ using System.Windows.Forms;
 
 namespace mojavePos
 {
-    //로그인 화면
     public partial class FORM_01 : Form
     {
         _Create ct = new _Create();
@@ -60,18 +61,26 @@ namespace mojavePos
             }
 
             //로그인 패널
+            tbSet tx1 = new tbSet(this, "tb1", 200, 35, 370, 50);
+            텍스트박스1 = ct.txtbox(tx1);
+            Controls.Add(텍스트박스1);
+
+            tbSet tx2 = new tbSet(this, "tb2", 200, 35, 370, 100);
+            텍스트박스2 = ct.txtbox(tx2);
+            Controls.Add(텍스트박스2);
+
             pnSet pn2 = new pnSet(this, 750, 169, 0, 110);
             Panel 패널2 = ct.panel(pn2);
             패널2.BackColor = Color.White;
             Controls.Add(패널2);
+            패널2.Controls.Add(텍스트박스1);
+            패널2.Controls.Add(텍스트박스2);
 
-            
+
             ArrayList arr1 = new ArrayList();
             arr1.Add(new lbSet(this, "lb3", "Name ", 150, 20, 190, 50,15));
             arr1.Add(new lbSet(this, "lb4", "Password", 150, 20, 190, 100, 15));
-            arr1.Add(new tbSet(this, "tb1", 200, 35, 370, 50));
-            arr1.Add(new tbSet(this, "tb2", 200, 35, 370, 100));
-
+           
             for (int i = 0; i < arr1.Count; i++)
             {
                 if (typeof(lbSet) == arr1[i].GetType())
@@ -79,14 +88,6 @@ namespace mojavePos
                     Label label = ct.lable((lbSet)arr1[i]);
                     label.Font = new Font("Tahoma", 15, FontStyle.Bold);
                     패널2.Controls.Add(label);
-                }
-                else if (typeof(tbSet) == arr1[i].GetType())
-                {
-                    textbox = ct.txtbox((tbSet)arr1[i]);
-                    if(i == 1) 텍스트박스1 = textbox ;
-                    else 텍스트박스2 = textbox ;    
-                    패널2.Controls.Add(텍스트박스1);
-                    패널2.Controls.Add(텍스트박스2);
                 }
             }
             //끝 패널
@@ -111,21 +112,32 @@ namespace mojavePos
 
         private void btn_Click(object sender, EventArgs e) //클릭버튼 수정할것.
         {
+            Module api = new Module();
+            api = new Module();
+            
             //(textBox_Results != null && !string.IsNullOrWhiteSpace(textBox_Results.Text))
             F3 = new FORM_03();
             F1 = new FORM_01();
-            F3.Show();
-            //입력값이 없으면 메세지박스(입력해주세요) 나오게할것,
-            //if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)// || 텍스트박스2.Text == null)
-            //{
-            //    MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
-            //    //F1.Show();
-            //}
-            //else
-            //{
-            //    F3.Show();
-            //}
-           
+            if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
+            {
+                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
+            }
+            else
+            {
+
+            }
+            /*
+            else if()
+            {
+
+            }
+            else
+            {
+
+            }*/
+            
+            
+            
             //입력값이 DB의 값과 틀렸을때(틀렸습니다. 다시입력해주세요) 나오게 할것.
             //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.
             //입력값이 맞다면 F3 로 넘어갈것.
@@ -133,11 +145,11 @@ namespace mojavePos
             //this.Dispose(false);
             //F3.Show();
         }
+        
 
         private void btn2_Click(object sender, EventArgs e)
         {
             FORM_02 F2 = new FORM_02();
-            //this.Dispose(false);
             F2.Show();
         }
 

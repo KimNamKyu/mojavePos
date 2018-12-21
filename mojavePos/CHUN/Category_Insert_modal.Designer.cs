@@ -1,6 +1,6 @@
-﻿namespace mojavePos
+﻿namespace mojavePos.CHUN
 {
-    partial class FORM_01
+    partial class Category_Insert_modal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // FORM_01
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "FORM_01";
-            this.Text = "FORM_01";
-            this.ResumeLayout(false);
-
+            this.Text = "Menu_modal";
         }
 
         #endregion

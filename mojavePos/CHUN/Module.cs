@@ -32,7 +32,7 @@ namespace WindowsFormsApp
                 {
 
                     JArray ja = (JArray)list[i];
-                    string[] arr = new string[6];
+                    string[] arr = new string[2];
                     for (int j = 0; j < ja.Count; j++)
                     {
                         arr[j] = ja[j].ToString();

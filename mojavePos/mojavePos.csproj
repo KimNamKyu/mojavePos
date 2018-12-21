@@ -55,6 +55,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="btnSet.cs" />
+    <Compile Include="CHUN\Category_Update_delete_modal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CHUN\Category_Update_delete_modal.Designer.cs">
+      <DependentUpon>Category_Update_delete_modal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CHUN\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CHUN\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="CHUN\Module.cs" />
     <Compile Include="CHUN\test.cs">
       <SubType>Form</SubType>
@@ -62,11 +74,11 @@
     <Compile Include="CHUN\test.Designer.cs">
       <DependentUpon>test.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\Menu_modal.cs">
+    <Compile Include="CHUN\Category_Insert_modal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\Menu_modal.Designer.cs">
-      <DependentUpon>Menu_modal.cs</DependentUpon>
+    <Compile Include="CHUN\Category_Insert_modal.Designer.cs">
+      <DependentUpon>Category_Insert_modal.cs</DependentUpon>
     </Compile>
     <Compile Include="comboboxSet.cs" />
     <Compile Include="Commons.cs" />
@@ -207,6 +219,9 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
+    <EmbeddedResource Include="CHUN\FORM_01.resx">
+      <DependentUpon>FORM_01.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="menuForm\CountView.resx">
       <DependentUpon>CountView.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,7 +263,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\test2.jpg" />
+    <None Include="Resources\test2.jpg" />
     <None Include="Resources\aa.bmp" />
     <Content Include="Resources\edbeafa0-3460-47e9-9fd9-f5f6db7cdd00.jpg" />
   </ItemGroup>

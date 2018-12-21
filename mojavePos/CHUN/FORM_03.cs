@@ -19,8 +19,10 @@ namespace mojavePos
         lbSet pn5_lb;
         Label 시간;
         Label 날짜;
+        Label 경고문;
         Timer timer;
         _Create ct;
+        Panel 패널4;
         public FORM_03()
         {
             InitializeComponent();
@@ -126,7 +128,7 @@ namespace mojavePos
             btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", " ", 80, 80, 50, 30, btn_Click);
             Button 영업시작버튼 = ct.btn(pn2_btn_1);
             영업시작버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            영업시작버튼.Image = Image.FromFile("C:\\github\\Images\\test2.jpg"); //진욱이한테 물어보기
+            영업시작버튼.BackgroundImage = mojavePos.Properties.Resources.test2;
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
@@ -167,7 +169,10 @@ namespace mojavePos
             btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", " ", 80, 80, 50, 30, btn1_Click);
             Button 관리자버튼 = ct.btn(pn3_btn_1);
             관리자버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            관리자버튼.Image = Image.FromFile("C:\\github\\Images\\test2.jpg"); //진욱이한테 물어보기
+           
+            관리자버튼.BackgroundImage = mojavePos.Properties.Resources.test2;
+          
+
             Controls.Add(관리자버튼);
 
             //관리자 라벨
@@ -193,14 +198,13 @@ namespace mojavePos
             경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(경고문);
 
-            
-
             //하단부 패널
             pnSet pn4 = new pnSet(this, 750, 50, 0,380);
             Panel 패널4 = ct.panel(pn4);
             패널4.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널4);
             패널4.Controls.Add(경고문);
+            
 
             Control_Init();
         }
@@ -223,16 +227,24 @@ namespace mojavePos
         private void btn_Click(object sender, EventArgs e)
         {
             MainPos MP = new MainPos();
-            
-            
-            MP.Show();
+            if(MessageBox.Show("영업을 시작 하시겠습니까?","",MessageBoxButtons.YesNo)==DialogResult.Yes)
+            {
+                
+                MP.Show();               
+                //하위라벨 및 버튼라벨 바꾸기
+                //경고문.Text = "영업중 입니다.판매를 종료하시려면 영업종료를 눌러주십시오.";
+            }
+            else if(MessageBox.Show("영업을 종료 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                //하위 라벨 및 버튼 바꾸기
+            }
         }
 
         //관리자버튼 효과
         private void btn1_Click(object sender, EventArgs e)
         {
             ManagerForm MF = new ManagerForm();
-            this.Dispose(false);
+           
             MF.Show();
 
         }

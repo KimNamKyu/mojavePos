@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp;
 
 /*-----------------------------------------------------------------
  // 클릭시 버튼 색상 변경해줘야 함.
@@ -20,7 +21,7 @@ namespace mojavePos
 {
     public partial class FORM_02 : Form
     {
-        
+
 
 
         //static ToolStripStatusLabel StripLb;
@@ -28,6 +29,7 @@ namespace mojavePos
         _Create ct;
         TextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
         FORM_01 F1;
+        FORM_02 F2;
         private string PS_No;
 
         public FORM_02()
@@ -177,7 +179,6 @@ namespace mojavePos
         {
 
             F1 = new FORM_01();
-            //this.Dispose(false);
 
             if (네임택박.Text.Length == 0 || 포지션택박.Text.Length == 0 || 패스워드택박.Text.Length == 0 || 시리얼택박.Text.Length == 0)
             {
@@ -192,59 +193,27 @@ namespace mojavePos
                 }
                 else
                 {
-                    common(1);
-                    F1.Show();
-                }
-            }
-        }
-
-        private void btn2_Click(object sender, EventArgs e)
-        {
-            F1 = new FORM_01();
-            //this.Dispose(false);
-            F1.Show();
-        }
-
-        private void listview_Click(object o, EventArgs e)
-        {
-            ListView lv = (ListView)o;
-            ListView.SelectedListViewItemCollection slv = lv.SelectedItems;
-            for (int i = 0; i < slv.Count; i++)
-            {
-                ListViewItem item = slv[i];
-                //MessageBox.Show(item.SubItems[0].Text);
-                PS_No = item.SubItems[0].Text;
-                네임택박.Text = item.SubItems[1].Text;
-                포지션택박.Text = item.SubItems[2].Text;
-                패스워드택박.Text = item.SubItems[3].Text;
-                시리얼택박.Text = item.SubItems[4].Text;
-            }
-        }
-
-        //예외처리 PS_No >= 2 일때 DB에 넣어지면 안된다.
-
-        public void common(int type)
-        {
-            Hashtable ht = new Hashtable();
-            switch (type)
-            {
-                case 1:
-
-                    ht = new Hashtable();
-                    ht.Add("@PS_Id", 네임택박.Text);
-                    ht.Add("@PS_Rank", 포지션택박.Text);
-                    ht.Add("@PS_passwd", 패스워드택박.Text);
-                    ht.Add("@PS_code", 시리얼택박.Text);
                    
+                    Hashtable ht = new Hashtable();
+                    Module api = new Module();
+                    api = new Module();
+                    ht.Add("ps_Id", 네임택박.Text);
+                    ht.Add("ps_Rank", 포지션택박.Text);
+                    ht.Add("ps_passwd", 패스워드택박.Text);
+                    ht.Add("ps_code", 시리얼택박.Text);
+                    api.post("http://localhost:5000/SI_insert_Pos", ht);
+                }
 
-                    //label1.Text = textBox1.Text;
-
-                    break;
-                default:
-                    break;
             }
+        }
+            private void btn2_Click(object sender, EventArgs e)
+            {
+            this.Close();
+            }
+
+            //경고문으로 이미 회원가입을 하셨습니다. 라는 메세지박스 출력할것.
+
 
         }
     }
-}
 

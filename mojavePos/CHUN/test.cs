@@ -47,7 +47,7 @@ namespace mojavePos.CHUN
         }
         private void btn_Click(object sender, EventArgs e)
         {
-            Menu_modal MenuM = new Menu_modal();
+            Category_Insert_modal MenuM = new Category_Insert_modal();
             MenuM.Show();
         }
         private void btn2_Click(object sender, EventArgs e)

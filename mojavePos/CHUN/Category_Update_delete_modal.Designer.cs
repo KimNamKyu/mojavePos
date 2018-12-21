@@ -1,6 +1,6 @@
 ﻿namespace mojavePos.CHUN
 {
-    partial class Menu_modal
+    partial class Category_Update_delete_modal
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Menu_modal";
+            this.Text = "Category_Update_delete_modal";
         }
 
         #endregion

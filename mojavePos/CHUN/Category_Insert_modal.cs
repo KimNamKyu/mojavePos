@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,14 +12,13 @@ using WindowsFormsApp;
 
 namespace mojavePos.CHUN
 {
-    public partial class Menu_modal : Form
+    public partial class Category_Insert_modal : Form
     {
         _Create ct = new _Create();
-        SqlConnection conn;
         TextBox textbox1;
         private string no;
 
-        public Menu_modal()
+        public Category_Insert_modal()
         {
             InitializeComponent();
             Load += Menu_modal_Load;
@@ -63,20 +61,16 @@ namespace mojavePos.CHUN
         private void btn_click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            Module api = new Module();
             switch (btn.Name)
             {
                 case "btn1":
                     Hashtable ht = new Hashtable();
-                    Module api = new Module();
                     api = new Module();
                     ht.Add("mc_Name", textbox1.Text);
                     api.post("http://localhost:5000/mc_insert", ht);
-
-
                     break;
 
-
-                    break;
                 case "btn2":
                     this.Close();
                     break;
