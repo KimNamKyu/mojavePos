@@ -209,8 +209,5 @@ namespace mojavePos.Han
                 e.Handled = true;
             }
         }
-
-
-
     }
 }

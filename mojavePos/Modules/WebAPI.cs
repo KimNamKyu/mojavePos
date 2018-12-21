@@ -90,5 +90,65 @@ namespace mojavePos.Modules
                 return false;
             }
         }
+
+
+
+        public ArrayList Select(string url, Hashtable ht)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection param = new NameValueCollection();
+
+                foreach (DictionaryEntry data in ht)
+                {
+                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
+                    param.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                //byte로 반환
+                byte[] results = wc.UploadValues(url, "POST", param);
+                string resultStr = Encoding.UTF8.GetString(results);
+                //MessageBox.Show(resultStr);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+
+                //MessageBox.Show("성공");
+                return list;
+            }
+            catch
+            {
+                //MessageBox.Show("실패");
+                return null;
+            }
+        }
+
+        public ArrayList ListView(ListView listView, ArrayList list)
+        {
+            ArrayList arrayList = new ArrayList();
+            try
+            {
+                listView.Items.Clear();
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray ja = (JArray)list[i];
+                    string[] arr = new string[ja.Count];
+                    for (int j = 0; j < ja.Count; j++)
+                    {
+                        //MessageBox.Show(list.Count.ToString());
+                        //MessageBox.Show(ja[j].ToString());
+                        arr[j] = ja[j].ToString();
+                    }
+                    listView.Items.Add(new ListViewItem(arr));
+                }
+                MessageBox.Show("성공");
+                return arrayList;
+            }
+            catch
+            {
+                MessageBox.Show("실패");
+                return null;
+            }
+        }
     }
 }
