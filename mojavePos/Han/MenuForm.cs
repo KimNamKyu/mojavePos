@@ -57,7 +57,7 @@ namespace mojavePos.Han
             ArrayList arr = new ArrayList();
             arr.Add(new lbSet(this, "lb1", "Category", 200, 35, 350, 80, 25));
             arr.Add(new btnSet(this, "btn_1", "추가", 90, 50, 460, 125, btn_Click));
-            arr.Add(new pictureBoxSet(this, 40, 40, 410, 120, " "));
+            arr.Add(new pictureBoxSet(this, 40, 40, 410, 120, " "));//
             arr.Add(new lbSet(this, "lb2", "Menu", 200, 35, 1000, 80, 25));
             arr.Add(new btnSet(this, "btn_2", "추가", 90, 50, 1060, 125, btn2_Click));
             arr.Add(new pictureBoxSet(this, 40, 40, 1010, 120, " "));
