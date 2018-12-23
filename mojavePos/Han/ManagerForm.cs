@@ -35,11 +35,20 @@ namespace mojavePos.Han
         }
         private void Head()
         {
+
+
             pnSet pn1 = new pnSet(this, 1500, 100, 0, 0);
             Panel head = ct.panel(pn1);
             Controls.Add(head);
 
-           pnSet pn2 = new pnSet(this, 1500, 800, 0, 100);
+            PictureBox mojave = new PictureBox();
+            mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("mojave");
+            mojave.SizeMode = PictureBoxSizeMode.StretchImage;
+            mojave.Size = new Size(300, 100);
+            mojave.Location = new Point(0, 0);
+            head.Controls.Add(mojave);
+
+            pnSet pn2 = new pnSet(this, 1500, 800, 0, 100);
            bottom = ct.panel(pn2); // 패널이름 : bottom
            Controls.Add(bottom);
 
@@ -49,52 +58,12 @@ namespace mojavePos.Han
             mf.FormBorderStyle = FormBorderStyle.None;
             bottom.Controls.Add(mf);
             mf.Show();
-            /*
-            //ArrayList arr = new ArrayList();
-
-            //arr.Add(new lbSet(this, "lb1", "Category", 200, 35, 350, 80, 25));
-            //arr.Add(new btnSet(this, "btn_1", "//사진으로 대체", 30, 30, 460, 125, btn_Click));
-            //arr.Add(new pictureBoxSet(this, 40, 40, 410, 120, " "));
-            //arr.Add(new lbSet(this, "lb2", "Menu", 200, 35, 1000, 80, 25));
-            //arr.Add(new btnSet(this, "btn_2", "//사진으로 대체", 30, 30, 1060, 125, btn2_Click));
-            //arr.Add(new pictureBoxSet(this, 40, 40, 1010, 120, " "));
-
-            //for (int i = 0; i < arr.Count; i++)
-            //{
-            //    if (typeof(lbSet) == arr[i].GetType())
-            //    {
-            //        Label label = ct.lable((lbSet)arr[i]);
-            //        bottom.Controls.Add(label);
-            //    }
-            //    else if (typeof(btnSet) == arr[i].GetType())
-            //    {
-            //        Button button = ct.btn((btnSet)arr[i]);
-            //        bottom.Controls.Add(button);
-            //    }
-            //    else if (typeof(pictureBoxSet) == arr[i].GetType())
-            //    {
-            //        PictureBox picuturebox = ct.picture((pictureBoxSet)arr[i]);
-            //        picuturebox.BackColor = Color.Green;
-            //        bottom.Controls.Add(picuturebox);
-                    
-            //    }
-            //}
-            ///*-----------*/
-            //gr = this.CreateGraphics();
-            //Pen pen1 = new Pen(Color.Black, 1);
-            //pen1.LineJoin = System.Drawing.Drawing2D.LineJoin.Bevel;
-            //Point First = new Point(300, 300);
-            //Point Second = new Point(1200, 300);
-            ///*-----------*/
-
-            //head.BackColor = Color.Black;
-            //bottom.BackColor = Color.BurlyWood;
-            /*----------------------------*/
+            
             ArrayList btn_list = new ArrayList();
-            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 300, 100, 0, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "money", "매출관리", 300, 100, 300, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "rank", "메뉴순위", 300, 100, 600, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "user", "회원관리", 300, 100, 900, 0, Main_Click));
+            //btn_list.Add(new btnSet(this, "image", "image", 300, 100, 0, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 300, 100, 300, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "money", "매출관리", 300, 100, 600, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "rank", "메뉴순위", 300, 100, 900, 0, Main_Click));
             btn_list.Add(new btnSet(this, "exit", "종료", 300, 100, 1200, 0, Main_Click));
 
             for (int i=0; i < btn_list.Count; i++)
@@ -126,14 +95,7 @@ namespace mojavePos.Han
                     bottom.Controls.Add(money);
                     money.Show();
                     break;
-                case "user":
-                    UserForm user = new UserForm();
-                    user.MdiParent = this;
-                    user.WindowState = FormWindowState.Maximized;
-                    user.FormBorderStyle = FormBorderStyle.None;
-                    bottom.Controls.Add(user);
-                    user.Show();
-                    break;
+                
                 case "rank":
                     RankForm rf = new RankForm();
                     rf.MdiParent = this;
@@ -145,7 +107,6 @@ namespace mojavePos.Han
                 case "exit":
                     FORM_03 F3 = new FORM_03();
                     Close();
-                    F3.Show(); // exit하면 MANAGERFORM이 꺼져야하는 기능 추가해야 함
                     break;
             }
         }

@@ -113,7 +113,7 @@ namespace mojavePos
             Panel 패널2 = ct.panel(pn2);
             패널2.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널2);   //패널 화면 출력
-            패널2.Controls.Add(mojave);
+            //패널2.Controls.Add(mojave);
 
             ArrayList arr2 = new ArrayList();
             arr2.Add(new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 210, 15, 15, 40, 10));

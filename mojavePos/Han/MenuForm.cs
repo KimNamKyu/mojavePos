@@ -17,7 +17,7 @@ namespace mojavePos.Han
     {
         public static string camo_no;
         _Create ct = new _Create();
-        Panel bottom;
+        Panel bottom,line;
         private Graphics gr;
         Module api = new Module();
         Category_Update_delete_modal CUD;
@@ -30,33 +30,38 @@ namespace mojavePos.Han
         private void MenuForm_Load(object sender, EventArgs e)
         {
             ClientSize = new Size(1500, 800);
-
-            lvSet lv1 = new lvSet(this, "lv1", 400, 500, 250, 230, lv_mouseClick);
+           
+            lvSet lv1 = new lvSet(this, "lv1", 400, 500, 500, 230, lv_mouseClick);
             ListView listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
             listview.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
+           
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview);
             Controls.Add(listview);
 
-            lvSet lv2 = new lvSet(this, "lv2", 400, 500,850, 230, lv2_mouseClick);
+            lvSet lv2 = new lvSet(this, "lv2", 400, 500,1000, 230, lv2_mouseClick);
             ListView listview2 = ct.listview(lv2);
             listview2.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview2);
             Controls.Add(listview2);
 
+            pnSet pn3 = new pnSet(this,1500, 1, 0, 0);
+            line = ct.panel(pn3);
+            Controls.Add(line);
+
             pnSet pn2 = new pnSet(this, 1500, 800, 0, 0);
             bottom = ct.panel(pn2); // 패널이름 : bottom
             Controls.Add(bottom);
             bottom.Controls.Add(listview);
             bottom.Controls.Add(listview2);
-
+            
             ArrayList arr = new ArrayList();
-            arr.Add(new lbSet(this, "lb1", "Category", 200, 35, 350, 80, 25));
+            arr.Add(new lbSet(this, "lb1", "Category", 250, 50, 600, 80, 35));
             arr.Add(new btnSet(this, "btn_1", "추가", 90, 50, 460, 125, btn_Click));
             arr.Add(new pictureBoxSet(this, 40, 40, 410, 120, " "));
-            arr.Add(new lbSet(this, "lb2", "Menu", 200, 35, 1000, 80, 25));
+            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1200, 80,35));
             arr.Add(new btnSet(this, "btn_2", "추가", 90, 50, 1060, 125, btn2_Click));
             arr.Add(new pictureBoxSet(this, 40, 40, 1010, 120, " "));
           
@@ -65,6 +70,7 @@ namespace mojavePos.Han
                 if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
+                    label.BackColor = System.Drawing.Color.Transparent;
                     bottom.Controls.Add(label);
                 }
                 else if (typeof(btnSet) == arr[i].GetType())
@@ -82,7 +88,8 @@ namespace mojavePos.Han
 
             }
 
-            bottom.BackColor = Color.BurlyWood;
+            //bottom.BackColor = Color.BurlyWood;
+            bottom.BackgroundImage = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("배경화면1");
 
         }
         private void btn_Click(object sender, EventArgs e)

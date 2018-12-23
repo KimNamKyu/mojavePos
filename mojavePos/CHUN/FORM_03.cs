@@ -15,11 +15,8 @@ namespace mojavePos
     public partial class FORM_03 : Form
     {
        
-        lbSet pn4_lb;
-        lbSet pn5_lb;
-        Label 시간;
-        Label 날짜;
-        Label 경고문;
+        lbSet pn4_lb, pn5_lb;
+        Label 시간, 날짜, 경고문;
         Timer timer;
         _Create ct;
         Panel 패널4;
@@ -38,91 +35,52 @@ namespace mojavePos
             BackColor = Color.FromArgb(191, 191, 191);
             this.StartPosition = FormStartPosition.Manual;
             
-            //오늘매출액 파트 라벨
-            lbSet pn1_lb1 = new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 70, 10);
-            Label 오늘매출액 = ct.lable(pn1_lb1);
-            오늘매출액.TextAlign = ContentAlignment.MiddleCenter;
-            오늘매출액.BackColor = Color.LightGreen;
-             오늘매출액.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(오늘매출액);
-
-            lbSet pn1_lb1_1 = new lbSet(this, "label1_1", "10,000,000", 100, 25, 60, 100, 10);
-            Label 오늘매출액숫자 = ct.lable(pn1_lb1_1);
-            오늘매출액숫자.TextAlign = ContentAlignment.MiddleCenter;
-            //오늘매출액숫자.BackColor = Color.LightGray;
-            오늘매출액숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(오늘매출액숫자);
-
-            lbSet pn1_lb1_2 = new lbSet(this, "label1_2", "원", 20, 25, 160, 100, 10);
-            Label 오늘매출액원 = ct.lable(pn1_lb1_2);
-            오늘매출액원.TextAlign = ContentAlignment.MiddleLeft;
-            //오늘매출액원.BackColor = Color.LightGreen;
-            오늘매출액원.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(오늘매출액원);
-
-            //오늘계산서수 파트 라벨
-            lbSet pn1_lb2 = new lbSet(this, "pn1_lb2", "분기 총 매출액", 110, 25, 90, 140, 10);
-            Label 오늘계산서수 = ct.lable(pn1_lb2);
-            오늘계산서수.TextAlign = ContentAlignment.MiddleCenter;
-            오늘계산서수.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            오늘계산서수.BackColor = Color.LightYellow;
-            Controls.Add(오늘계산서수);
-
-            lbSet pn1_lb2_0 = new lbSet(this, "pn1_lb2_0", "-", 20, 25, 70, 140, 10);
-            Label 분기숫자 = ct.lable(pn1_lb2_0);
-            분기숫자.TextAlign = ContentAlignment.MiddleCenter;
-             분기숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            //분기숫자.BackColor = Color.LightGray;
-            Controls.Add(분기숫자);
-
-            lbSet pn1_lb2_1 = new lbSet(this, "pn1_lb2_1", "10,000,000", 100, 25, 60, 170, 10);
-            Label 오늘계산서숫자 = ct.lable(pn1_lb2_1);
-            오늘계산서숫자.TextAlign = ContentAlignment.MiddleCenter;
-            오늘계산서숫자.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            //오늘계산서숫자.BackColor = Color.LightGray;
-            Controls.Add(오늘계산서숫자);
-
-            lbSet pn1_lb2_2 = new lbSet(this, "pn1_lb2_2", "원", 20, 25, 160, 170, 10);
-            Label 오늘계산서갯수 = ct.lable(pn1_lb2_2);
-            오늘계산서갯수.TextAlign = ContentAlignment.MiddleCenter;
-            오늘계산서갯수.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            //오늘계산서갯수.BackColor = Color.LightGray;
-            Controls.Add(오늘계산서갯수);
-
-           
             //날짜라벨
             lbSet pn1_lb5 = new lbSet(this, "pn1_lb5", "//날짜", 250, 30, 5, 240, 15);
             날짜 = ct.lable(pn1_lb5);
             날짜.TextAlign = ContentAlignment.MiddleCenter;
             날짜.Font = new Font("Tahoma", 15, FontStyle.Bold);
-
+            날짜.ForeColor = Color.White;
             Controls.Add(날짜);
-
             
             //시간라벨
             lbSet pn1_lb6 = new lbSet(this, "pn1_lb6", "//시간", 170, 30, 45, 270, 15);
             시간 = ct.lable(pn1_lb6);
             시간.TextAlign = ContentAlignment.MiddleCenter;
             시간.Font = new Font("Tahoma", 15, FontStyle.Bold);
+            시간.ForeColor = Color.White;
             Controls.Add(시간);
 
-            //왼쪽 부분 패널
+            //패널
             pnSet pn1 = new pnSet(this, 250, 350, 0, 0);
             Panel 패널1 = ct.panel(pn1);
-            패널1.BackColor = Color.FromArgb(52, 152, 219);
+            패널1.BackColor = Color.FromArgb(19, 38, 78);
             Controls.Add(패널1);   //패널 화면 출력
-            패널1.Controls.Add(오늘매출액);
-            패널1.Controls.Add(오늘매출액숫자);
-            패널1.Controls.Add(오늘매출액원);
-
-            패널1.Controls.Add(분기숫자);
-            패널1.Controls.Add(오늘계산서수);
-            패널1.Controls.Add(오늘계산서숫자);
-            패널1.Controls.Add(오늘계산서갯수);
-
             패널1.Controls.Add(날짜);
             패널1.Controls.Add(시간);
 
+            //그림넣기
+
+            ArrayList arr = new ArrayList();
+            arr.Add(new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 70, 10));
+            arr.Add(new lbSet(this, "label1_1", "10,000,000", 100, 25, 60, 100, 10));
+            arr.Add(new lbSet(this, "label1_2", "원", 20, 25, 160, 100, 10));
+            arr.Add(new lbSet(this, "pn1_lb2", "분기 매출액", 110, 25, 70, 140, 10));
+            arr.Add(new lbSet(this, "pn1_lb2_0", "2", 20, 25, 58, 140, 10));
+            arr.Add(new lbSet(this, "pn1_lb2_1", "10,000,000", 100, 25, 60, 170, 10));
+            arr.Add(new lbSet(this, "pn1_lb2_2", "원", 20, 25, 160, 170, 10));
+            
+            for(int i = 0; i< arr.Count; i++)
+            {
+                if(typeof(lbSet) == arr[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr[i]);
+                    label.TextAlign = ContentAlignment.MiddleCenter;
+                    label.ForeColor = Color.White;
+                    label.Font = new Font("Tahoma", 10, FontStyle.Bold);
+                    패널1.Controls.Add(label);
+                }
+            }
             //영업시작 파트
             //영업시작 버튼
             btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", " ", 80, 80, 50, 30, btn_Click);
@@ -192,7 +150,7 @@ namespace mojavePos
 
 
             //경고문 라벨
-            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 125, 12, 15);
+            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 80, 12, 15);
             pn5_lb = new lbSet(this, "label2", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 90, 12, 15);
             Label 경고문 = ct.lable(pn4_lb);
             경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
