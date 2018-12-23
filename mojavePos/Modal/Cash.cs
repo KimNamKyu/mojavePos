@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mojavePos.Modules;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,10 +17,14 @@ namespace mojavePos.Modal
         _Create ct = new _Create();
         TextBox textbox1,textbox2;
         Button btn;
-        public Cash()
+        private Hashtable ht;
+        private WebAPI api;
+        private string tNo;
+        public Cash(string tNo)
         {
             InitializeComponent();
             Load += Cash_Load;
+            this.tNo = tNo;
         }
 
         private void Cash_Load(object sender, EventArgs e)
@@ -97,6 +102,7 @@ namespace mojavePos.Modal
            
         }
 
+                    CountView cv = new CountView();
         private void btn1_Click(object sender, EventArgs e)
         {
             btn = (Button)sender;
@@ -119,7 +125,10 @@ namespace mojavePos.Modal
                     textbox2.Text = textbox1.Text;
                     break;
                 case "결제완료":
-                    Dispose();
+                    api = new WebAPI();
+                    ht = new Hashtable();
+                    ht.Add("tNo", tNo);
+                    api.Post("http://localhost:5000/delete", ht);
                     break;
             }
         }

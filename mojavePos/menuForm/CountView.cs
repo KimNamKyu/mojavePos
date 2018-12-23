@@ -20,18 +20,23 @@ namespace mojavePos
         _Create ct = new _Create();
         Panel panel2;
         private Panel panel;
-        private pastaForm form;
         private ListView lv;
         private WebAPI api;
         private Hashtable ht;
+        private string _bNo;
+        private string tNo;
+        private ArrayList list;
+
         public CountView()
         {
             InitializeComponent();
-            Load += CountView_Load;
+          
         }
-        public CountView(ListView lv)
+        public CountView(string tNo,ArrayList list)
         {
-            this.lv = lv;
+            Load += CountView_Load;
+            this.tNo = tNo;
+            this.list = list;
         }
 
         private void CountView_Load(object sender, EventArgs e)
@@ -40,6 +45,16 @@ namespace mojavePos
             listView();
             btn_load();
             menu_view();
+            MessageBox.Show(tNo);
+            ArrayList arrayList = api.ListView(lv, list);
+            if (list != null)
+            {
+                arrayList = api.ListView(lv, list);
+                for(int i = 0; i< arrayList.Count; i++)
+                {
+                    Controls.Add(lv);
+                }
+            }
         }
 
         public void listView()
@@ -71,7 +86,6 @@ namespace mojavePos
                     lv = ct.listview((lvSet)arr[i]);
                     lv.BackColor = Color.WhiteSmoke;
                     panel.Controls.Add(lv);
-                    lv.Columns.Add("No", 40, HorizontalAlignment.Center);
                     lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
@@ -112,14 +126,14 @@ namespace mojavePos
         private void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
+            api = new WebAPI();
+            ht = new Hashtable();
             switch (btn.Name)
             {
                 case "btn1":
-                    pastaForm pf = new pastaForm(lv);
-                    pf.Commons(btn.Name);
                     break;
                 case "btn2":
-                    Cash cash = new Cash();
+                    Cash cash = new Cash(tNo);
                     cash.StartPosition = FormStartPosition.CenterParent;
                     cash.Show();
                     break;
@@ -142,17 +156,7 @@ namespace mojavePos
             panel2 = ct.panel(pn2);
             panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
-            /*
-            ArrayList arrayList = new ArrayList();
-
-            arrayList.Add(new btnSet(this, "menu1", "파스타", 100, 100, 0, 0, menu_Click));
-            arrayList.Add(new btnSet(this, "menu2", "스테이크", 100, 100, 0, 100, menu_Click));
-            arrayList.Add(new btnSet(this, "menu3", "샐러드", 100, 100, 0, 200, menu_Click));
-            arrayList.Add(new btnSet(this, "menu4", "디저트", 100, 100, 0, 300, menu_Click));
-            arrayList.Add(new btnSet(this, "menu5", "음료", 100, 100, 0, 400, menu_Click));
-            arrayList.Add(new btnSet(this, "menu6", "사이드메뉴", 100, 100, 0, 500, menu_Click));
-            */
-
+      
             api = new WebAPI();
             ht = new Hashtable();
             ht.Add("spName", "sp_MenuCategory_Select");
@@ -167,26 +171,18 @@ namespace mojavePos
                     panel.Controls.Add(button);
                 }
             }
-            /*
-            pastaForm pastaForm = new pastaForm();
-            pastaForm.MdiParent = this.ParentForm;
-            pastaForm.WindowState = FormWindowState.Maximized;
-            pastaForm.FormBorderStyle = FormBorderStyle.None;
-            panel2.Controls.Add(pastaForm);
-            pastaForm.Show();
-            */
         }      
        
         private void Category_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            string _bNo = btn.Name;
+            _bNo = btn.Name;
             MessageBox.Show(_bNo);
 
             ht = new Hashtable();
             ht.Add("spName", "sp_Menu_Select");
             ht.Add("param", "_bNo:"+ _bNo);
-
+            panel2.Controls.Clear();
             ArrayList list = api.Select("http://localhost:5000/select", ht);
             if (list != null)
             {
@@ -197,68 +193,51 @@ namespace mojavePos
                     panel2.Controls.Add(button);
                 }
             }
-           
-            }
-             /*
-             switch (btn.Name)
-             {
-                 case "menu1":
-                     pastaForm pastaForm = new pastaForm(lv);
-                     pastaForm.MdiParent = this.ParentForm;
-                     pastaForm.WindowState = FormWindowState.Maximized;
-                     pastaForm.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(pastaForm);
-                     pastaForm.Show();
+        }
+         
+        private void Menu_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            MessageBox.Show(btn.Text);
+            Commons(btn.Name);
+        }
 
-                     break;
-                 case "menu2":
-                     steakeForm steakeform = new steakeForm();
-                     steakeform.MdiParent = this.ParentForm;
-                     steakeform.WindowState = FormWindowState.Maximized;
-                    steakeform.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(steakeform);
-                     steakeform.Show();
-                     break;
-                 case "menu3":
-                     SaladForm saladform = new SaladForm();
-                     saladform.MdiParent = this.ParentForm;
-                     saladform.WindowState = FormWindowState.Maximized;
-                     saladform.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(saladform);
-                     saladform.Show();
-                     break;
-                 case "menu4":
-                     beverageForm beverage = new beverageForm();
-                     beverage.MdiParent = this.ParentForm;
-                     beverage.WindowState = FormWindowState.Maximized;
-                     beverage.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(beverage);
-                     beverage.Show();
-                     break;
-                 case "menu5":
-                     dessertForm dessert = new dessertForm();
-                     dessert.MdiParent = this.ParentForm;
-                     dessert.WindowState = FormWindowState.Maximized;
-                     dessert.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(dessert);
-                     dessert.Show();
-                     break;
-                 case "menu6":
-                     sidemenuForm sidemenu = new sidemenuForm();
-                     sidemenu.MdiParent = this.ParentForm;
-                     sidemenu.WindowState = FormWindowState.Maximized;
-                     sidemenu.FormBorderStyle = FormBorderStyle.None;
-                     panel2.Controls.Add(sidemenu);
-                     sidemenu.Show();
-                     break;
-             }
-             */
-     
-            private void Menu_Click(object sender, EventArgs e)
+        private void Commons(string type)
+        {
+            api = new WebAPI();
+            ht = new Hashtable();
+            string mNo = _bNo;  
+            switch (type)
             {
-                Button btn = (Button)sender;
-                //MessageBox.Show(btn.Name);
+                case "1":
+                    ht.Add("tNo",tNo );
+                    ht.Add("mNo", mNo);
+                    api.Post("http://localhost:5000/insert", ht);
+                    break;
+                case "2":
+                    ht.Add("tNo", tNo);
+                    ht.Add("mNo", mNo);
+                    api.Post("http://localhost:5000/insert", ht);
+                    break;
+                case "3":
+                    ht.Add("tNo", tNo);
+                    ht.Add("mNo", mNo);
+                    api.Post("http://localhost:5000/insert", ht);
+                    break;
+                case "4":
+                    ht.Add("tNo", tNo);
+                    ht.Add("mNo", mNo);
+                    api.Post("http://localhost:5000/insert", ht);
+                    break;
+                case "5":
+                    ht.Add("tNo", tNo);
+                    ht.Add("mNo", mNo);
+                    api.Post("http://localhost:5000/insert", ht);
+                    break;
                
+                default:
+                    break;
+            }
         }
     }
 }

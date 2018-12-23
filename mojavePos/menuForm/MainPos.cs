@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mojavePos.Modules;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +17,15 @@ namespace mojavePos
         _Create ct= new _Create();
         private Panel pn4;
         private Commons comm;
+        private Hashtable ht;
+        private WebAPI api;
+        private string tNo;
+      
 
         public MainPos()
         {
             InitializeComponent();
             Load += MainPos_Load;
-           
             //this.StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -95,53 +99,55 @@ namespace mojavePos
         //버튼 UI
         private void btn_Load()
         {
-            ArrayList arrayList = new ArrayList();
+            ArrayList array = new ArrayList();
+
+            array.Add(new pnSet(this, 5, 310, 620, 40));
+            array.Add(new pnSet(this, 5, 310, 620, 450));
             
-            arrayList.Add(new pnSet(this, 5, 310, 620, 40));
-            arrayList.Add(new pnSet(this, 5, 310, 620, 450));
-            arrayList.Add(new btnSet(this,"table1"," 1", 200, 310, 100, 40,btn_Click));
-            arrayList.Add(new btnSet(this, "table2", "2", 200, 310, 350, 40, btn_Click));
-            arrayList.Add(new btnSet(this, "table3", "3", 200, 310, 100, 450, btn_Click));
-            arrayList.Add(new btnSet(this, "table4", "4", 200, 310, 350, 450, btn_Click));
-            arrayList.Add(new btnSet(this, "table5", "5", 200, 150, 700, 40, btn_Click));
-            arrayList.Add(new btnSet(this, "table6", "6", 200, 150, 700, 200, btn_Click));
-            arrayList.Add(new btnSet(this, "table7", "7", 200, 150, 950, 40, btn_Click));
-            arrayList.Add(new btnSet(this, "table8", "8", 200, 150, 950, 200, btn_Click));
-            arrayList.Add(new btnSet(this, "table9", "9", 200, 150, 1200, 40, btn_Click));
-            arrayList.Add(new btnSet(this, "table10", "10", 200, 150, 1200, 200, btn_Click));
-            arrayList.Add(new btnSet(this, "table11", "11", 200, 150, 700, 450, btn_Click));
-            arrayList.Add(new btnSet(this, "table12", "12", 200, 150, 700, 610, btn_Click));
-            for (int i = 0; i<arrayList.Count; i++)
+            for (int i = 0; i < array.Count; i++)
             {
-                if(typeof(pnSet) == arrayList[i].GetType())
+                if (typeof(pnSet) == array[i].GetType())
                 {
-                    Panel panel =  ct.panel((pnSet)arrayList[i]);
+                    Panel panel = ct.panel((pnSet)array[i]);
                     panel.BackColor = Color.Silver;
                     pn4.Controls.Add(panel);
                 }
-                if (typeof(btnSet) == arrayList[i].GetType())
+            }
+            api = new WebAPI();
+            ht = new Hashtable();
+            ht.Add("spName", "sp_Table_Select");
+            ht.Add("param", "");
+            ArrayList list = api.Select("http://localhost:5000/select", ht);
+            if (list != null)
+            {
+                ArrayList arrayList = api.Button3(pn4, list, btn_Click);
+                for (int i = 0; i < arrayList.Count; i++)
                 {
-                    Button btn = ct.btn((btnSet)arrayList[i]);
-                    pn4.Controls.Add(btn);
+                    Button button = ct.btn((btnSet)arrayList[i]);
+                    pn4.Controls.Add(button);
                 }
             }
         }
+        
+        private ArrayList list;
         //버튼 이벤트
         private void btn_Click(object sender, EventArgs e)
         {
-            CountView cv = new CountView();
+            Button btn = (Button)sender;
+            //MessageBox.Show(btn.Name);
+            //MessageBox.Show(btn.Text);
+            tNo = btn.Text;
+            ht = new Hashtable();
+            ht.Add("spName", "sp_Order_Select");
+            ht.Add("param", "_tNo:" + tNo);
+            list = api.Select("http://localhost:5000/select", ht);
+            
+            CountView cv = new CountView(tNo, list);
             cv.MdiParent = this;
             cv.WindowState = FormWindowState.Maximized;
             cv.FormBorderStyle = FormBorderStyle.None;
             pn4.Controls.Add(cv);
             cv.Show();
-            Button btn = (Button)sender;
-            switch (btn.Name)
-            {
-                
-                default:
-                    break;
-            }
         }
     }
 }
