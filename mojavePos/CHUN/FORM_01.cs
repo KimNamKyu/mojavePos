@@ -23,7 +23,8 @@ namespace mojavePos
     public partial class FORM_01 : Form
     {
         _Create ct = new _Create();
-        TextBox textbox , 텍스트박스1 , 텍스트박스2;
+        RichTextBox textbox , 텍스트박스1;
+        TextBox 텍스트박스2;
         FORM_01 F1;
         FORM_03 F3;
         public FORM_01()
@@ -41,7 +42,7 @@ namespace mojavePos
             // 제목 패널
             pnSet pn1 = new pnSet(this, 750, 110, 0, 0);
             Panel 패널 = ct.panel(pn1);
-            패널.BackColor = Color.FromArgb(52, 152, 219);
+            패널.BackColor = Color.FromArgb(19, 38, 78);
             Controls.Add(패널);   //패널 화면 출력
 
             ArrayList arr = new ArrayList();
@@ -54,19 +55,30 @@ namespace mojavePos
                 if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
-                    if(i==1) label.Font = new Font("Tahoma", 40, FontStyle.Bold); //글꼴설정
-                    else label.Font = new Font("Tahoma", 20, FontStyle.Bold);
+                    if (i == 1)
+                    {
+                        label.Font = new Font("Tahoma", 40, FontStyle.Bold); //글꼴설정
+                        label.ForeColor = Color.White;
+                    }
+                    else
+                    {
+                        label.Font = new Font("Tahoma", 20, FontStyle.Bold);
+                        label.ForeColor = Color.White;
+                    }
                     패널.Controls.Add(label);
                 }
             }
 
             //로그인 패널
-            tbSet tx1 = new tbSet(this, "tb1", 200, 35, 370, 50);
-            텍스트박스1 = ct.txtbox(tx1);
+            Richtb tx1 = new Richtb(this, "tb1", 200, 35, 370, 45);
+            텍스트박스1 = ct.richbox(tx1);
+            텍스트박스1.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(텍스트박스1);
 
-            tbSet tx2 = new tbSet(this, "tb2", 200, 35, 370, 100);
+            tbSet tx2 = new tbSet(this, "tb2", 200, 35, 370, 93);
             텍스트박스2 = ct.txtbox(tx2);
+            텍스트박스2.Font = new Font("Tahoma", 15, FontStyle.Bold);
+            텍스트박스2.PasswordChar = '*';
             Controls.Add(텍스트박스2);
 
             pnSet pn2 = new pnSet(this, 750, 169, 0, 110);
@@ -91,14 +103,14 @@ namespace mojavePos
                 }
             }
             //끝 패널
-            pnSet pn3 = new pnSet(this, 750, 160, 0, 280);
+            pnSet pn3 = new pnSet(this, 750, 130, 0, 280);
             Panel 패널3 = ct.panel(pn3);
-            패널3.BackColor = Color.White;
+            패널3.BackColor = Color.FromArgb(19, 38, 78);
             Controls.Add(패널3);   //패널 화면 출력
 
             ArrayList arr2 = new ArrayList();
-            arr2.Add(new btnSet(this, "button", "로그인", 250, 40, 260, 35, btn_Click));
-            arr2.Add(new btnSet(this, "button", "계정만들기", 130, 30, 320, 85, btn2_Click));
+            arr2.Add(new btnSet(this, "button", "로그인", 250, 40, 260, 25, btn_Click));
+            arr2.Add(new btnSet(this, "button", "계정만들기", 130, 30, 320, 75, btn2_Click));
             for (int i = 0; i < arr2.Count; i++)
             {
                 if (typeof(btnSet) == arr2[i].GetType())
@@ -106,6 +118,23 @@ namespace mojavePos
                     Button button = ct.btn((btnSet)arr2[i]);
                     button.Font = new Font("Tahoma", 8, FontStyle.Regular);
                     패널3.Controls.Add(button);
+                }
+            }
+            
+            pnSet pn4 = new pnSet(this, 750, 19, 0, 411);
+            Panel 패널4 = ct.panel(pn4);
+            패널4.BackColor = Color.White;
+            Controls.Add(패널4);   //패널 화면 출력
+
+            ArrayList arr3 = new ArrayList();
+            arr3.Add(new lbSet(this, "lb3", "관리자 : (주)Mojav  연락처 : 1588-3000", 300, 20, 517, 3, 8));
+            for (int i = 0; i < arr3.Count; i++)
+            {
+                if (typeof(lbSet) == arr3[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr3[i]);
+                    label.Font = new Font("Tahoma", 8, FontStyle.Bold);
+                    패널4.Controls.Add(label);
                 }
             }
         }

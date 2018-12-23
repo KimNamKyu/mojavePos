@@ -72,7 +72,7 @@ namespace mojavePos.CHUN
                     ht.Add("mc_No", mf.No);
                     ht.Add("mc_Name", textbox1.Text);
                     api.post("http://localhost:5000/mc_update", ht);
-                    MessageBox.Show("수정하셨습니다.");
+                    //MessageBox.Show("수정하셨습니다.");
                     this.Close();
                     //Close();
                     break;

@@ -45,155 +45,118 @@ namespace mojavePos
 
             ct = new _Create();
 
-            //Name 라벨 출력
-            lbSet lb1 = new lbSet(this, "label1", "Name", 50, 15, 90, 50, 10);
-            Label 라벨1 = ct.lable(lb1);
-            라벨1.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(라벨1);
-
             //Name 텍스트박스 출력
-            tbSet tx1 = new tbSet(this, "txt1", 170, 30, 30, 70);
+            tbSet tx1 = new tbSet(this, "txt1", 170, 30, 30, 60);
             네임택박 = ct.txtbox(tx1);
             Controls.Add(네임택박);
 
-            //Postion 라벨 출력
-            lbSet lb2 = new lbSet(this, "label2", "Postion", 100, 15, 80, 110, 10);
-            Label 라벨2 = ct.lable(lb2);
-            라벨2.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(라벨2);
-
             //Postion 텍스트박스 출력
-            tbSet tx2 = new tbSet(this, "txt2", 170, 30, 30, 130);
+            tbSet tx2 = new tbSet(this, "txt2", 170, 30, 30, 120);
             포지션택박 = ct.txtbox(tx2);
             Controls.Add(포지션택박);
 
-            //Password 라벨 출력
-            lbSet lb3 = new lbSet(this, "label3", "Password", 100, 15, 70, 170, 10);
-            Label 라벨3 = ct.lable(lb3);
-            라벨3.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(라벨3);
-
             //Password 텍스트박스 출력
-            tbSet tx3 = new tbSet(this, "txt3", 170, 30, 30, 190);
+            tbSet tx3 = new tbSet(this, "txt3", 170, 30, 30, 180);
             패스워드택박 = ct.txtbox(tx3);
             Controls.Add(패스워드택박);
 
-            //Serial 라벨 출력
-            lbSet lb4 = new lbSet(this, "label4", "Serial Number", 100, 15, 85, 230, 10);
-            Label 라벨4 = ct.lable(lb4);
-            라벨4.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(라벨4);
-
             //Serial 텍스트박스 출력
-            tbSet tx4 = new tbSet(this, "txt4", 170, 30, 30, 250);
+            tbSet tx4 = new tbSet(this, "txt4", 170, 30, 30, 240);
             시리얼택박 = ct.txtbox(tx4);
             Controls.Add(시리얼택박);
 
-            btnSet Btn1_pn1 = new btnSet(this, "Btn1_pn1", "가입", 80, 30, 55, 330, btn_Click);
-            Button 가입버튼 = ct.btn(Btn1_pn1);
-            Controls.Add(가입버튼);
-
-            btnSet Btn2_pn1 = new btnSet(this, "Btn2_pn1", "취소", 80, 30, 155, 330, btn2_Click);
-            Button 취소버튼 = ct.btn(Btn2_pn1);
-            Controls.Add(취소버튼);
-
-            //왼쪽 패널 출력
-            pnSet pn1 = new pnSet(this, 240, 370, 30, 30);
+            pnSet pn1 = new pnSet(this, 230, 370, 30, 30);
             Panel 패널 = ct.panel(pn1);
-            패널.BackColor = Color.FromArgb(52, 152, 219);
-
-            Controls.Add(패널); //패널 안에 라벨 텍스트박스 출력
-            패널.Controls.Add(라벨1);
-            패널.Controls.Add(라벨2);
-            패널.Controls.Add(라벨3);
-            패널.Controls.Add(라벨4);
+            패널.BackColor = Color.FromArgb(19, 38, 78);
+            Controls.Add(패널);
             패널.Controls.Add(네임택박);
             패널.Controls.Add(포지션택박);
             패널.Controls.Add(패스워드택박);
             패널.Controls.Add(시리얼택박);
 
+            ArrayList arr = new ArrayList();
 
-            lbSet lb5 = new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 240, 15, 15, 50, 10);
-            Label 라벨5 = ct.lable(lb5);
-            라벨5.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(라벨5);
+            arr.Add(new lbSet(this, "label1", "Name", 50, 15, 90, 40, 10));
+            arr.Add(new lbSet(this, "label2", "Postion", 100, 15, 83, 100, 10));
+            arr.Add(new lbSet(this, "label3", "Password", 100, 15, 75, 160, 10));
+            arr.Add(new lbSet(this, "label4", "Serial Number", 100, 15, 90, 220, 10));
+            arr.Add(new btnSet(this, "Btn1_pn1", "가입", 80, 50, 30, 290, btn_Click));
+            arr.Add(new btnSet(this, "Btn2_pn1", "취소", 80, 50, 120, 290, btn2_Click));
 
-            lbSet lb6 = new lbSet(this, "label6", "Mojave of Pos", 200, 25, 250, 43, 17);
-            Label 라벨6 = ct.lable(lb6);
-            라벨6.Font = new Font("Tahoma", 15, FontStyle.Bold);
-            Controls.Add(라벨6);
+            for (int i = 0; i < arr.Count; i++)
+            {
+                if (typeof(lbSet) == arr[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr[i]);
+                    label.ForeColor = Color.White;
+                    label.Font = new Font("Tahoma", 10, FontStyle.Bold);
+                    패널.Controls.Add(label);
+                }
+                else
+                {
+                    if (typeof(btnSet) == arr[i].GetType())
+                    {
+                        Button button = ct.btn((btnSet)arr[i]);
+                        button.Font = new Font("Tahoma", 8, FontStyle.Bold);
+                        패널.Controls.Add(button);
+                    }
+                }
+            }
+            //사진넣기
+            //PictureBox mojave = new PictureBox();
+            //mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("그림1");
+            //mojave.SizeMode = PictureBoxSizeMode.StretchImage;
+            //mojave.Size = new Size(300, 100);
+            //mojave.Location = new Point(0, 0);
 
-            lbSet lb7 = new lbSet(this, "label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 15, 80, 8);
-            Label 라벨7 = ct.lable(lb7);
-            라벨7.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨7);
-
-            lbSet lb8 = new lbSet(this, "label8", "2. Mojave of Pos는 ELBON the table의 효율적인 재정관리를 할 수 있도록 돕기 위해 제작 되었습니다.", 380, 30, 15, 110, 8);
-            Label 라벨8 = ct.lable(lb8);
-            라벨8.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨8);
-
-            lbSet lb9 = new lbSet(this, "label9", "3. Mojave of Pos는 자체 제공한 시리얼넘버로 하나의 아이디만 회원가입할수 있습니다.", 380, 30, 15, 155, 8);
-            Label 라벨9 = ct.lable(lb9);
-            라벨9.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨9);
-
-            lbSet lb10 = new lbSet(this, "label10", "4. Mojave of Pos는 비밀번호찾기 기능을 따로 제공하지 않습니다.", 380, 15, 15, 200, 8);
-            Label 라벨10 = ct.lable(lb10);
-            라벨10.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨10);
-
-            lbSet lb11 = new lbSet(this, "label6", "5. Mojave of Pos안의 ELBON the table 정보는 절대 외부에 공개 하지 않습니다.", 380, 30, 15, 230, 8);
-            Label 라벨11 = ct.lable(lb11);
-            라벨11.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨11);
-
-            lbSet lb12 = new lbSet(this, "label12", "6. Mojave of Pos는 포스기에 최적화 되어 있습니다.", 380, 15, 15, 275, 8);
-            Label 라벨12 = ct.lable(lb12);
-            라벨12.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨12);
-
-            lbSet lb13 = new lbSet(this, "label13", "문의사항 : question@MojaveKorea.co.kr", 380, 15, 15, 310, 8);
-            Label 라벨13 = ct.lable(lb13);
-            라벨13.Font = new Font("Tahoma", 8, FontStyle.Bold);
-            Controls.Add(라벨13);
-
-
-            //오른쪽 패널 출력
             pnSet pn2 = new pnSet(this, 420, 370, 300, 30);
             Panel 패널2 = ct.panel(pn2);
             패널2.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널2);   //패널 화면 출력
-            패널2.Controls.Add(라벨5);
-            패널2.Controls.Add(라벨6);
-            패널2.Controls.Add(라벨7);
-            패널2.Controls.Add(라벨8);
-            패널2.Controls.Add(라벨9);
-            패널2.Controls.Add(라벨10);
-            패널2.Controls.Add(라벨11);
-            패널2.Controls.Add(라벨12);
-            패널2.Controls.Add(라벨13);
+            패널2.Controls.Add(mojave);
 
+            ArrayList arr2 = new ArrayList();
+            arr2.Add(new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 210, 15, 15, 40, 10));
+            arr2.Add(new lbSet(this, "label6", "Mojave of Pos", 200, 25, 220, 32, 17));
+            arr2.Add(new lbSet(this, "label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 15, 70, 8));
+            arr2.Add(new lbSet(this, "label8", "2. Mojave of Pos는 ELBON the table의 효율적인 재정관리를 할 수        있도록 돕기 위해 제작 되었습니다.", 380, 30, 15, 100, 8));
+            arr2.Add(new lbSet(this, "label9", "3. Mojave of Pos는 자체 제공한 시리얼넘버로 하나의 아이디만           회원가입할수 있습니다.", 380, 30, 15, 145, 8));
+            arr2.Add(new lbSet(this, "label10", "4. Mojave of Pos는 비밀번호찾기 기능을 따로 제공하지 않습니다.", 380, 15, 15, 190, 8));
+            arr2.Add(new lbSet(this, "label6", "5. Mojave of Pos안의 ELBON the table 정보는 절대 외부에 공개를        하지 않습니다.", 380, 30, 15, 220, 8));
+            arr2.Add(new lbSet(this, "label12", "6. Mojave of Pos는 포스기에 최적화 되어 있습니다.", 380, 15, 15, 265, 8));
+            arr2.Add(new lbSet(this, "label13", "문의사항 : question@MojaveKorea.co.kr", 380, 15, 15, 310, 8));
+            for (int i = 0; i < arr2.Count; i++)
+            {
+                if (typeof(lbSet) == arr2[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr2[i]);
+                    if (i == 0) label.Font = new Font("Tahoma", 9, FontStyle.Bold);
+                    else if (i == 1) label.Font = new Font("Tahoma", 16, FontStyle.Bold);
+                    else label.Font = new Font("Tahoma", 8, FontStyle.Bold);
+                    패널2.Controls.Add(label);
+                }
+            }
         }
-        private void btn_Click(object sender, EventArgs e)
-        {
+        
 
+        private void btn_Click(object sender, EventArgs e)
+        {   
             F1 = new FORM_01();
 
             if (네임택박.Text.Length == 0 || 포지션택박.Text.Length == 0 || 패스워드택박.Text.Length == 0 || 시리얼택박.Text.Length == 0)
             {
-                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주세요.");
+              
+                MessageBox.Show("값을 입력 받지 않았습니다.\n 확인 후 입력해주세요.");
             }
             else
             {
-                if (시리얼택박.Text != "1111")
+                if (시리얼택박.Text != "GUDI")
 
                 {
                     MessageBox.Show("시리얼 번호가 맞지 않습니다. 다시 입력해주시기 바랍니다.");
                 }
                 else
                 {
-                   
                     Hashtable ht = new Hashtable();
                     Module api = new Module();
                     api = new Module();
@@ -203,17 +166,16 @@ namespace mojavePos
                     ht.Add("ps_code", 시리얼택박.Text);
                     api.post("http://localhost:5000/SI_insert_Pos", ht);
                 }
-
             }
         }
-            private void btn2_Click(object sender, EventArgs e)
-            {
+        private void btn2_Click(object sender, EventArgs e)
+        {
             this.Close();
-            }
-
-            //경고문으로 이미 회원가입을 하셨습니다. 라는 메세지박스 출력할것.
-
-
         }
+        //DB의 No = 1이 없으면 가입하고 가입되었습니다. 넣고 DB의 NO = 2 이상은 MessageBox로 이미 회원가입을 하셨습니다. 라는 메세지박스 출력할것.
+        // 메세지박스 가운데 정렬할것.
+       
     }
+}
+
 

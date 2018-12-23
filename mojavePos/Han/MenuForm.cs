@@ -34,16 +34,14 @@ namespace mojavePos.Han
             lvSet lv1 = new lvSet(this, "lv1", 400, 500, 250, 230, lv_mouseClick);
             ListView listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
-            listview.Columns.Add("번호", 100, HorizontalAlignment.Center);
-            listview.Columns.Add("카테고리", 296, HorizontalAlignment.Center);
+            listview.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview);
             Controls.Add(listview);
 
             lvSet lv2 = new lvSet(this, "lv2", 400, 500,850, 230, lv2_mouseClick);
             ListView listview2 = ct.listview(lv2);
-            listview2.Columns.Add("번호", 100, HorizontalAlignment.Center);
-            listview2.Columns.Add("카테고리", 296, HorizontalAlignment.Center);
+            listview2.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview2);
             Controls.Add(listview2);
