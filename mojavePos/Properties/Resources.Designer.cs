@@ -63,6 +63,26 @@ namespace mojavePos.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap coo1 {
+            get {
+                object obj = ResourceManager.GetObject("coo1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap coo2 {
+            get {
+                object obj = ResourceManager.GetObject("coo2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap mojave {
             get {
                 object obj = ResourceManager.GetObject("mojave", resourceCulture);
@@ -86,6 +106,16 @@ namespace mojavePos.Properties {
         internal static System.Drawing.Bitmap 배경화면1 {
             get {
                 object obj = ResourceManager.GetObject("배경화면1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 버튼 {
+            get {
+                object obj = ResourceManager.GetObject("버튼", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

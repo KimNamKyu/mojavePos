@@ -16,10 +16,17 @@ namespace mojavePos
     {
        
         lbSet pn4_lb, pn5_lb;
-        Label 시간, 날짜, 경고문;
+        string lbText1 = "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.";
+        string lbText2 = "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.";
+        string lbText3 = "영업시작";
+        string lbText4 = "영업종료";
+        TextBox 준비금텍스트박스;
+        Label 시간, 날짜, 경고문 , 영업시작 , 준비금;
         Timer timer;
         _Create ct;
         Panel 패널4;
+        bool value = true;
+        object a;
         public FORM_03()
         {
             InitializeComponent();
@@ -90,22 +97,22 @@ namespace mojavePos
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
-            lbSet pn2_lb1 = new lbSet(this, "pn2_lb1", "영업시작",  130, 30, 30, 120, 20);
-            Label 영업시작 = ct.lable(pn2_lb1);
+            lbSet pn2_lb1 = new lbSet(this, "pn2_lb1", lbText3,  130, 30, 30, 120, 20);
+           영업시작 = ct.lable(pn2_lb1);
             영업시작.TextAlign = ContentAlignment.MiddleCenter;
              영업시작.Font = new Font("Tahoma", 20, FontStyle.Bold);
             Controls.Add(영업시작);
 
             //준비금 라벨
             lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,65, 155, 10);
-            Label 준비금 = ct.lable(pn2_lb2);
+            준비금 = ct.lable(pn2_lb2);
             준비금.TextAlign = ContentAlignment.MiddleCenter;
             준비금.Font = new Font("Tahoma", 10, FontStyle.Bold);
             Controls.Add(준비금);
 
             //준비금 텍스트박스
             tbSet pn2_txbox = new tbSet(this, "pn2_txbox", 120, 20, 33, 175);
-            TextBox 준비금텍스트박스 = ct.txtbox(pn2_txbox);
+            준비금텍스트박스 = ct.txtbox(pn2_txbox);
             준비금텍스트박스.Font = new Font("Tahoma", 10, FontStyle.Bold);
             준비금텍스트박스.TextAlign = HorizontalAlignment.Center;
             Controls.Add(준비금텍스트박스);
@@ -148,12 +155,13 @@ namespace mojavePos
             패널3.Controls.Add(관리자버튼);
             패널3.Controls.Add(관리자);
 
-
+             a = pn4_lb;
             //경고문 라벨
-            pn4_lb = new lbSet(this, "label2", "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.", 1500, 30, 80, 12, 15);
-            pn5_lb = new lbSet(this, "label2", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 90, 12, 15);
-            Label 경고문 = ct.lable(pn4_lb);
+            pn4_lb = new lbSet(this, "label2", lbText1, 750, 30, 0, 12, 15);
+            //pn5_lb = new lbSet(this, "label3", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 90, 12, 15);
+            경고문 = ct.lable(pn4_lb);
             경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
+            경고문.TextAlign = ContentAlignment.MiddleCenter;
             Controls.Add(경고문);
 
             //하단부 패널
@@ -185,14 +193,47 @@ namespace mojavePos
         private void btn_Click(object sender, EventArgs e)
         {
             MainPos MP = new MainPos();
-            if(MessageBox.Show("영업을 시작 하시겠습니까?","",MessageBoxButtons.YesNo)==DialogResult.Yes)
+            if (value == true)
             {
+                if (MessageBox.Show("영업을 시작 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+
+                    경고문.Text = lbText2;
+                    영업시작.Text = lbText4;
+                    준비금텍스트박스.Width = 0;
+                    준비금.Text = "";
+                    MP.Show();
+
+                    value = false;
+                    //하위라벨 및 버튼라벨 바꾸기
+                    //경고문.Text = "영업중 입니다.판매를 종료하시려면 영업종료를 눌러주십시오.";
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("영업을 종료 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    경고문.Text = lbText1;
+                    영업시작.Text = lbText3;
+                    준비금텍스트박스.Width = 120;
+                    준비금.Text = "준비금";
+                    MessageBox.Show("영업을 종료 하였습니다.");
+                }
+            }
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            MainPos MP = new MainPos();
+            if (MessageBox.Show("영업을 시작 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+
+                MP.Show();
                 
-                MP.Show();               
                 //하위라벨 및 버튼라벨 바꾸기
                 //경고문.Text = "영업중 입니다.판매를 종료하시려면 영업종료를 눌러주십시오.";
             }
-            else if(MessageBox.Show("영업을 종료 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            else if (MessageBox.Show("영업을 종료 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 //하위 라벨 및 버튼 바꾸기
             }

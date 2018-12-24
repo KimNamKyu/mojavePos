@@ -266,6 +266,9 @@
     <None Include="Resources\배경화면1.png" />
     <None Include="Resources\test2.jpg" />
     <None Include="Resources\aa.bmp" />
+    <None Include="Resources\+버튼.png" />
+    <None Include="Resources\coo1.png" />
+    <None Include="Resources\coo2.png" />
     <Content Include="Resources\edbeafa0-3460-47e9-9fd9-f5f6db7cdd00.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
