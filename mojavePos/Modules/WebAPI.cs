@@ -56,6 +56,47 @@ namespace mojavePos.Modules
         ///  NonQuery
         /// </summary>
         /// <returns></returns>
+        /// 
+        public bool Post2(string url, Hashtable ht)
+        {
+            WebClient client = new WebClient(); // 웹 접속 객체 생성
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)"); // 웹 호출 시 보낸쪽 정보 설정
+            client.Encoding = Encoding.UTF8; // UTF-8 설정 하여 한글 처리하기
+
+
+
+            
+            NameValueCollection param = new NameValueCollection();
+            byte[] result = client.UploadValues(url, "POST", param);
+            string strResult = Encoding.UTF8.GetString(result);
+            ArrayList strJ = JsonConvert.DeserializeObject<ArrayList>(strResult);
+            for (int i = 0; i < strJ.Count; i++)
+            {
+
+                JObject jo = (JObject)strJ[i];
+                //listView.Items.Add((string)jp.Value);
+                string[] arr = new string[jo.Count];
+                foreach (JProperty jp in jo.Properties())
+                {//jp.Name,jp.Value
+
+                    //Console.WriteLine("{0} : {1}", jp.Name, jp.Value); 
+                    if (jp.Name == "m_bNo")
+                    {
+                        arr[0] = (string)jp.Value;
+                    }
+                    else if (jp.Name == "c_Menu")
+                    {
+                        arr[1] = (string)jp.Value;
+                    }
+                    else if (jp.Name == "sum(cm.c_Count)")
+                    {
+                        arr[2] = (string)jp.Value;
+                    }
+                   
+                }
+            }
+            return true;
+        }
         public bool Post(string url, Hashtable ht)
         {
             MessageBox.Show(url);
@@ -90,7 +131,7 @@ namespace mojavePos.Modules
                 return false;
             }
         }
-
+       
 
 
         public ArrayList Select(string url, Hashtable ht)

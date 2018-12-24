@@ -164,7 +164,7 @@ namespace mojavePos.Han
         {
             //dt1 = new DateTimePicker();
             // dt2 = new DateTimePicker();
-          
+           
             Hashtable ht = new Hashtable();
             api = new WebAPI();
             ht.Add("spName", "select_date");
