@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using mojavePos.Modules;
 
 namespace mojavePos.Han
 {
@@ -24,7 +25,9 @@ namespace mojavePos.Han
         Legend legend1;
         Series series1;
         Hashtable ht;
-
+        TextBox tb;
+        string start = "";
+        string end = "";
         Panel pasta, steake, salad, dessert, beverage, side;
         public RankForm()
         {
@@ -88,8 +91,6 @@ namespace mojavePos.Han
             panel.Add(dessert);
 
 
-
-
             for (int i = 0; i < 6; i++)
             {
                 ht = new Hashtable();
@@ -98,12 +99,14 @@ namespace mojavePos.Han
                 ht.Add("seriname", "Series1");
                 ht.Add("chartname", "chartname");
                 ht.Add("text", panel[i]);
+                
                 chart = comm.getChart(ht, (Panel)panel[i]);
                 switch (i)
                 {
+                    
                     case 0:
                         chart.Titles.Add("파스타");
-                        chart.Series["Series1"].Points.AddXY("1", "60");
+                        chart.Series["Series1"].Points.AddXY(1, "60");
                         chart.Series["Series1"].Points.AddXY("2", "60");
                         break;
                     case 1:
@@ -158,25 +161,63 @@ namespace mojavePos.Han
             if (index == "1분기")
             {
 
+
+      
+
+                if (tb.Text != "")
+                {
+                    start = tb.Text + "-1-1";
+                    end = tb.Text + "-3-31";
+
+
+                }
+
             }
             else if (index == "2분기")
             {
+                if (tb.Text != "")
+                {
+                    start = tb.Text + "-4-1";
+                    end = tb.Text + "-6-30";
+                }
+
 
             }
             else if (index == "3분기")
             {
-                MessageBox.Show("3분기");
+                if (tb.Text != "")
+                {
+                    start = tb.Text + "-7-1";
+                    end = tb.Text + "-9-30";
+
+                }
+
             }
             else if (index == "4분기")
             {
-                MessageBox.Show("4분기");
+                WebAPI api = new WebAPI();
+                Hashtable pcd = new Hashtable();
+                pcd.Add("spName", "sel_Rank");
+                pcd.Add("start", start);
+                pcd.Add("end", end);
+                ArrayList list = api.Select("http://localhost:5000/sel_Rank", pcd);
+                
+                for (int i = 0; i < list.Count; i++)
+                {
+                    MessageBox.Show(list[i].ToString());
+                }
+                if (tb.Text != "")
+                {
+                    start = tb.Text + "-10-1";
+                    end = tb.Text + "-12-31";
+                }
             }
 
         }
         private void get_text()
         {
             comm = new Commons();
-            TextBox tb = new TextBox();
+            tb = new TextBox();
             tbSet tbs = new tbSet(this, "year", 120, 24, 650, 35);
             tb = ct.txtbox(tbs);
             tb.KeyPress += Tb_KeyPress;
