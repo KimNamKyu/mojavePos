@@ -22,10 +22,17 @@ namespace mojavePos
             btn.BackColor = Color.White;
             btn.Cursor = Cursors.Hand;
             btn.Click += bS.eh_btn;
-            bS.Form.Controls.Add(btn);
+            if(bS.Form == null)
+            {
+                bS.Control.Controls.Add(btn);
+            }
+            else
+            {
+                bS.Form.Controls.Add(btn);
+            }            
             return btn;
         }
-        
+
         //라벨
         public Label lable(lbSet lb)
         {
