@@ -110,11 +110,16 @@ namespace mojavePos.Modules
                 {
                     JArray ja = (JArray)list[i];
                     string[] arr = new string[ja.Count];
+                    
                     for (int j = 0; j < ja.Count; j++)
                     {
                         arr[j] = ja[j].ToString();
                     }
                     arrayList.Add(new btnSet(control, arr[0], arr[1], 200, 100, 200 * (i % 3), 100 * (i / 3), eh_btn));
+                    string Price = arr[2];
+                    string Count = arr[3];
+                   // MessageBox.Show(Price);
+                    //MessageBox.Show(Count);
                 }
                 return arrayList;
             }
@@ -146,6 +151,7 @@ namespace mojavePos.Modules
                 return null;
             }
         }
+
         /// <summary>
         ///  NonQuery
         /// </summary>

@@ -1,6 +1,7 @@
-﻿using mojavePos.menuForm;
+﻿
 using mojavePos.Modal;
 using mojavePos.Modules;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace mojavePos
 {
-   
+
     public partial class CountView : Form
     {
         _Create ct = new _Create();
@@ -24,18 +25,20 @@ namespace mojavePos
         private WebAPI api;
         private Hashtable ht;
         private string _bNo;
-        private string tNo;
+        private string _tNo;
         private ArrayList list;
+        private string _mNo;
+        private string _mName;
 
         public CountView()
         {
             InitializeComponent();
-          
+
         }
-        public CountView(string tNo,ArrayList list)
+        public CountView(string tNo, ArrayList list)
         {
             Load += CountView_Load;
-            this.tNo = tNo;
+            this._tNo = tNo;
             this.list = list;
         }
 
@@ -45,12 +48,12 @@ namespace mojavePos
             listView();
             btn_load();
             menu_view();
-            MessageBox.Show(tNo);
+            //MessageBox.Show(tNo);
             ArrayList arrayList = api.ListView(lv, list);
             if (list != null)
             {
                 arrayList = api.ListView(lv, list);
-                for(int i = 0; i< arrayList.Count; i++)
+                for (int i = 0; i < arrayList.Count; i++)
                 {
                     Controls.Add(lv);
                 }
@@ -60,7 +63,7 @@ namespace mojavePos
         public void listView()
         {
             ArrayList arr = new ArrayList();
-            arr.Add(new pnSet(this,600,780,50,10));
+            arr.Add(new pnSet(this, 600, 780, 50, 10));
             arr.Add(new lvSet(this, "", 500, 300, 50, 20, list_Click));
             arr.Add(new lbSet(this, "lb1", "판매액", 150, 30, 100, 360, 20));
             arr.Add(new lbSet(this, "lb1", "할인", 150, 30, 110, 410, 20));
@@ -81,42 +84,64 @@ namespace mojavePos
                     panel.BackColor = Color.Gainsboro;
                     Controls.Add(panel);
                 }
-                else if(typeof(lvSet) == arr[i].GetType())
+                else if (typeof(lvSet) == arr[i].GetType())
                 {
                     lv = ct.listview((lvSet)arr[i]);
                     lv.BackColor = Color.WhiteSmoke;
                     panel.Controls.Add(lv);
+                    lv.Columns.Add("No", 30, HorizontalAlignment.Center);
                     lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
                 }
-                else if(typeof(btnSet) == arr[i].GetType())
+                else if (typeof(btnSet) == arr[i].GetType())
                 {
                     Button button = ct.btn((btnSet)arr[i]);
                     panel.Controls.Add(button);
                 }
-                else if(typeof(lbSet) == arr[i].GetType())
+                else if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
                     if (label.Name == "lb2") label.BackColor = Color.White;
                     panel.Controls.Add(label);
                 }
             }
-         }
+        }
 
         private void list_Click(object sender, MouseEventArgs e)
         {
             ListView lv = (ListView)sender;
-            lv.FullRowSelect = true; 
+            lv.FullRowSelect = true;
             ListView.SelectedListViewItemCollection itemGroup = lv.SelectedItems;
-            ListViewItem item = itemGroup[0];
+            
+            for (int i = 0; i < itemGroup.Count; i++)
+            {
+                ListViewItem item = itemGroup[i];
+                _mName = item.SubItems[0].Text;
+
+                for(int j = 0; j < Orderlist.Count; j++)
+                {
+                    string[] row = (string[])Orderlist[j];
+                    if (_mName == row[0])
+                    {
+                        int cnt = Convert.ToInt32(row[3]);
+                        MessageBox.Show(cnt.ToString());
+                        cnt++;
+                        MessageBox.Show(cnt.ToString());
+                        row[3] = cnt.ToString();
+                        Orderlist[j] = row;
+                        ListCommon();
+                        break;
+                    }
+                }
+            }
         }
 
         private void btn_load()
         {
             ArrayList arr2 = new ArrayList();
-           
+
             for (int i = 0; i < arr2.Count; i++)
             {
                 ct.btn((btnSet)arr2[i]);
@@ -131,21 +156,40 @@ namespace mojavePos
             switch (btn.Name)
             {
                 case "btn1":
+                    api = new WebAPI();
+                    ht = new Hashtable();
+                    ht.Add("spName", "sp_Order_Update");
+                    ht.Add("tNo", _tNo);
+                    ht.Add("mNo", _mNo);
+                    ArrayList list = api.Select("http://localhost:5000/update", ht);
+                    ArrayList arrayList = api.ListView(lv, list);
+                    if (list != null)
+                    {
+                        arrayList = api.ListView(lv, list);
+                        for (int i = 0; i < arrayList.Count; i++)
+                        {
+                            Controls.Add(lv);
+                        }
+                    }
                     break;
                 case "btn2":
-                    Cash cash = new Cash(tNo);
+                    Cash cash = new Cash(_tNo);
                     cash.StartPosition = FormStartPosition.CenterParent;
                     cash.Show();
                     break;
                 case "btn3":
                     this.Visible = false;
+                    
                     break;
                 case "btn4":
-                    MessageBox.Show("서비스준비중입니다.","알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("서비스준비중입니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
         }
 
+        /// <summary>
+        /// 메뉴 카테고리 뷰 화면
+        /// </summary>
         private void menu_view()
         {
             pnSet pn1 = new pnSet(this, 100, 780, 750, 10);
@@ -156,7 +200,7 @@ namespace mojavePos
             panel2 = ct.panel(pn2);
             panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
-      
+
             api = new WebAPI();
             ht = new Hashtable();
             ht.Add("spName", "sp_MenuCategory_Select");
@@ -168,22 +212,26 @@ namespace mojavePos
                 for (int i = 0; i < arrayList.Count; i++)
                 {
                     Button button = ct.btn((btnSet)arrayList[i]);
+
                     panel.Controls.Add(button);
                 }
             }
-        }      
-       
+        }
+
+        /// <summary>
+        /// 카테고리 클릭 버튼 이벤트
+        /// </summary>
         private void Category_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             _bNo = btn.Name;
-            MessageBox.Show(_bNo);
+            //MessageBox.Show(_bNo);
 
             ht = new Hashtable();
             ht.Add("spName", "sp_Menu_Select");
-            ht.Add("param", "_bNo:"+ _bNo);
+            ht.Add("param", "_bNo:" + _bNo);
             panel2.Controls.Clear();
-            ArrayList list = api.Select("http://localhost:5000/select", ht);
+            list = api.Select("http://localhost:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button2(panel2, list, Menu_Click);
@@ -194,49 +242,46 @@ namespace mojavePos
                 }
             }
         }
-         
+
+        /// <summary>
+        ///  메뉴 클릭 버튼 이벤트
+        /// </summary>
         private void Menu_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            MessageBox.Show(btn.Text);
-            Commons(btn.Name);
-        }
-
-        private void Commons(string type)
-        {
-            api = new WebAPI();
-            ht = new Hashtable();
-            string mNo = _bNo;  
-            switch (type)
+            _mNo = btn.Name;
+            
+            //MessageBox.Show(btn.Name);
+            //Commons(btn.Name);
+           // lv.Items.Clear();
+            //MessageBox.Show(list.Count.ToString());
+            for (int i = 0; i < list.Count; i++)
             {
-                case "1":
-                    ht.Add("tNo",tNo );
-                    ht.Add("mNo", mNo);
-                    api.Post("http://localhost:5000/insert", ht);
+                JArray ja = (JArray)list[i];
+                string[] arr = new string[ja.Count];
+                //MessageBox.Show(ja.Count.ToString());
+                for (int j = 0; j < ja.Count; j++)
+                {
+                    arr[j] = ja[j].ToString();                    
+                }
+                if (_mNo == arr[0])
+                {
+                    //MessageBox.Show(_mNo + " : " + arr[0]);
+                    // lv.Items.Add(new ListViewItem(arr));
+                    Orderlist.Add(arr);
                     break;
-                case "2":
-                    ht.Add("tNo", tNo);
-                    ht.Add("mNo", mNo);
-                    api.Post("http://localhost:5000/insert", ht);
-                    break;
-                case "3":
-                    ht.Add("tNo", tNo);
-                    ht.Add("mNo", mNo);
-                    api.Post("http://localhost:5000/insert", ht);
-                    break;
-                case "4":
-                    ht.Add("tNo", tNo);
-                    ht.Add("mNo", mNo);
-                    api.Post("http://localhost:5000/insert", ht);
-                    break;
-                case "5":
-                    ht.Add("tNo", tNo);
-                    ht.Add("mNo", mNo);
-                    api.Post("http://localhost:5000/insert", ht);
-                    break;
-               
-                default:
-                    break;
+                }
+            }
+            ListCommon();
+        }
+        ArrayList Orderlist = new ArrayList();
+        private void ListCommon()
+        {
+            lv.Items.Clear();
+            for (int i = 0; i < Orderlist.Count; i++)
+            {
+                string[] row = (string[]) Orderlist[i];
+                lv.Items.Add(new ListViewItem(row));
             }
         }
     }
