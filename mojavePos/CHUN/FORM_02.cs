@@ -46,23 +46,27 @@ namespace mojavePos
             ct = new _Create();
 
             //Name 텍스트박스 출력
-            tbSet tx1 = new tbSet(this, "txt1", 170, 30, 30, 60);
-            네임택박 = ct.txtbox(tx1);
+            Richtb tx1 = new Richtb(this, "txt1", 170, 30, 30, 60);
+            네임택박 = ct.richbox(tx1);
+            네임택박.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(네임택박);
 
             //Postion 텍스트박스 출력
-            tbSet tx2 = new tbSet(this, "txt2", 170, 30, 30, 120);
-            포지션택박 = ct.txtbox(tx2);
+            Richtb tx2 = new Richtb(this, "txt2", 170, 30, 30, 120);
+            포지션택박 = ct.richbox(tx2);
+            포지션택박.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(포지션택박);
 
             //Password 텍스트박스 출력
-            tbSet tx3 = new tbSet(this, "txt3", 170, 30, 30, 180);
-            패스워드택박 = ct.txtbox(tx3);
+            Richtb tx3 = new Richtb(this, "txt3", 170, 30, 30, 180);
+            패스워드택박 = ct.richbox(tx3);
+            패스워드택박.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(패스워드택박);
 
             //Serial 텍스트박스 출력
-            tbSet tx4 = new tbSet(this, "txt4", 170, 30, 30, 240);
-            시리얼택박 = ct.txtbox(tx4);
+            Richtb tx4 = new Richtb(this, "txt4", 170, 30, 30, 240);
+            시리얼택박 = ct.richbox(tx4);
+            시리얼택박.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(시리얼택박);
 
             pnSet pn1 = new pnSet(this, 230, 370, 30, 30);
