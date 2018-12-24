@@ -27,7 +27,7 @@ namespace mojavePos
         //static ToolStripStatusLabel StripLb;
         //StatusStrip statusStrip;
         _Create ct;
-        TextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
+        RichTextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
         FORM_01 F1;
         FORM_02 F2;
         private string PS_No;

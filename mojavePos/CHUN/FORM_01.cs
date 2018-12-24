@@ -153,7 +153,7 @@ namespace mojavePos
             }
             else
             {
-
+                F3.Show();
             }
             /*
             else if()

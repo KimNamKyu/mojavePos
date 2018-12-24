@@ -31,23 +31,28 @@ namespace mojavePos.Han
         {
             ClientSize = new Size(1500, 800);
            
-            lvSet lv1 = new lvSet(this, "lv1", 400, 500, 500, 230, lv_mouseClick);
+            lvSet lv1 = new lvSet(this, "lv1", 300, 500, 570, 230, lv_mouseClick);
             ListView listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
-            listview.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
+            listview.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            listview.Columns.Add(" ", 296, HorizontalAlignment.Center);
            
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview);
             Controls.Add(listview);
 
-            lvSet lv2 = new lvSet(this, "lv2", 400, 500,1000, 230, lv2_mouseClick);
+            lvSet lv2 = new lvSet(this, "lv2", 400, 500, 1000, 230, lv2_mouseClick);
             ListView listview2 = ct.listview(lv2);
-            listview2.Columns.Add("카테고리", 396, HorizontalAlignment.Center);
+            listview2.Columns.Add("메뉴명", 100, HorizontalAlignment.Center);
+            listview2.Columns.Add("가격", 200, HorizontalAlignment.Center);
+            listview2.Columns.Add("변경/삭제", 100, HorizontalAlignment.Center);
+
+            /* 
             api = new Module();
             api.selectListView("http://localhost:5000/mc_select", listview2);
             Controls.Add(listview2);
-
-            pnSet pn3 = new pnSet(this,1500, 1, 0, 0);
+            */
+            pnSet pn3 = new pnSet(this, 1500, 1, 0, 0);
             line = ct.panel(pn3);
             Controls.Add(line);
 
@@ -58,18 +63,19 @@ namespace mojavePos.Han
             bottom.Controls.Add(listview2);
             
             ArrayList arr = new ArrayList();
-            arr.Add(new lbSet(this, "lb1", "Category", 250, 50, 600, 80, 35));
-            arr.Add(new btnSet(this, "btn_1", "추가", 90, 50, 460, 125, btn_Click));
-            arr.Add(new pictureBoxSet(this, 40, 40, 410, 120, " "));
-            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1200, 80,35));
-            arr.Add(new btnSet(this, "btn_2", "추가", 90, 50, 1060, 125, btn2_Click));
-            arr.Add(new pictureBoxSet(this, 40, 40, 1010, 120, " "));
+            arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 600, 100, 35));
+            arr.Add(new btnSet(this, "btn_1", "추가", 30, 30, 730, 170, btn_Click));
+            arr.Add(new pictureBoxSet(this, 40, 40, 680, 165, " "));
+            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1110, 100,35));
+            arr.Add(new btnSet(this, "btn_2", "추가", 30, 30, 1200, 170, btn2_Click));
+            arr.Add(new pictureBoxSet(this, 40, 40, 1150, 165, " "));
           
             for (int i = 0; i < arr.Count; i++)
             {
                 if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
+                    label.Font = new Font("Tahoma", 35, FontStyle.Bold);
                     label.BackColor = System.Drawing.Color.Transparent;
                     bottom.Controls.Add(label);
                 }
