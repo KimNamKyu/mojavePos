@@ -16,6 +16,7 @@ namespace mojavePos
         _Create ct= new _Create();
         private Panel pn4;
         private Commons comm;
+        public Button btn;
 
         public MainPos()
         {
@@ -121,7 +122,7 @@ namespace mojavePos
                 }
                 if (typeof(btnSet) == arrayList[i].GetType())
                 {
-                    Button btn = ct.btn((btnSet)arrayList[i]);
+                    btn = ct.btn((btnSet)arrayList[i]);
                     pn4.Controls.Add(btn);
                 }
             }
