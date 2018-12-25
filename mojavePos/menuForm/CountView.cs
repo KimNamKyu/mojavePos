@@ -28,7 +28,6 @@ namespace mojavePos
         private string _tNo;
         private ArrayList list;
         private string _mNo;
-        private string _mName;
 
         public CountView()
         {
@@ -46,7 +45,7 @@ namespace mojavePos
         {
             this.BackColor = Color.White;
             listView();
-            btn_load();
+           
             menu_view();
             //MessageBox.Show(tNo);
             ArrayList arrayList = api.ListView(lv, list);
@@ -63,7 +62,7 @@ namespace mojavePos
         public void listView()
         {
             ArrayList arr = new ArrayList();
-            arr.Add(new pnSet(this, 600, 780, 50, 10));
+            arr.Add(new pnSet(this, 580, 760, 10, 10));
             arr.Add(new lvSet(this, "", 500, 300, 50, 20, list_Click));
             arr.Add(new lbSet(this, "lb1", "판매액", 150, 30, 100, 360, 20));
             arr.Add(new lbSet(this, "lb1", "할인", 150, 30, 110, 410, 20));
@@ -71,7 +70,7 @@ namespace mojavePos
             arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 360, 20));
             arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 410, 20));
             arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 460, 20));
-            arr.Add(new btnSet(this, "btn1", "할인쿠폰", 230, 100, 50, 560, btn_Click));
+            arr.Add(new btnSet(this, "btn1", "증가", 230, 100, 50, 560, btn_Click));
             arr.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 560, btn_Click));
             arr.Add(new btnSet(this, "btn3", "주문", 230, 100, 50, 670, btn_Click));
             arr.Add(new btnSet(this, "btn4", "카드결제", 230, 100, 320, 670, btn_Click));
@@ -94,6 +93,7 @@ namespace mojavePos
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                    lv.Font = new Font("굴림",15, FontStyle.Bold);
                 }
                 else if (typeof(btnSet) == arr[i].GetType())
                 {
@@ -118,35 +118,11 @@ namespace mojavePos
             for (int i = 0; i < itemGroup.Count; i++)
             {
                 ListViewItem item = itemGroup[i];
-                _mName = item.SubItems[0].Text;
-
-                for(int j = 0; j < Orderlist.Count; j++)
-                {
-                    string[] row = (string[])Orderlist[j];
-                    if (_mName == row[0])
-                    {
-                        int cnt = Convert.ToInt32(row[3]);
-                        MessageBox.Show(cnt.ToString());
-                        cnt++;
-                        MessageBox.Show(cnt.ToString());
-                        row[3] = cnt.ToString();
-                        Orderlist[j] = row;
-                        ListCommon();
-                        break;
-                    }
-                }
+                _mNo = item.SubItems[0].Text;
             }
         }
 
-        private void btn_load()
-        {
-            ArrayList arr2 = new ArrayList();
 
-            for (int i = 0; i < arr2.Count; i++)
-            {
-                ct.btn((btnSet)arr2[i]);
-            }
-        }
 
         private void btn_Click(object sender, EventArgs e)
         {
@@ -156,19 +132,19 @@ namespace mojavePos
             switch (btn.Name)
             {
                 case "btn1":
-                    api = new WebAPI();
-                    ht = new Hashtable();
-                    ht.Add("spName", "sp_Order_Update");
-                    ht.Add("tNo", _tNo);
-                    ht.Add("mNo", _mNo);
-                    ArrayList list = api.Select("http://localhost:5000/update", ht);
-                    ArrayList arrayList = api.ListView(lv, list);
-                    if (list != null)
+                    for (int j = 0; j < Orderlist.Count; j++)
                     {
-                        arrayList = api.ListView(lv, list);
-                        for (int i = 0; i < arrayList.Count; i++)
+                        string[] row = (string[])Orderlist[j];
+                        if (_mNo == row[0])
                         {
-                            Controls.Add(lv);
+                            int cnt = Convert.ToInt32(row[3]);
+                            //MessageBox.Show(cnt.ToString());
+                            cnt++;
+                            //MessageBox.Show(cnt.ToString());
+                            row[3] = cnt.ToString();
+                            Orderlist[j] = row;
+                            ListCommon();
+                            break;
                         }
                     }
                     break;
@@ -192,11 +168,11 @@ namespace mojavePos
         /// </summary>
         private void menu_view()
         {
-            pnSet pn1 = new pnSet(this, 100, 780, 750, 10);
+            pnSet pn1 = new pnSet(this, 100, 760, 600, 10);
             Panel panel = ct.panel(pn1);
             panel.BackColor = Color.Gainsboro;
             Controls.Add(panel);
-            pnSet pn2 = new pnSet(this, 600, 780, 850, 10);
+            pnSet pn2 = new pnSet(this, 570, 760, 700, 10);
             panel2 = ct.panel(pn2);
             panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
@@ -250,11 +226,12 @@ namespace mojavePos
         {
             Button btn = (Button)sender;
             _mNo = btn.Name;
-            
+
             //MessageBox.Show(btn.Name);
             //Commons(btn.Name);
-           // lv.Items.Clear();
+            // lv.Items.Clear();
             //MessageBox.Show(list.Count.ToString());
+           
             for (int i = 0; i < list.Count; i++)
             {
                 JArray ja = (JArray)list[i];
@@ -262,19 +239,19 @@ namespace mojavePos
                 //MessageBox.Show(ja.Count.ToString());
                 for (int j = 0; j < ja.Count; j++)
                 {
-                    arr[j] = ja[j].ToString();                    
+                    arr[j] = ja[j].ToString();
                 }
                 if (_mNo == arr[0])
                 {
-                    //MessageBox.Show(_mNo + " : " + arr[0]);
-                    // lv.Items.Add(new ListViewItem(arr));
                     Orderlist.Add(arr);
                     break;
                 }
             }
             ListCommon();
         }
+
         ArrayList Orderlist = new ArrayList();
+
         private void ListCommon()
         {
             lv.Items.Clear();

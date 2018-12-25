@@ -27,16 +27,19 @@ namespace mojavePos
             InitializeComponent();
             Load += MainPos_Load;
             //this.StartPosition = FormStartPosition.CenterScreen;
+            
         }
 
         private void MainPos_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.DarkBlue;
             comm = new Commons();
             this.IsMdiContainer = true;
-            this.ClientSize = new Size(1500, 900);
+            this.ClientSize = new Size(1300, 900);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             Mainup_Load();
+            //button();
             btn_Load();
         }
 
@@ -44,47 +47,36 @@ namespace mojavePos
         private void Mainup_Load()
         {
             ArrayList arr = new ArrayList();
-
-            arr.Add(new pnSet(this, 300, 100, 0, 0));
-            arr.Add(new pnSet(this, 900, 100, 300, 0));
-            arr.Add(new pnSet(this, 300, 100, 1200, 0));
+            arr.Add(new pnSet(this, 1000, 100, 0, 0));
+            arr.Add(new pnSet(this, 300, 100, 1000, 0));
             
-            Panel pnl = new Panel();
-            pnl = ct.panel((pnSet)arr[0]);
-            pnl.BackColor = Color.Blue;
-            Controls.Add(pnl);
+            Panel pnl2 = new Panel();
+            pnl2 = ct.panel((pnSet)arr[0]);
+            pnl2.BackColor = Color.Gainsboro;
+            Controls.Add(pnl2);
 
             PictureBox mojave = new PictureBox();
             mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("mojave");
             mojave.SizeMode = PictureBoxSizeMode.StretchImage;
-            mojave.Size = new Size(300, 100);
+            mojave.Size = new Size(200, 100);
             mojave.Location = new Point(0, 0);
-            pnl.Controls.Add(mojave);
-
-            Panel pnl2 = new Panel();
-            pnl2 = ct.panel((pnSet)arr[1]);
-            pnl2.BackColor = Color.Gainsboro;
-            Controls.Add(pnl2);
+            pnl2.Controls.Add(mojave);
 
             Panel pnl3 = new Panel();
-            pnl3 = ct.panel((pnSet)arr[2]);
+            pnl3 = ct.panel((pnSet)arr[1]);
             pnl3.BackColor = Color.Silver;
             pnl3.Click += Pnl3_Click;
             Controls.Add(pnl3);
             
-            arr.Add(new lbSet(this, "라벨1", "MojavePos System", 400, 70, 300, 20, 40));
+            //arr.Add(new lbSet(this, "라벨1", "MojavePos System", 300, 70, 200, 20, 40));
             arr.Add(new lbSet(this, "라벨2", "종료", 150, 50, 100, 20, 35));
             
-            Label label1 = ct.lable((lbSet)arr[3]);
-            pnl2.Controls.Add(label1);
+            Label label1 = ct.lable((lbSet)arr[2]);
+            pnl3.Controls.Add(label1);
 
-            Label label2 = ct.lable((lbSet)arr[4]);
-            pnl3.Controls.Add(label2);
-
-            arr.Add(new pnSet(this, 1500, 800, 0, 100));
+            arr.Add(new pnSet(this, 1280, 780, 10, 110));
             pn4 = new Panel();
-            pn4.Name = "contents";
-            pn4 = ct.panel((pnSet)arr[5]);
+            pn4 = ct.panel((pnSet)arr[3]);
             pn4.BackColor = Color.Beige;
             Controls.Add(pn4);
 
@@ -96,14 +88,20 @@ namespace mojavePos
             FORM_03 f3 = new FORM_03();
             f3.Show();
         }
+
+
         //버튼 UI
         private void btn_Load()
         {
             ArrayList array = new ArrayList();
 
-            array.Add(new pnSet(this, 5, 310, 620, 40));
-            array.Add(new pnSet(this, 5, 310, 620, 450));
-            
+            array.Add(new pnSet(this, 10, 310, 480, 20));
+            array.Add(new pnSet(this, 10, 310, 480, 450));
+            array.Add(new pnSet(this, 420, 20, 30, 375));
+            array.Add(new pnSet(this, 730, 20, 520, 375));
+            array.Add(new pnSet(this, 730, 20, 520, 375));
+            array.Add(new btnSet(this, "count", "카운트", 175, 310, 1080, 450, btn_Click));
+
             for (int i = 0; i < array.Count; i++)
             {
                 if (typeof(pnSet) == array[i].GetType())
@@ -111,6 +109,13 @@ namespace mojavePos
                     Panel panel = ct.panel((pnSet)array[i]);
                     panel.BackColor = Color.Silver;
                     pn4.Controls.Add(panel);
+                }
+                if (typeof(btnSet) == array[i].GetType())
+                {
+                    Button button = ct.btn((btnSet)array[i]);
+                    button.BackColor = Color.Gray;
+                    button.Enabled = false;
+                    pn4.Controls.Add(button);
                 }
             }
             api = new WebAPI();
@@ -148,6 +153,50 @@ namespace mojavePos
             cv.FormBorderStyle = FormBorderStyle.None;
             pn4.Controls.Add(cv);
             cv.Show();
+        }
+
+        private void button()
+        {
+            ArrayList array = new ArrayList();
+
+            array.Add(new pnSet(this, 10, 310, 480, 20));
+            array.Add(new pnSet(this, 10, 310, 480, 450));
+            array.Add(new pnSet(this, 420, 20, 30, 375));
+            array.Add(new pnSet(this, 730, 20, 520, 375));
+            array.Add(new btnSet(this, "btn1", "1", 200, 310, 30, 20, btn_Click));
+            array.Add(new btnSet(this, "btn2", "11", 200, 310, 30, 450, btn_Click));
+            array.Add(new btnSet(this, "btn3", "2", 200, 310, 250, 20, btn_Click));
+            array.Add(new btnSet(this, "btn2", "12", 200, 310, 250, 450, btn_Click));
+
+            array.Add(new btnSet(this, "btn2", "3", 175, 150, 520, 20, btn_Click));
+            array.Add(new btnSet(this, "btn2", "4", 175, 150, 705, 20, btn_Click));
+            array.Add(new btnSet(this, "btn2", "5", 175, 150, 895, 20, btn_Click));
+            array.Add(new btnSet(this, "btn2", "6", 175, 150, 1080, 20, btn_Click));
+
+            array.Add(new btnSet(this, "btn2", "7", 175, 150, 520, 179, btn_Click));
+            array.Add(new btnSet(this, "btn2", "8", 175, 150, 705, 179, btn_Click));
+            array.Add(new btnSet(this, "btn2", "9", 175, 150, 895, 179, btn_Click));
+            array.Add(new btnSet(this, "btn2", "10", 175, 150, 1080, 179, btn_Click));
+
+            array.Add(new btnSet(this, "btn2", "13", 175, 150, 520, 450, btn_Click));
+            array.Add(new btnSet(this, "btn2", "14", 175, 150, 705, 450, btn_Click));
+            array.Add(new btnSet(this, "btn2", "15", 175, 150, 520, 609, btn_Click));
+            array.Add(new btnSet(this, "btn2", "16", 175, 150, 705, 609, btn_Click));
+
+            for (int i = 0; i < array.Count; i++)
+            {
+                if (typeof(pnSet) == array[i].GetType())
+                {
+                    Panel panel = ct.panel((pnSet)array[i]);
+                    panel.BackColor = Color.Silver;
+                    pn4.Controls.Add(panel);
+                }
+                if (typeof(btnSet) == array[i].GetType())
+                {
+                    Button button = ct.btn((btnSet)array[i]);
+                    pn4.Controls.Add(button);
+                }
+            }
         }
     }
 }
