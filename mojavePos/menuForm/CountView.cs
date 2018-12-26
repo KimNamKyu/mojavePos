@@ -48,6 +48,7 @@ namespace mojavePos
             listView();
             btn_load();
             menu_view();
+            api = new WebAPI();
             //MessageBox.Show(tNo);
             ArrayList arrayList = api.ListView(lv, list);
             if (list != null)

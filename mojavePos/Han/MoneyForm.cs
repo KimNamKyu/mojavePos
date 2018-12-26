@@ -55,7 +55,7 @@ namespace mojavePos.Han
             lv.Columns.Add("등록자", 160, HorizontalAlignment.Center);
 
            
-           api = new WebAPI();
+            api = new WebAPI();
             api.SelectListView("http://localhost:5000/cm_init", lv);
 
         }
