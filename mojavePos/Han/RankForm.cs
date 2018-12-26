@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using mojavePos.Modules;
 using Newtonsoft.Json.Linq;
 
 namespace mojavePos.Han

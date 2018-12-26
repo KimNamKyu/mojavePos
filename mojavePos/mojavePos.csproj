@@ -107,6 +107,7 @@
     <Compile Include="Han\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Han\WebAPI.cs" />
     <Compile Include="menuForm\beverageForm.cs">
       <SubType>Form</SubType>
     </Compile>
