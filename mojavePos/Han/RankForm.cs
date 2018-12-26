@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using mojavePos.Modules;
+using Newtonsoft.Json.Linq;
 
 namespace mojavePos.Han
 {
@@ -28,12 +29,16 @@ namespace mojavePos.Han
         TextBox tb;
         string start = "";
         string end = "";
+        string[] arr;
         Panel pasta, steake, salad, dessert, beverage, side;
+        ArrayList list = new ArrayList();
+        
         public RankForm()
         {
             InitializeComponent();
             Load += RankForm_Load;
         }
+       
 
         private void RankForm_Load(object sender, EventArgs e)
         {
@@ -106,7 +111,7 @@ namespace mojavePos.Han
                     
                     case 0:
                         chart.Titles.Add("파스타");
-                        chart.Series["Series1"].Points.AddXY(1, "60");
+                        chart.Series["Series1"].Points.AddXY("1", "60");
                         chart.Series["Series1"].Points.AddXY("2", "60");
                         break;
                     case 1:
@@ -116,7 +121,7 @@ namespace mojavePos.Han
                         break;
                     case 2:
                         chart.Titles.Add("샐러드");
-                        chart.Series["Series1"].Points.AddXY("1", "60");
+                        //chart.Series["Series1"].Points.AddXY(arr[1], arr[2]);
                         chart.Series["Series1"].Points.AddXY("2", "60");
                         chart.Series["Series1"].Points.AddXY("3", "60");
                         break;
@@ -151,27 +156,21 @@ namespace mojavePos.Han
             Controls.Add(combo);
 
         }
-
         private void Combo_SelectedIndexChanged(object sender, EventArgs e) // 콤보박스 이벤트 
         {
             ComboBox combo = (ComboBox)sender;
 
+            WebAPI api = new WebAPI();
             string index = (string)combo.SelectedItem;
 
             if (index == "1분기")
             {
-
-
-      
-
                 if (tb.Text != "")
-                {
+                {                    
+                    api.Post2("http://localhost:5000/insert_CM");
                     start = tb.Text + "-1-1";
                     end = tb.Text + "-3-31";
-
-
                 }
-
             }
             else if (index == "2분기")
             {
@@ -180,8 +179,6 @@ namespace mojavePos.Han
                     start = tb.Text + "-4-1";
                     end = tb.Text + "-6-30";
                 }
-
-
             }
             else if (index == "3분기")
             {
@@ -189,23 +186,11 @@ namespace mojavePos.Han
                 {
                     start = tb.Text + "-7-1";
                     end = tb.Text + "-9-30";
-
                 }
 
             }
             else if (index == "4분기")
             {
-                WebAPI api = new WebAPI();
-                Hashtable pcd = new Hashtable();
-                pcd.Add("spName", "sel_Rank");
-                pcd.Add("start", start);
-                pcd.Add("end", end);
-                ArrayList list = api.Select("http://localhost:5000/sel_Rank", pcd);
-                
-                for (int i = 0; i < list.Count; i++)
-                {
-                    MessageBox.Show(list[i].ToString());
-                }
                 if (tb.Text != "")
                 {
                     start = tb.Text + "-10-1";
@@ -213,7 +198,23 @@ namespace mojavePos.Han
                 }
             }
 
+            
+            Hashtable pcd = new Hashtable();
+            pcd.Add("spName", "sel_Rank");
+            pcd.Add("start", start);
+            pcd.Add("end", end);
+            list = api.Select("http://localhost:5000/sel_date", pcd);
+            arr = api.Chart(list);
+            foreach(Hashtable ht in list)
+            {
+                ht["m_bNo"].ToString();
+                ht["c_Menu"].ToString();
+                ht["sum(cm.c_Count)"].ToString();
+            }
+
         }
+
+
         private void get_text()
         {
             comm = new Commons();

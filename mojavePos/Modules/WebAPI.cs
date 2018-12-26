@@ -57,46 +57,58 @@ namespace mojavePos.Modules
         /// </summary>
         /// <returns></returns>
         /// 
-        public bool Post2(string url, Hashtable ht)
+        
+
+        public string[] Chart(ArrayList list)
         {
-            WebClient client = new WebClient(); // 웹 접속 객체 생성
-            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)"); // 웹 호출 시 보낸쪽 정보 설정
-            client.Encoding = Encoding.UTF8; // UTF-8 설정 하여 한글 처리하기
-
-
-
-            
-            NameValueCollection param = new NameValueCollection();
-            byte[] result = client.UploadValues(url, "POST", param);
-            string strResult = Encoding.UTF8.GetString(result);
-            ArrayList strJ = JsonConvert.DeserializeObject<ArrayList>(strResult);
-            for (int i = 0; i < strJ.Count; i++)
+            ArrayList arrayList = new ArrayList();
+            string[] arr = null;
+            try
             {
-
-                JObject jo = (JObject)strJ[i];
-                //listView.Items.Add((string)jp.Value);
-                string[] arr = new string[jo.Count];
-                foreach (JProperty jp in jo.Properties())
-                {//jp.Name,jp.Value
-
-                    //Console.WriteLine("{0} : {1}", jp.Name, jp.Value); 
-                    if (jp.Name == "m_bNo")
+               
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray ja = (JArray)list[i];
+                   arr = new string[ja.Count];
+                    for (int j = 0; j < ja.Count; j++)
                     {
-                        arr[0] = (string)jp.Value;
+                        //MessageBox.Show(list.Count.ToString());
+                        //MessageBox.Show(ja[j].ToString());
+                        arr[j] = ja[j].ToString();
                     }
-                    else if (jp.Name == "c_Menu")
-                    {
-                        arr[1] = (string)jp.Value;
-                    }
-                    else if (jp.Name == "sum(cm.c_Count)")
-                    {
-                        arr[2] = (string)jp.Value;
-                    }
-                   
+                    
                 }
+                MessageBox.Show("성공");
+                
+                return arr;
             }
-            return true;
+            catch
+            {
+                MessageBox.Show("실패");
+                return null;
+            }
         }
+
+        public bool Post2(string url)
+        {  
+            try
+            {
+                WebClient wc = new WebClient();
+                wc.Encoding = Encoding.UTF8;
+                Stream st = wc.OpenRead(url);
+                
+                StreamReader sr = new StreamReader(st);
+                string str = sr.ReadToEnd();
+                MessageBox.Show("결과 확인 : " + str);
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
         public bool Post(string url, Hashtable ht)
         {
             MessageBox.Show(url);
@@ -154,12 +166,12 @@ namespace mojavePos.Modules
 
                 ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
 
-                //MessageBox.Show("성공");
+                
                 return list;
             }
             catch
             {
-                //MessageBox.Show("실패");
+                
                 return null;
             }
         }
