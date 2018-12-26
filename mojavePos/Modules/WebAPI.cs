@@ -166,7 +166,7 @@ namespace mojavePos.Modules
 
                 foreach (DictionaryEntry data in ht)
                 {
-                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
+                    MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
                     param.Add(data.Key.ToString(), data.Value.ToString());
                 }
 

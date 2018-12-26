@@ -1,4 +1,5 @@
 ﻿using mojavePos.Modules;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -135,6 +136,7 @@ namespace mojavePos
         }
         
         private ArrayList list;
+        string[] arr = { };
         //버튼 이벤트
         private void btn_Click(object sender, EventArgs e)
         {
@@ -146,57 +148,13 @@ namespace mojavePos
             ht.Add("spName", "sp_Order_Select");
             ht.Add("param", "_tNo:" + tNo);
             list = api.Select("http://localhost:5000/select", ht);
-            
+
             CountView cv = new CountView(tNo, list);
             cv.MdiParent = this;
             cv.WindowState = FormWindowState.Maximized;
             cv.FormBorderStyle = FormBorderStyle.None;
             pn4.Controls.Add(cv);
             cv.Show();
-        }
-
-        private void button()
-        {
-            ArrayList array = new ArrayList();
-
-            array.Add(new pnSet(this, 10, 310, 480, 20));
-            array.Add(new pnSet(this, 10, 310, 480, 450));
-            array.Add(new pnSet(this, 420, 20, 30, 375));
-            array.Add(new pnSet(this, 730, 20, 520, 375));
-            array.Add(new btnSet(this, "btn1", "1", 200, 310, 30, 20, btn_Click));
-            array.Add(new btnSet(this, "btn2", "11", 200, 310, 30, 450, btn_Click));
-            array.Add(new btnSet(this, "btn3", "2", 200, 310, 250, 20, btn_Click));
-            array.Add(new btnSet(this, "btn2", "12", 200, 310, 250, 450, btn_Click));
-
-            array.Add(new btnSet(this, "btn2", "3", 175, 150, 520, 20, btn_Click));
-            array.Add(new btnSet(this, "btn2", "4", 175, 150, 705, 20, btn_Click));
-            array.Add(new btnSet(this, "btn2", "5", 175, 150, 895, 20, btn_Click));
-            array.Add(new btnSet(this, "btn2", "6", 175, 150, 1080, 20, btn_Click));
-
-            array.Add(new btnSet(this, "btn2", "7", 175, 150, 520, 179, btn_Click));
-            array.Add(new btnSet(this, "btn2", "8", 175, 150, 705, 179, btn_Click));
-            array.Add(new btnSet(this, "btn2", "9", 175, 150, 895, 179, btn_Click));
-            array.Add(new btnSet(this, "btn2", "10", 175, 150, 1080, 179, btn_Click));
-
-            array.Add(new btnSet(this, "btn2", "13", 175, 150, 520, 450, btn_Click));
-            array.Add(new btnSet(this, "btn2", "14", 175, 150, 705, 450, btn_Click));
-            array.Add(new btnSet(this, "btn2", "15", 175, 150, 520, 609, btn_Click));
-            array.Add(new btnSet(this, "btn2", "16", 175, 150, 705, 609, btn_Click));
-
-            for (int i = 0; i < array.Count; i++)
-            {
-                if (typeof(pnSet) == array[i].GetType())
-                {
-                    Panel panel = ct.panel((pnSet)array[i]);
-                    panel.BackColor = Color.Silver;
-                    pn4.Controls.Add(panel);
-                }
-                if (typeof(btnSet) == array[i].GetType())
-                {
-                    Button button = ct.btn((btnSet)array[i]);
-                    pn4.Controls.Add(button);
-                }
-            }
         }
     }
 }
