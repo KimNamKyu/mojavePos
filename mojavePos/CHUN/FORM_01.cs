@@ -138,42 +138,35 @@ namespace mojavePos
                 }
             }
         }
-
-        private void btn_Click(object sender, EventArgs e) //클릭버튼 수정할것.
+        //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.
+        private void btn_Click(object sender, EventArgs e) 
         {
             Module api = new Module();
             api = new Module();
-            
-            //(textBox_Results != null && !string.IsNullOrWhiteSpace(textBox_Results.Text))
+          
             F3 = new FORM_03();
             F1 = new FORM_01();
-            if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
-            {
-                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
-            }
-            else
-            {
-                F3.Show();
-            }
-            /*
-            else if()
-            {
-
-            }
-            else
-            {
-
-            }*/
-            
-            
-            
-            //입력값이 DB의 값과 틀렸을때(틀렸습니다. 다시입력해주세요) 나오게 할것.
-            //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.
-            //입력값이 맞다면 F3 로 넘어갈것.
-            
-            //this.Dispose(false);
-            //F3.Show();
-        }
+           
+            string Correctid = api.getIdPass("http://localhost:5000/SI_select_Pos_Id");
+            string Correctpw = api.getIdPass("http://localhost:5000/SI_select_Pos_Pass");
+           
+                if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
+                {   
+                    F3.Show();
+                }
+                else if (텍스트박스1.Text != Correctid)
+                {
+                    MessageBox.Show("아이디를 잘못 입력하셨습니다.");
+                }
+                else if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
+                {
+                    MessageBox.Show("비밀번호를 잘못 입력하셨습니다.");
+                }
+                else if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
+                {
+                    MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
+                }
+           }
         
 
         private void btn2_Click(object sender, EventArgs e)
