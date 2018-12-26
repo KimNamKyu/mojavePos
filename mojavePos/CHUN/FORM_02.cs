@@ -120,29 +120,29 @@ namespace mojavePos
             //패널2.Controls.Add(mojave);
 
             ArrayList arr2 = new ArrayList();
-            arr2.Add(new lbSet(this, "label5", "- ELBON the table 을 위한 포스기.", 210, 15, 15, 40, 10));
-            arr2.Add(new lbSet(this, "label6", "Mojave of Pos", 200, 25, 220, 32, 17));
-            arr2.Add(new lbSet(this, "label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 15, 70, 8));
-            arr2.Add(new lbSet(this, "label8", "2. Mojave of Pos는 ELBON the table의 효율적인 재정관리를 할 수        있도록 돕기 위해 제작 되었습니다.", 380, 30, 15, 100, 8));
-            arr2.Add(new lbSet(this, "label9", "3. Mojave of Pos는 자체 제공한 시리얼넘버로 하나의 아이디만           회원가입할수 있습니다.", 380, 30, 15, 145, 8));
-            arr2.Add(new lbSet(this, "label10", "4. Mojave of Pos는 비밀번호찾기 기능을 따로 제공하지 않습니다.", 380, 15, 15, 190, 8));
-            arr2.Add(new lbSet(this, "label6", "5. Mojave of Pos안의 ELBON the table 정보는 절대 외부에 공개를        하지 않습니다.", 380, 30, 15, 220, 8));
-            arr2.Add(new lbSet(this, "label12", "6. Mojave of Pos는 포스기에 최적화 되어 있습니다.", 380, 15, 15, 265, 8));
-            arr2.Add(new lbSet(this, "label13", "문의사항 : question@MojaveKorea.co.kr", 380, 15, 15, 310, 8));
+            arr2.Add(new lbSet(this, "label5", "ELBON the table     _", 140, 15, 35, 40, 10));
+            arr2.Add(new lbSet(this, "label6", "Mojave of Pos", 200, 27, 180, 29, 30));
+            arr2.Add(new lbSet(this, "label7", "1. Mojave of Pos 는 'Mojave/모하비'에서 제작하였습니다.", 350, 15, 35, 70, 8));
+            arr2.Add(new lbSet(this, "label8", "2. Mojave of Pos는 ELBON the table의 효율적인 재정관리를 할 수                있도록 돕기 위해 제작 되었습니다.", 380, 30, 35, 100, 8));
+            arr2.Add(new lbSet(this, "label9", "3. Mojave of Pos는 자체 제공한 시리얼넘버로 하나의 아이디만 회원               가입할수 있습니다.", 380, 30, 35, 145, 8));
+            arr2.Add(new lbSet(this, "label10", "4. Mojave of Pos는 비밀번호찾기 기능을 따로 제공하지 않습니다.", 380, 15, 35, 190, 8));
+            arr2.Add(new lbSet(this, "label6", "5. Mojave of Pos안의 ELBON the table 정보는 절대 외부에 공개를                하지 않습니다.", 380, 30, 35, 220, 8));
+            arr2.Add(new lbSet(this, "label12", "6. Mojave of Pos는 포스기에 최적화 되어 있습니다.", 380, 15, 35, 265, 8));
+            arr2.Add(new lbSet(this, "label13", "문의사항 : question@MojaveKorea.co.kr", 380, 15, 35, 310, 8));
             for (int i = 0; i < arr2.Count; i++)
             {
                 if (typeof(lbSet) == arr2[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr2[i]);
                     if (i == 0) label.Font = new Font("Tahoma", 9, FontStyle.Bold);
-                    else if (i == 1) label.Font = new Font("Tahoma", 16, FontStyle.Bold);
+                    else if (i == 1) label.Font = new Font("Tahoma", 19, FontStyle.Bold);
                     else label.Font = new Font("Tahoma", 8, FontStyle.Bold);
                     패널2.Controls.Add(label);
                 }
             }
         }
-        
 
+        //DB의 No = 1이 없으면 가입하고 가입되었습니다. 넣고 DB의 NO = 2 이상은 MessageBox로 이미 회원가입을 하셨습니다. 라는 메세지박스 출력할것.
         private void btn_Click(object sender, EventArgs e)
         {   
             F1 = new FORM_01();
@@ -176,9 +176,6 @@ namespace mojavePos
         {
             this.Close();
         }
-        //DB의 No = 1이 없으면 가입하고 가입되었습니다. 넣고 DB의 NO = 2 이상은 MessageBox로 이미 회원가입을 하셨습니다. 라는 메세지박스 출력할것.
-        // 메세지박스 가운데 정렬할것.
-       
     }
 }
 

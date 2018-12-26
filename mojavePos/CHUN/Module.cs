@@ -77,15 +77,20 @@ namespace WindowsFormsApp
             }
         }
 
-        //public string getIdPass(string url)
-        //{
-        //    try
-        //    {
-        //        WebClient wc = new WebClient();
-        //        Stream myStream = wc.OpenRead(url);
-        //        StreamReader sr = new StreamReader(myStream);
-        //        string result = sr.ReadToEnd();
-        //    }
-        //}
+        public string getIdPass(string url)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream myStream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(myStream);
+                string result = sr.ReadToEnd();
+                return result;
+            }
+            catch
+            {
+                return "";
+            }
+        }
     }
 }

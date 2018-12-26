@@ -56,7 +56,7 @@ namespace mojavePos.Han
 
            
             api = new WebAPI();
-            api.SelectListView("http://localhost:5000/cm_init", lv);
+            //api.SelectListView("http://localhost:5000/cm_init", lv);
 
         }
 
