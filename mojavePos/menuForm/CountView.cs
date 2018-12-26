@@ -158,26 +158,26 @@ namespace mojavePos
                     //        break;
                     //    }
                     //}
-                    MessageBox.Show(_mNo);
+                    //MessageBox.Show(_mNo);
                     ht.Add("spName", "sp_Order_Insert");    
-                    ht.Add("mNo", _tNo);
+                   
                     ht.Add("tNo", _tNo);
+                    ht.Add("mNo", _mNo);
+
                     for (int j = 0; j < Orderlist.Count; j++)
                     {
                         string[] arr = (string[])Orderlist[j];
+                        foreach (DictionaryEntry arry in ht)
+                        {
+                            string ab = (string)arry.Value;
+                            MessageBox.Show(ab);
+                        }
+                        if (!api.Post("http://localhost:5000/sp_insert", ht))
+                        {
+                            MessageBox.Show("주문오류");
+                            break;
+                        }
                     }
-                    
-                    foreach(DictionaryEntry arry in ht)
-                    {
-                        string ab = (string)arry.Value;
-                        MessageBox.Show(ab);
-                    }
-                    if (!api.Post("http://localhost:5000/sp_insert", ht))
-                    {
-                        MessageBox.Show("주문오류");
-                        break;
-                    }
-
                     this.Visible = false;
                     break;
 
