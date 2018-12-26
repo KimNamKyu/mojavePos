@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using mojavePos.Modules;
 
 namespace mojavePos.Han
 {
@@ -170,26 +169,22 @@ namespace mojavePos.Han
             ht.Add("spName", "select_date");
             ht.Add("start", dt1.Text.Substring(0, 10));
             ht.Add("end", dt2.Text.Substring(0, 10));
-            ArrayList list = api.Select("http://localhost:5000/cm_date", ht);
+            ArrayList list = api.Select("http://localhost:5000/sel_date", ht);
             api.ListView(lv, list);
 
-            long total = 0;
-            for (int i = 0; i < lv.Items.Count; i++)
-            {
-                ListViewItem item = lv.Items[i];
-                total += Convert.ToInt64(item.SubItems[4].Text);
-            }
-            lbSet ls1 = new lbSet(this, "lb2", total.ToString() + "원", 600, 50, 650, 20, 30);
-            //label2 = new Label();
+            Hashtable pro = new Hashtable();
+            pro.Add("spName", "total_Money");
+            pro.Add("start", dt1.Text.Substring(0, 10));
+            pro.Add("end", dt2.Text.Substring(0, 10));
+            ArrayList money = api.Select("http://localhost:5000/sel_date", pro);
+               string[] arr2 = api.Chart(money);
+            lbSet ls1 = new lbSet(this, "lb2",  arr2[0]+ "원", 600, 50, 650, 20, 30);
             
-            label2.Text ="총 금액: " +total.ToString()+"원";
-            
+            label2.Text ="총 금액: " +arr2[0]+"원";     
             label2 = ct.lable(ls1);
             label2.BackColor = Color.Beige;
             label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
             Controls.Add(label2);
-            
         }
-
     }
 }
