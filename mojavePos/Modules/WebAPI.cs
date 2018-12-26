@@ -78,7 +78,7 @@ namespace mojavePos.Modules
                     }
                     
                 }
-                MessageBox.Show("성공");
+                
                 
                 return arr;
             }
