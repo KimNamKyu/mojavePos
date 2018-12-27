@@ -112,7 +112,7 @@ namespace mojavePos.Han
             Controls.Add(combo);
 
         }
-        public void make_chart()
+        public void get_chart()
         {
             chat = new Hashtable();
             chat.Add("areaname", "ChartArea1");
@@ -229,7 +229,7 @@ namespace mojavePos.Han
             else
             {
                 panel_clear();
-                make_chart();
+                get_chart();
                 array = api.Cut(list);
                 for (int i = 0; i < 6; i++)
                 {
