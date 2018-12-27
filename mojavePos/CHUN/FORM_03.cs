@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using mojavePos.Han;
+using WindowsFormsApp;
 
 namespace mojavePos
 {
@@ -25,6 +26,7 @@ namespace mojavePos
         Timer timer;
         _Create ct;
         Panel 패널4;
+        Module api;
         bool value = true;
         object a;
         public FORM_03()
@@ -67,6 +69,7 @@ namespace mojavePos
             패널1.Controls.Add(시간);
 
             //그림넣기
+            //분기매출액 표현하기
 
             ArrayList arr = new ArrayList();
             arr.Add(new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 70, 10));
@@ -82,6 +85,19 @@ namespace mojavePos
                 if(typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
+
+                    if(i==1)
+                    {
+                        api = new Module();
+                        string total_money = api.getIdPass("http://localhost:5000/F3_total_day");
+                        //MessageBox.Show(Correctid);
+                       // MessageBox.Show(total_money);
+                        if (total_money == null)
+                        {
+                            label.Text = "0";
+                        }
+                        else label.Text = total_money;
+                    }
                     label.TextAlign = ContentAlignment.MiddleCenter;
                     label.ForeColor = Color.White;
                     label.Font = new Font("Tahoma", 10, FontStyle.Bold);
@@ -158,7 +174,6 @@ namespace mojavePos
              a = pn4_lb;
             //경고문 라벨
             pn4_lb = new lbSet(this, "label2", lbText1, 750, 30, 0, 12, 15);
-            //pn5_lb = new lbSet(this, "label3", "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.", 1500, 30, 90, 12, 15);
             경고문 = ct.lable(pn4_lb);
             경고문.Font = new Font("Tahoma", 15, FontStyle.Bold);
             경고문.TextAlign = ContentAlignment.MiddleCenter;
@@ -171,24 +186,19 @@ namespace mojavePos
             Controls.Add(패널4);
             패널4.Controls.Add(경고문);
             
-
             Control_Init();
         }
-
         private void Control_Init()
         {
             timer = new Timer();
             timer.Tick += Timer_Tick1;
             timer.Start();
         }
-
         private void Timer_Tick1(object sender, EventArgs e)
         {
             시간.Text = string.Format("{0:HH:mm:ss}", DateTime.Now);
             날짜.Text = string.Format("{0:yyyy.MM.dd (dddd)}", DateTime.Now);
         }
-        
-
         //시작버튼 효과
         private void btn_Click(object sender, EventArgs e)
         {
@@ -205,8 +215,7 @@ namespace mojavePos
                     MP.Show();
 
                     value = false;
-                    //하위라벨 및 버튼라벨 바꾸기
-                    //경고문.Text = "영업중 입니다.판매를 종료하시려면 영업종료를 눌러주십시오.";
+                  
                 }
             }
             else
@@ -218,10 +227,11 @@ namespace mojavePos
                     준비금텍스트박스.Width = 120;
                     준비금.Text = "준비금";
                     MessageBox.Show("영업을 종료 하였습니다.");
+
+                    value = true;
                 }
             }
         }
-
         private void btn2_Click(object sender, EventArgs e)
         {
             MainPos MP = new MainPos();
@@ -229,16 +239,13 @@ namespace mojavePos
             {
 
                 MP.Show();
-                
-                //하위라벨 및 버튼라벨 바꾸기
-                //경고문.Text = "영업중 입니다.판매를 종료하시려면 영업종료를 눌러주십시오.";
+             
             }
             else if (MessageBox.Show("영업을 종료 하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
-                //하위 라벨 및 버튼 바꾸기
+             
             }
         }
-
         //관리자버튼 효과
         private void btn1_Click(object sender, EventArgs e)
         {
