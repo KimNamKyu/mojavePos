@@ -74,17 +74,17 @@ namespace mojavePos.Han
                         arr[j] = ja[j].ToString();
                     }
                 }
-                MessageBox.Show("성공");
+             
 
                 return arr;
             }
             catch
             {
-                MessageBox.Show("실패");
+                
                 return null; 
             }
         }
-        public ArrayList Chart(ArrayList list)
+        public ArrayList Cut(ArrayList list)
         {
             
             //string[] arr = null;
@@ -103,13 +103,13 @@ namespace mojavePos.Han
                     }
 
                 }
-                MessageBox.Show("성공");
+                MessageBox.Show("성공!");
 
                 return arry;
             }
             catch
             {
-                MessageBox.Show("실패");
+                MessageBox.Show("실패!");
                 return new ArrayList();
             }
         }
@@ -219,12 +219,12 @@ namespace mojavePos.Han
                     }
                     listView.Items.Add(new ListViewItem(arr));
                 }
-                MessageBox.Show("성공");
+                
                 return arrayList;
             }
             catch
             {
-                MessageBox.Show("실패");
+                
                 return null;
             }
         }

@@ -20,7 +20,7 @@ namespace mojavePos.Han
     {
         Commons comm;
         _Create ct = new _Create();
-        Chart chart;
+        Chart chart1, chart2, chart3, chart4, chart5, chart6;
         ChartArea chartArea1;
         Legend legend1;
         Series series1;
@@ -28,120 +28,74 @@ namespace mojavePos.Han
         TextBox tb;
         string start = "";
         string end = "";
-        string[] arr=null;
+        string[] arr = null;
         Panel pasta, steake, salad, dessert, beverage, side;
-        ArrayList list,array;
-        
+        ArrayList list, array, panel;
+
         public RankForm()
         {
             InitializeComponent();
             Load += RankForm_Load;
         }
-       
+
 
         private void RankForm_Load(object sender, EventArgs e)
         {
             get_Combo();
-           // get_panel();
+            get_panel();
             get_text();
-           // get_panel();
+            // get_panel();
 
         }
-        /*
         public void get_panel()
         {
-            ArrayList panel = new ArrayList();
+
+            panel = new ArrayList();
             comm = new Commons();
-            
+
             pnSet pn1 = new pnSet(this, 433, 350, 100, 70);
             pasta = ct.panel(pn1);
-            pasta.BackColor = Color.Azure;
+            pasta.BackColor = Color.White;
             pasta.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(pasta);
             panel.Add(pasta);
 
             pnSet pn2 = new pnSet(this, 433, 350, 533, 70);
             steake = ct.panel(pn2);
-            steake.BackColor = Color.Black;
+            steake.BackColor = Color.White;
             steake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(steake);
             panel.Add(steake);
 
             pnSet pn3 = new pnSet(this, 433, 350, 966, 70);
             salad = ct.panel(pn3);
-            salad.BackColor = Color.Aqua;
+            salad.BackColor = Color.White;
             salad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(salad);
             panel.Add(salad);
 
             pnSet pn4 = new pnSet(this, 433, 350, 100, 420);
             beverage = ct.panel(pn4);
-            beverage.BackColor = Color.BurlyWood;
+            beverage.BackColor = Color.White;
             beverage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(beverage);
             panel.Add(beverage);
 
             pnSet pn5 = new pnSet(this, 433, 350, 533, 420);
             side = ct.panel(pn5);
-            side.BackColor = Color.DarkMagenta;
+            side.BackColor = Color.White;
             side.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(side);
             panel.Add(side);
 
             pnSet pn6 = new pnSet(this, 433, 350, 966, 420);
             dessert = ct.panel(pn6);
-            dessert.BackColor = Color.MidnightBlue;
+            dessert.BackColor = Color.White;
             dessert.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(dessert);
             panel.Add(dessert);
-
-
-            for (int i = 0; i < 6; i++)
-            {
-                chat = new Hashtable();
-                chat.Add("areaname", "ChartArea1");
-                chat.Add("legname", "Legend1");
-                chat.Add("seriname", "Series1");
-                chat.Add("chartname", "chartname");
-                chat.Add("text", panel[i]);
-                
-                chart = comm.getChart(chat, (Panel)panel[i]);
-                switch (i)
-                {
-                    
-                    case 0:
-                        chart.Titles.Add("파스타");
-                        //chart.Series["Series1"].Points.AddXY(array[1].ToString(), array[2].ToString());
-                        chart.Series["Series1"].Points.AddXY("2", "60");
-                        break;
-                    case 1:
-                        chart.Titles.Add("스테이크");
-                        chart.Series["Series1"].Points.AddXY("2", "60");
-                        chart.Series["Series1"].Points.AddXY("3", "60");
-                        break;
-                    case 2:
-                        chart.Titles.Add("샐러드");
-                        //chart.Series["Series1"].Points.AddXY(arr[1], arr[2]);
-                        chart.Series["Series1"].Points.AddXY("2", "60");
-                        chart.Series["Series1"].Points.AddXY("3", "60");
-                        break;
-                    case 3:
-                        chart.Titles.Add("음료");
-                        
-                        break;
-                    case 4:
-                        chart.Titles.Add("사이드");
-                        break;
-                    case 5:
-                        chart.Titles.Add("디저트");
-                        break;
-                }
-
-
-            }
-
         }
-        */
+
         public void get_Combo()
         {
             comm = new Commons();
@@ -158,6 +112,65 @@ namespace mojavePos.Han
             Controls.Add(combo);
 
         }
+        public void make_chart()
+        {
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "pasta");
+            chart1 = comm.getChart(chat, pasta);
+
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "steake");
+            chart2 = comm.getChart(chat, steake);
+
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "salad");
+            chart3 = comm.getChart(chat, salad);
+
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "dessert");
+            chart4 = comm.getChart(chat, dessert);
+
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "beverage");
+            chart5 = comm.getChart(chat, beverage);
+
+            chat = new Hashtable();
+            chat.Add("areaname", "ChartArea1");
+            chat.Add("legname", "Legend1");
+            chat.Add("seriname", "Series1");
+            chat.Add("chartname", "chartname");
+            chat.Add("text", "side");
+            chart6 = comm.getChart(chat, side);
+        }
+        public void panel_clear()
+        {
+            pasta.Controls.Clear();
+            steake.Controls.Clear();
+            salad.Controls.Clear();
+            side.Controls.Clear();
+            dessert.Controls.Clear();
+            beverage.Controls.Clear();
+        }
         private void Combo_SelectedIndexChanged(object sender, EventArgs e) // 콤보박스 이벤트 
         {
             ComboBox combo = (ComboBox)sender;
@@ -169,7 +182,7 @@ namespace mojavePos.Han
             {
                 if (tb.Text != "")
                 {
-                    api.Post2("http://localhost:5000/insert_CM"); // 결제버튼 클릭 시 매출관리 테이블에 추가
+                    //api.Post2("http://localhost:5000/insert_CM"); // 결제버튼 클릭 시 매출관리 테이블에 추가
                     start = tb.Text + "-1-1";
                     end = tb.Text + "-3-31";
                 }
@@ -199,142 +212,87 @@ namespace mojavePos.Han
                     end = tb.Text + "-12-31";
                 }
             }
+
+
             Hashtable pcd = new Hashtable();
             pcd.Add("spName", "sel_Rank");
             pcd.Add("start", start);
             pcd.Add("end", end);
             list = api.Select("http://localhost:5000/sel_date", pcd);
-            //arr = api.Chart(list);
 
-            array = api.Chart(list);
-            
-
-
-
-            ArrayList panel = new ArrayList();
-            comm = new Commons();
-
-            pnSet pn1 = new pnSet(this, 433, 350, 100, 70);
-            pasta = ct.panel(pn1);
-            pasta.BackColor = Color.Azure;
-            pasta.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(pasta);
-            panel.Add(pasta);
-
-            pnSet pn2 = new pnSet(this, 433, 350, 533, 70);
-            steake = ct.panel(pn2);
-            steake.BackColor = Color.Black;
-            steake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(steake);
-            panel.Add(steake);
-
-            pnSet pn3 = new pnSet(this, 433, 350, 966, 70);
-            salad = ct.panel(pn3);
-            salad.BackColor = Color.Aqua;
-            salad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(salad);
-            panel.Add(salad);
-
-            pnSet pn4 = new pnSet(this, 433, 350, 100, 420);
-            beverage = ct.panel(pn4);
-            beverage.BackColor = Color.BurlyWood;
-            beverage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(beverage);
-            panel.Add(beverage);
-
-            pnSet pn5 = new pnSet(this, 433, 350, 533, 420);
-            side = ct.panel(pn5);
-            side.BackColor = Color.DarkMagenta;
-            side.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(side);
-            panel.Add(side);
-
-            pnSet pn6 = new pnSet(this, 433, 350, 966, 420);
-            dessert = ct.panel(pn6);
-            dessert.BackColor = Color.MidnightBlue;
-            dessert.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            Controls.Add(dessert);
-            panel.Add(dessert);
-
-
-            for (int i = 0; i < 6; i++)
+            if (list.Count == 0)
             {
-                chat = new Hashtable();
-                chat.Add("areaname", "ChartArea1");
-                chat.Add("legname", "Legend1");
-                chat.Add("seriname", "Series1");
-                chat.Add("chartname", "chartname");
-                chat.Add("text", panel[i]);
+                MessageBox.Show("데이터값이 없습니다.");
+            }
 
-                chart = comm.getChart(chat, (Panel)panel[i]);
-                switch (i)
+
+            else
+            {
+                panel_clear();
+                make_chart();
+                array = api.Cut(list);
+                for (int i = 0; i < 6; i++)
                 {
-                    
-                    case 0:
-                        chart.Titles.Add("파스타");
-                        for (int j = 0; j < array.Count; j++) {
-                            if (j * 3 < array.Count)
+                    switch (i)
+                    {
+
+                        case 0:
+                            chart1.Series["Series1"].Points.Clear();
+                            chart1.Titles.Add("파스타");
+
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "1")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+
+                                    chart1.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
-                        break;
-                    case 1:
-                        chart.Titles.Add("스테이크");
-                        for (int j = 0; j < array.Count; j++)
-                        {
-                            if (j * 3 < array.Count)
+                            break;
+                        case 1:
+                            chart2.Series["Series1"].Points.Clear();
+                            chart2.Titles.Add("스테이크");
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "2")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+                                    chart2.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
                             break;
-                    case 2:
-                        chart.Titles.Add("샐러드");
-                        for (int j = 0; j < array.Count; j++)
-                        {
-                            if (j * 3 < array.Count)
+                        case 2:
+                            chart3.Series["Series1"].Points.Clear();
+                            chart3.Titles.Add("샐러드");
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "3")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+                                    chart3.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
-                        break;
-                    case 3:
-                        chart.Titles.Add("디저트");
-                        for (int j = 0; j < array.Count; j++)
-                        {
-                            if (j * 3 < array.Count)
+                            break;
+                        case 3:
+                            chart4.Series["Series1"].Points.Clear();
+                            chart4.Titles.Add("디저트");
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "4")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+                                    chart4.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
-                        break;
-                    case 4:
-                        chart.Titles.Add("음료");
-                        for (int j = 0; j < array.Count; j++)
-                        {
-                            if (j * 3 < array.Count)
+                            break;
+                        case 4:
+                            chart5.Series["Series1"].Points.Clear();
+                            chart5.Titles.Add("음료");
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "5")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+                                    chart5.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
-                        break;
-                    case 5:
-                        chart.Titles.Add("사이드");
-                        for (int j = 0; j < array.Count; j++)
-                        {
-                            if (j * 3 < array.Count)
+                            break;
+                        case 5:
+                            chart6.Series["Series1"].Points.Clear();
+                            chart6.Titles.Add("사이드");
+                            for (int j = 0; j < list.Count; j++)
                             {
                                 if (array[j * 3].ToString() == "6")
-                                    chart.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
+                                    chart6.Series["Series1"].Points.AddXY(array[(j * 3) + 1].ToString(), array[(j * 3) + 2].ToString());
                             }
-                        }
-                        break;
+                            break;
+                    }
                 }
             }
         }

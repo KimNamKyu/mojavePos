@@ -163,31 +163,40 @@ namespace mojavePos.Han
         }
         private void ok_Click(object sender, EventArgs e)
         {
-            //dt1 = new DateTimePicker();
-            // dt2 = new DateTimePicker();
-           
-            Hashtable ht = new Hashtable();
-            api = new WebComm();
-            ht.Add("spName", "select_date");
-            ht.Add("start", dt1.Text.Substring(0, 10));
-            ht.Add("end", dt2.Text.Substring(0, 10));
-            ArrayList list = api.Select("http://localhost:5000/sel_date", ht);
-            api.ListView(lv, list);
+            int a = dt1.Text.Substring(0, 10).CompareTo(dt2.Text.Substring(0, 10)); // 시작날짜가 종료날짜보다 클때 에러처리
 
-            Hashtable pro = new Hashtable();
-            pro.Add("spName", "total_Money");
-            pro.Add("start", dt1.Text.Substring(0, 10));
-            pro.Add("end", dt2.Text.Substring(0, 10));
-            ArrayList money = api.Select("http://localhost:5000/sel_date", pro);
-   
-            string[] arr2 = api.str(money); // 총가격
-            ls1 = new lbSet(this, "lb2",  arr2[0]+ "원", 600, 50, 650, 20, 30);
-            
-            label2.Text ="총 금액: "+arr2[0]+"원";     
-            label2 = ct.lable(ls1);
-            label2.BackColor = Color.Beige;
-            label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
-            Controls.Add(label2);
+           if(a==1)
+            {
+                MessageBox.Show("정확한 날짜를 입력바랍니다.");
+            }
+           
+            else{
+                Hashtable ht = new Hashtable();
+                api = new WebComm();
+                ht.Add("spName", "select_date");
+                ht.Add("start", dt1.Text.Substring(0, 10));
+                ht.Add("end", dt2.Text.Substring(0, 10));
+                ArrayList list = api.Select("http://localhost:5000/sel_date", ht);
+                api.ListView(lv, list);
+
+                Hashtable pro = new Hashtable();
+                pro.Add("spName", "total_Money");
+                pro.Add("start", dt1.Text.Substring(0, 10));
+                pro.Add("end", dt2.Text.Substring(0, 10));
+                ArrayList money = api.Select("http://localhost:5000/sel_date", pro);
+
+                string[] arr2 = api.str(money); // 총가격
+                if (arr2[0] == "") label2.Text = "총 금액: 0원";
+                else
+                {
+                    ls1 = new lbSet(this, "lb2", arr2[0] + "원", 600, 50, 650, 20, 30);
+
+                    label2.Text = "총 금액: " + arr2[0] + "원";
+                    label2.BackColor = Color.Beige;
+                    label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
+                }
+                Controls.Add(label2);
+            }
         }
     }
 }
