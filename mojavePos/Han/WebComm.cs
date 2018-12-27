@@ -57,12 +57,11 @@ namespace mojavePos.Han
         /// </summary>
         /// <returns></returns>
         /// 
-
-
-        public string[] Chart(ArrayList list)
+        public string[] str(ArrayList list)
         {
-            ArrayList arrayList = new ArrayList();
+
             string[] arr = null;
+            ArrayList arry = new ArrayList();
             try
             {
 
@@ -72,11 +71,8 @@ namespace mojavePos.Han
                     arr = new string[ja.Count];
                     for (int j = 0; j < ja.Count; j++)
                     {
-                        //MessageBox.Show(list.Count.ToString());
-                        //MessageBox.Show(ja[j].ToString());
                         arr[j] = ja[j].ToString();
                     }
-
                 }
                 MessageBox.Show("성공");
 
@@ -85,7 +81,36 @@ namespace mojavePos.Han
             catch
             {
                 MessageBox.Show("실패");
-                return null;
+                return null; 
+            }
+        }
+        public ArrayList Chart(ArrayList list)
+        {
+            
+            //string[] arr = null;
+            ArrayList arry = new ArrayList();
+            try
+            {
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray ja = (JArray)list[i];
+                    //arr = new string[ja.Count];
+
+                    for (int j = 0; j < ja.Count; j++)
+                    {
+                        arry.Add(ja[j].ToString());
+                    }
+
+                }
+                MessageBox.Show("성공");
+
+                return arry;
+            }
+            catch
+            {
+                MessageBox.Show("실패");
+                return new ArrayList();
             }
         }
 

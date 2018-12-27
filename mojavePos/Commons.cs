@@ -62,7 +62,7 @@ namespace mojavePos
             chart.ChartAreas.Add(chartArea1);
             chart.Legends.Add(legend1);
             chart.Series.Add(series1);
-            chart.Series[series1.Name].IsValueShownAsLabel = false;
+            chart.Series[series1.Name].IsValueShownAsLabel = true;
 
             parentDomain.Controls.Add(chart);
             return chart;
