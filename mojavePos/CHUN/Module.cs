@@ -36,6 +36,7 @@ namespace WindowsFormsApp
                     for (int j = 0; j < ja.Count; j++)
                     {
                         arr[j] = ja[j].ToString();
+                        //MessageBox.Show("arr 값 : " + ja[j].ToString());
                     }
                     listview.Items.Add(new ListViewItem(arr));
                 }
@@ -46,8 +47,8 @@ namespace WindowsFormsApp
                 return false;
             }
         }
-
-        public bool post(string url, Hashtable ht)
+       
+        public bool insert_Category(string url, Hashtable ht)
         {
             try
             {
@@ -91,6 +92,46 @@ namespace WindowsFormsApp
             {
                 return "";
             }
+        }
+
+        public bool selectListView_Menu(string url, ListView listview2,string no)
+        {            
+            WebClient client = new WebClient();
+            NameValueCollection data = new NameValueCollection();
+            client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            client.Encoding = Encoding.UTF8;
+
+            data.Add("bNo", no);
+            
+            try
+            {
+                
+                byte[] result = client.UploadValues(url, "POST", data);
+               
+                string strResult = Encoding.UTF8.GetString(result);
+               
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(strResult);
+                listview2.Items.Clear();
+               
+                for (int i = 0; i < list.Count; i++)
+                {
+                    //MessageBox.Show("확인");
+                    JArray ja = (JArray)list[i];
+                    string[] arr = new string[3];
+                    for (int j = 0; j < ja.Count; j++)
+                    {
+                        arr[j] = ja[j].ToString();
+                       // MessageBox.Show("arr 값 : " + arr[j].ToString());
+                    }
+                    listview2.Items.Add(new ListViewItem(arr));
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
     }
 }

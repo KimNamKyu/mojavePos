@@ -30,6 +30,7 @@ namespace mojavePos
         RichTextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
         FORM_01 F1;
         FORM_02 F2;
+        Module api;
         private string PS_No;
 
         public FORM_02()
@@ -162,13 +163,12 @@ namespace mojavePos
                 else
                 {
                     Hashtable ht = new Hashtable();
-                    Module api = new Module();
                     api = new Module();
                     ht.Add("ps_Id", 네임택박.Text);
                     ht.Add("ps_Rank", 포지션택박.Text);
                     ht.Add("ps_passwd", 패스워드택박.Text);
                     ht.Add("ps_code", 시리얼택박.Text);
-                    api.post("http://localhost:5000/SI_insert_Pos", ht);
+                    api.insert_Category("http://localhost:5000/SI_insert_Pos", ht);
                 }
             }
         }

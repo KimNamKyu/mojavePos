@@ -17,11 +17,14 @@ namespace mojavePos.Han
     {
         public static string camo_no;
         _Create ct = new _Create();
-        Panel bottom,line;
+        Panel bottom, line;
         private Graphics gr;
         Module api = new Module();
+        Button button, 수정버튼;
+        public string no;
         Category_Update_delete_modal CUD;
-        ListView listview2;
+        ListView.SelectedListViewItemCollection slv;
+        public ListView listview2;
         public MenuForm()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace mojavePos.Han
         private void MenuForm_Load(object sender, EventArgs e)
         {
             ClientSize = new Size(1500, 800);
-           
+
             lvSet lv1 = new lvSet(this, "lv1", 300, 500, 570, 230, lv_mouseClick);
             ListView listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
@@ -40,11 +43,7 @@ namespace mojavePos.Han
             listview.Columns.Add(" ", 296, HorizontalAlignment.Center);
             Controls.Add(listview);
             api = new Module();
-           
             api.selectListView("http://localhost:5000/mc_select", listview);
-          
-
-
 
             lvSet lv2 = new lvSet(this, "lv2", 400, 500, 1000, 230, lv2_mouseClick);
             listview2 = ct.listview(lv2);
@@ -52,10 +51,14 @@ namespace mojavePos.Han
             listview2.Columns.Add("", 0, HorizontalAlignment.Center);
             listview2.Columns.Add("메뉴명", 200, HorizontalAlignment.Center);
             listview2.Columns.Add("가격", 100, HorizontalAlignment.Center);
-            //listview2.Columns.Add("변경/삭제", 100, HorizontalAlignment.Center);
-            Controls.Add(listview2);
 
-            pnSet pn3 = new pnSet(this, 1500, 1, 0, 0);
+            //listview2.Columns.Add("변경/삭제", 100, HorizontalAlignment.Center);
+
+            btnSet btn1_1 = new btnSet(this, "btn_1_1", "--", 30, 30, 770, 170, btn3_Click);
+            수정버튼 = ct.btn(btn1_1);
+            Controls.Add(수정버튼);
+
+            pnSet pn3 = new pnSet(this, 950, 2, 500, 218);
             line = ct.panel(pn3);
             Controls.Add(line);
 
@@ -64,15 +67,17 @@ namespace mojavePos.Han
             Controls.Add(bottom);
             bottom.Controls.Add(listview);
             bottom.Controls.Add(listview2);
-            
+            bottom.Controls.Add(수정버튼);
+
             ArrayList arr = new ArrayList();
             arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 600, 100, 35));
             arr.Add(new btnSet(this, "btn_1", "", 30, 30, 730, 170, btn_Click));
+
             arr.Add(new pictureBoxSet(this, 40, 40, 680, 165, " "));
-            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1110, 100,35));
+            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1110, 100, 35));
             arr.Add(new btnSet(this, "btn_2", "", 30, 30, 1200, 170, btn2_Click));
             arr.Add(new pictureBoxSet(this, 40, 40, 1150, 165, " "));
-          
+
             for (int i = 0; i < arr.Count; i++)
             {
                 if (typeof(lbSet) == arr[i].GetType())
@@ -84,7 +89,7 @@ namespace mojavePos.Han
                 }
                 else if (typeof(btnSet) == arr[i].GetType())
                 {
-                    Button button = ct.btn((btnSet)arr[i]);
+                    button = ct.btn((btnSet)arr[i]);
                     button.Font = new Font("Tahoma", 10, FontStyle.Bold);
                     button.BackgroundImage = mojavePos.Properties.Resources.버튼;
                     bottom.Controls.Add(button);
@@ -112,7 +117,6 @@ namespace mojavePos.Han
                     Me_mo.Location = new Point(100, 100);
                     Me_mo.StartPosition = FormStartPosition.Manual;
                     Me_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
-                    Me_mo.BackColor = Color.Black;
                     Me_mo.Show();
                     break;
             }
@@ -120,18 +124,37 @@ namespace mojavePos.Han
         }
         private void btn2_Click(object sender, EventArgs e)
         {
+            Button btn = (Button)sender;
+            switch (btn.Name)
+            {
+                case "btn_2":
+                    Menu_Insert_modal Menu_mo = new Menu_Insert_modal();
+                    Menu_mo.Location = new Point(100, 100);
+                    Menu_mo.StartPosition = FormStartPosition.Manual;
+                    Menu_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
 
+                    run2();
+                    break;
+            }
         }
         private void lv_mouseClick(object o, MouseEventArgs e)
         {
+            수정버튼 = new Button();
+            api = new Module();
+            button = new Button();
             CUD = new Category_Update_delete_modal();
             ListView lv = (ListView)o;
-            ListView.SelectedListViewItemCollection slv = lv.SelectedItems;
-
-            listview2 = new ListView();
-            api = new Module();
-            api.selectListView("http://localhost:5000/menu_select", listview2);
-
+            slv = lv.SelectedItems;
+            for (int i = 0; i < slv.Count; i++)
+            {
+                ListViewItem item = slv[i];
+                no = item.SubItems[0].Text;
+               
+            }
+            api.selectListView_Menu("http://localhost:5000/mn_select", listview2, no);
+        }
+        private void btn3_Click(object o, EventArgs e)
+        {
             if (MessageBox.Show("수정하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 CUD.Show();
@@ -145,7 +168,7 @@ namespace mojavePos.Han
                 }
             }
         }
-        private void lv2_mouseClick(object o , EventArgs e)
+        private void lv2_mouseClick(object o, EventArgs e)
         {
 
 
@@ -161,6 +184,15 @@ namespace mojavePos.Han
                 camo_no = value;
             }
         }
-
+        private delegate void del11();
+        public void run2()
+        {
+            Menu_Insert_modal ff2 = new Menu_Insert_modal();
+            ff2.Show();
+            string sql = no;
+          
+            ff2.value1 = sql;
+            ff2.sss();
+        }
     }
 }

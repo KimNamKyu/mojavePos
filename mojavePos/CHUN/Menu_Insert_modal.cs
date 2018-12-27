@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mojavePos.Han;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,36 +13,38 @@ using WindowsFormsApp;
 
 namespace mojavePos.CHUN
 {
-    public partial class Category_Insert_modal : Form
+    public partial class Menu_Insert_modal : Form
     {
         _Create ct = new _Create();
-        TextBox textbox1;
-        private string no;
-
-        public Category_Insert_modal()
+        TextBox textbox1, textbox2;
+        MenuForm MenuForm;
+        string abb;
+        public Menu_Insert_modal()
         {
             InitializeComponent();
-            Load += Menu_modal_Load;
+            Load += Menu_Insert_modal_Load;
         }
 
-        private void Menu_modal_Load(object sender, EventArgs e)
+        private void Menu_Insert_modal_Load(object sender, EventArgs e)
         {
-            
-            ClientSize = new Size(300, 50);
-            pnSet pn = new pnSet(this, 300, 50, 0, 0);
+            ClientSize = new Size(300, 100);
+          
+
+            pnSet pn = new pnSet(this, 300, 100, 0, 0);
             Panel panel = ct.panel(pn);
             Controls.Add(panel);
-           
 
-            //arr.Add(new tbSet(this, "tb1", 200, 50, 0, 0));
             tbSet tb = new tbSet(this, "tb1", 200, 50, 0, 0);
             textbox1 = ct.txtbox(tb);
             panel.Controls.Add(textbox1);
-           
+
+            tbSet tb2 = new tbSet(this, "tb2", 200, 50, 0, 50);
+            textbox2 = ct.txtbox(tb2);
+            panel.Controls.Add(textbox2);
+
             ArrayList arr = new ArrayList();
-            arr.Add(new btnSet(this, "btn1", "추가",50, 50, 200, 0, btn_click));
+            arr.Add(new btnSet(this, "btn1", "추가", 50, 50, 200, 0, btn_click));
             arr.Add(new btnSet(this, "btn2", "취소", 50, 50, 250, 0, btn_click));
-           
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -57,18 +60,20 @@ namespace mojavePos.CHUN
                 }
             }
         }
-
         private void btn_click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             Module api = new Module();
+            MenuForm = new MenuForm();
             switch (btn.Name)
             {
                 case "btn1":
                     Hashtable ht = new Hashtable();
                     api = new Module();
-                    ht.Add("mc_Name", textbox1.Text);
-                    api.insert_Category("http://localhost:5000/mc_insert", ht);
+                    ht.Add("m_bNo", abb);
+                    ht.Add("m_Name", textbox1.Text);
+                    ht.Add("m_Price",textbox2.Text);
+                    api.insert_Category("http://localhost:5000/mn_insert", ht);
                     break;
 
                 case "btn2":
@@ -76,7 +81,22 @@ namespace mojavePos.CHUN
                     break;
             }
         }
-       
-      
+        public string value1
+        {
+            get;
+            set;
+        }
+        public string value2
+        {
+            get;
+            set;
+        }
+
+        public void sss()
+        {
+
+            abb = value1;
+            MessageBox.Show(abb);
+        }
     }
 }
