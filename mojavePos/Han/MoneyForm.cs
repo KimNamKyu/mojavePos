@@ -19,7 +19,7 @@ namespace mojavePos.Han
         Panel ch1, ch2, ch3, ch4, ch5, ch6;
         Commons comm;
         _Create ct = new _Create();
-        WebAPI api;
+        WebComm api;
         public MoneyForm()
         {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace mojavePos.Han
             lv.Columns.Add("등록자", 160, HorizontalAlignment.Center);
 
            
-            api = new WebAPI();
+            api = new WebComm();
             //api.SelectListView("http://localhost:5000/cm_init", lv);
 
         }
@@ -165,7 +165,7 @@ namespace mojavePos.Han
             // dt2 = new DateTimePicker();
            
             Hashtable ht = new Hashtable();
-            api = new WebAPI();
+            api = new WebComm();
             ht.Add("spName", "select_date");
             ht.Add("start", dt1.Text.Substring(0, 10));
             ht.Add("end", dt2.Text.Substring(0, 10));

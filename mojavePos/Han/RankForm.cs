@@ -159,7 +159,7 @@ namespace mojavePos.Han
         {
             ComboBox combo = (ComboBox)sender;
 
-            WebAPI api = new WebAPI();
+            WebComm api = new WebComm();
             string index = (string)combo.SelectedItem;
 
             if (index == "1분기")

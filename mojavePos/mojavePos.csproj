@@ -137,6 +137,7 @@
     <Compile Include="Han\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Han\WebComm.cs" />
     <Compile Include="menuForm\CountView.cs">
       <SubType>Form</SubType>
     </Compile>
