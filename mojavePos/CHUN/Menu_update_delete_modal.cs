@@ -13,29 +13,34 @@ using WindowsFormsApp;
 
 namespace mojavePos.CHUN
 {
-    public partial class Category_Update_delete_modal : Form
+    public partial class Menu_update_delete_modal : Form
     {
-
         _Create ct = new _Create();
-        public TextBox textbox1;
+        public TextBox textbox1, textbox2;
         private string mc_No;
         MenuForm mf;
-        public Category_Update_delete_modal()
+
+        public Menu_update_delete_modal()
         {
             InitializeComponent();
-            Load += Category_Update_delete_modal_Load;
+            Load += Menu_update_delete_modal_Load;
         }
 
-        private void Category_Update_delete_modal_Load(object sender, EventArgs e)
+        private void Menu_update_delete_modal_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(350, 50);
-            pnSet pn = new pnSet(this, 350, 50, 0, 0);
+
+            ClientSize = new Size(350, 100);
+            pnSet pn = new pnSet(this, 350, 100, 0, 0);
             Panel panel = ct.panel(pn);
             Controls.Add(panel);
 
             tbSet tb = new tbSet(this, "tb1", 200, 50, 0, 0);
             textbox1 = ct.txtbox(tb);
             panel.Controls.Add(textbox1);
+
+            tbSet tb2 = new tbSet(this, "tb2", 200, 50, 0, 50);
+            textbox2 = ct.txtbox(tb2);
+            panel.Controls.Add(textbox2);
 
             ArrayList arr = new ArrayList();
             arr.Add(new btnSet(this, "btn1", "수정", 50, 50, 200, 0, btn_click));
@@ -56,7 +61,6 @@ namespace mojavePos.CHUN
                     panel.Controls.Add(textbox);
                 }
             }
-
         }
         private void btn_click(object sender, EventArgs e)
         {
@@ -68,21 +72,24 @@ namespace mojavePos.CHUN
             {
                 case "btn1":
                     api = new Module();
-                    //MessageBox.Show(mf.No);
-                    ht.Add("mc_No", mf.No);
-                    ht.Add("mc_Name", textbox1.Text);
-                    api.insert_Category("http://192.168.3.28:5000/mc_update", ht);
-                    //MessageBox.Show("수정하셨습니다.");
+                    ht.Add("m_Sort", mf.No1);
+                    ht.Add("m_Name", textbox1.Text);
+                    ht.Add("m_Price", textbox2.Text);
+                    ht.Add("m_bNo",mf.No);
+                    api.insert_Category("http://192.168.3.20:5000/mn_update", ht);
+                    MessageBox.Show("수정하셨습니다.");
                     this.Close();
                     //Close();
                     break;
                 case "btn2":
                     api = new Module();
-                    //MessageBox.Show(mf.No);
-                    ht.Add("mc_No", mf.No);
-                    api.insert_Category("http://192.168.3.28:5000/mc_delete", ht);
-                    MessageBox.Show("삭제하셨습니다.");
+                    //MessageBox.Show(mf.No , mf.No1);
+                    ht.Add("m_bNo", mf.No);
+                    ht.Add("m_Sort", mf.No1);
+                    api.insert_Category("http://192.168.3.20:5000/mn_delete", ht);
+                    //MessageBox.Show("삭제하셨습니다.");
                     this.Close();
+                    //Close();
                     break;
                 case "btn3":
                     this.Close();
@@ -90,7 +97,5 @@ namespace mojavePos.CHUN
                     break;
             }
         }
-
-
     }
 }

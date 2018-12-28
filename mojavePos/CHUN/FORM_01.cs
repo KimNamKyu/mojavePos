@@ -153,8 +153,9 @@ namespace mojavePos
             string Correctpw = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Pass");
            
                 if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
-                {   
+                {
                     F3.Show();
+                    //Dispose(false);
                 }
                 if (텍스트박스1.Text != Correctid)
                 {
@@ -174,7 +175,7 @@ namespace mojavePos
         private void btn2_Click(object sender, EventArgs e)
         {
             FORM_02 F2 = new FORM_02();
-            F2.Show();
+            F2.ShowDialog();
         }
 
     }

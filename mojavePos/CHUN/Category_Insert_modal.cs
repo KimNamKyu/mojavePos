@@ -69,6 +69,7 @@ namespace mojavePos.CHUN
                     api = new Module();
                     ht.Add("mc_Name", textbox1.Text);
                     api.insert_Category("http://192.168.3.28:5000/mc_insert", ht);
+                    MessageBox.Show("추가 되었습니다.");
                     break;
 
                 case "btn2":

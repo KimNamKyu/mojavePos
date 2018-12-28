@@ -85,6 +85,12 @@
     <Compile Include="CHUN\Menu_Insert_modal.Designer.cs">
       <DependentUpon>Menu_Insert_modal.cs</DependentUpon>
     </Compile>
+    <Compile Include="CHUN\Menu_update_delete_modal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CHUN\Menu_update_delete_modal.Designer.cs">
+      <DependentUpon>Menu_update_delete_modal.cs</DependentUpon>
+    </Compile>
     <Compile Include="CHUN\Module.cs" />
     <Compile Include="CHUN\Category_Insert_modal.cs">
       <SubType>Form</SubType>

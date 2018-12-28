@@ -70,10 +70,11 @@ namespace mojavePos.CHUN
                 case "btn1":
                     Hashtable ht = new Hashtable();
                     api = new Module();
-                    ht.Add("m_bNo", abb);
+                    ht.Add("m_bNo", MenuForm.No);
                     ht.Add("m_Name", textbox1.Text);
                     ht.Add("m_Price",textbox2.Text);
-                    api.insert_Category("http://192.168.3.28:5000/mn_insert", ht);
+                    api.insert_Category("http://192.168.3.20:5000/mn_insert", ht);
+                    MessageBox.Show("추가 되었습니다.");
                     break;
 
                 case "btn2":
