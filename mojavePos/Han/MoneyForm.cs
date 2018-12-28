@@ -56,7 +56,7 @@ namespace mojavePos.Han
 
            
             api = new WebComm();
-            api.SelectListView("http://localhost:5000/cm_init", lv);
+            api.SelectListView("http://192.168.3.28:5000/cm_init", lv);
 
         }
 
@@ -176,14 +176,14 @@ namespace mojavePos.Han
                 ht.Add("spName", "select_date");
                 ht.Add("start", dt1.Text.Substring(0, 10));
                 ht.Add("end", dt2.Text.Substring(0, 10));
-                ArrayList list = api.Select("http://localhost:5000/sel_date", ht);
+                ArrayList list = api.Select("http://192.168.3.28:5000/sel_date", ht);
                 api.ListView(lv, list);
 
                 Hashtable pro = new Hashtable();
                 pro.Add("spName", "total_Money");
                 pro.Add("start", dt1.Text.Substring(0, 10));
                 pro.Add("end", dt2.Text.Substring(0, 10));
-                ArrayList money = api.Select("http://localhost:5000/sel_date", pro);
+                ArrayList money = api.Select("http://192.168.3.28:5000/sel_date", pro);
 
                 string[] arr2 = api.str(money); // 총가격
                 if (arr2[0] == "") label2.Text = "총 금액: 0원";

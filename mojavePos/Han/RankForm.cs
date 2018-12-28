@@ -182,7 +182,7 @@ namespace mojavePos.Han
             {
                 if (tb.Text != "")
                 {
-                    //api.Post2("http://localhost:5000/insert_CM"); // 결제버튼 클릭 시 매출관리 테이블에 추가
+                    //api.Post2("http://192.168.3.28:5000/insert_CM"); // 결제버튼 클릭 시 매출관리 테이블에 추가
                     start = tb.Text + "-1-1";
                     end = tb.Text + "-3-31";
                 }
@@ -218,7 +218,7 @@ namespace mojavePos.Han
             pcd.Add("spName", "sel_Rank");
             pcd.Add("start", start);
             pcd.Add("end", end);
-            list = api.Select("http://localhost:5000/sel_date", pcd);
+            list = api.Select("http://192.168.3.28:5000/sel_date", pcd);
 
             if (list.Count == 0)
             {
