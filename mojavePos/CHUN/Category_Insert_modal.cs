@@ -68,7 +68,7 @@ namespace mojavePos.CHUN
                     Hashtable ht = new Hashtable();
                     api = new Module();
                     ht.Add("mc_Name", textbox1.Text);
-                    api.insert_Category("http://localhost:5000/mc_insert", ht);
+                    api.insert_Category("http://192.168.3.28:5000/mc_insert", ht);
                     break;
 
                 case "btn2":

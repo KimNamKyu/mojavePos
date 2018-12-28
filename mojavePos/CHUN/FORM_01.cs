@@ -147,8 +147,8 @@ namespace mojavePos
             F3 = new FORM_03();
             F1 = new FORM_01();
            
-            string Correctid = api.getIdPass("http://localhost:5000/SI_select_Pos_Id");
-            string Correctpw = api.getIdPass("http://localhost:5000/SI_select_Pos_Pass");
+            string Correctid = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Id");
+            string Correctpw = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Pass");
            
                 if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
                 {   

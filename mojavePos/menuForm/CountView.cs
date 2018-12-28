@@ -191,7 +191,7 @@ namespace mojavePos
                         ht.Add("tNo", _tNo);
                         ht.Add("mNo", arr[0]);
                         ht.Add("oCount" ,arr[3]);
-                        if (!api.Post("http://localhost:5000/sp_insert", ht))
+                        if (!api.Post("http://192.168.3.28:5000/sp_insert", ht))
                         {
                             MessageBox.Show("주문오류");
                             break;
@@ -263,7 +263,7 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_MenuCategory_Select");
             ht.Add("param", "");
-            ArrayList list = api.Select("http://localhost:5000/select", ht);
+            ArrayList list = api.Select("http://192.168.3.28:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button(this, list, Category_Click);
@@ -289,7 +289,7 @@ namespace mojavePos
             ht.Add("spName", "sp_Menu_Select");
             ht.Add("param", "_bNo:" + _bNo);
             panel2.Controls.Clear();
-            list = api.Select("http://localhost:5000/select", ht);
+            list = api.Select("http://192.168.3.28:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button2(panel2, list, Menu_Click);

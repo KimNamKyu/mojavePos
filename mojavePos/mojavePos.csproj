@@ -79,12 +79,6 @@
     <Compile Include="CHUN\Category_Update_delete_modal.Designer.cs">
       <DependentUpon>Category_Update_delete_modal.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CHUN\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="CHUN\Menu_Insert_modal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,9 +190,6 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
-    <EmbeddedResource Include="CHUN\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CHUN\FORM_01.resx">
       <DependentUpon>FORM_01.cs</DependentUpon>
     </EmbeddedResource>

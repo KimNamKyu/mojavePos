@@ -168,7 +168,7 @@ namespace mojavePos
                     ht.Add("ps_Rank", 포지션택박.Text);
                     ht.Add("ps_passwd", 패스워드택박.Text);
                     ht.Add("ps_code", 시리얼택박.Text);
-                    api.insert_Category("http://localhost:5000/SI_insert_Pos", ht);
+                    api.insert_Category("http://192.168.3.28:5000/SI_insert_Pos", ht);
                 }
             }
         }

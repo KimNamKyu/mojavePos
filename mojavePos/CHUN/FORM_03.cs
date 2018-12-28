@@ -89,7 +89,7 @@ namespace mojavePos
                     if(i==1)
                     {
                         api = new Module();
-                        string total_money = api.getIdPass("http://localhost:5000/F3_total_day");
+                        string total_money = api.getIdPass("http://192.168.3.28:5000/F3_total_day");
                         //MessageBox.Show(Correctid);
                        // MessageBox.Show(total_money);
                         if (total_money == null)

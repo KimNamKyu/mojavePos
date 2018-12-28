@@ -43,7 +43,7 @@ namespace mojavePos.Han
             listview.Columns.Add(" ", 296, HorizontalAlignment.Center);
             Controls.Add(listview);
             api = new Module();
-            api.selectListView("http://localhost:5000/mc_select", listview);
+            api.selectListView("http://192.168.3.28:5000/mc_select", listview);
 
             lvSet lv2 = new lvSet(this, "lv2", 400, 500, 1000, 230, lv2_mouseClick);
             listview2 = ct.listview(lv2);
@@ -151,7 +151,7 @@ namespace mojavePos.Han
                 no = item.SubItems[0].Text;
                
             }
-            api.selectListView_Menu("http://localhost:5000/mn_select", listview2, no);
+            api.selectListView_Menu("http://192.168.3.28:5000/mn_select", listview2, no);
         }
         private void btn3_Click(object o, EventArgs e)
         {

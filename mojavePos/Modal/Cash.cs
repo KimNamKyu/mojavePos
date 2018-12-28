@@ -145,7 +145,7 @@ namespace mojavePos.Modal
                     api = new WebAPI();
                     ht = new Hashtable();
                     ht.Add("tNo", tNo);
-                    api.Post("http://localhost:5000/delete", ht);
+                    api.Post("http://192.168.3.28:5000/delete", ht);
                     break;
             }
         }
