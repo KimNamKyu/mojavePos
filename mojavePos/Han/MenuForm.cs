@@ -33,9 +33,9 @@ namespace mojavePos.Han
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(1500, 800);
+            ClientSize = new Size(1200, 800);
 
-            lvSet lv1 = new lvSet(this, "lv1", 300, 500, 570, 230, lv_mouseClick);
+            lvSet lv1 = new lvSet(this, "lv1", 300, 265, 170, 230, lv_mouseClick);
             ListView listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
             listview.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
@@ -45,24 +45,24 @@ namespace mojavePos.Han
             api = new Module();
             api.selectListView("http://192.168.3.28:5000/mc_select", listview);
 
-            lvSet lv2 = new lvSet(this, "lv2", 400, 500, 1000, 230, lv2_mouseClick);
+            lvSet lv2 = new lvSet(this, "lv2", 350, 500, 625, 230, lv2_mouseClick);
             listview2 = ct.listview(lv2);
             listview2.Font = new Font("Tahoma", 15, FontStyle.Bold);
             listview2.Columns.Add("", 0, HorizontalAlignment.Center);
             listview2.Columns.Add("메뉴명", 200, HorizontalAlignment.Center);
-            listview2.Columns.Add("가격", 100, HorizontalAlignment.Center);
+            listview2.Columns.Add("가격", 150, HorizontalAlignment.Center);
 
             //listview2.Columns.Add("변경/삭제", 100, HorizontalAlignment.Center);
 
-            btnSet btn1_1 = new btnSet(this, "btn_1_1", "--", 30, 30, 770, 170, btn3_Click);
+            btnSet btn1_1 = new btnSet(this, "btn_1_1", "--", 30, 30, 370, 170, btn3_Click);
             수정버튼 = ct.btn(btn1_1);
             Controls.Add(수정버튼);
 
-            pnSet pn3 = new pnSet(this, 950, 2, 500, 218);
+            pnSet pn3 = new pnSet(this, 950, 2, 100, 218);
             line = ct.panel(pn3);
             Controls.Add(line);
 
-            pnSet pn2 = new pnSet(this, 1500, 800, 0, 0);
+            pnSet pn2 = new pnSet(this, 1200, 800, 0, 0);
             bottom = ct.panel(pn2); // 패널이름 : bottom
             Controls.Add(bottom);
             bottom.Controls.Add(listview);
@@ -70,13 +70,13 @@ namespace mojavePos.Han
             bottom.Controls.Add(수정버튼);
 
             ArrayList arr = new ArrayList();
-            arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 600, 100, 35));
-            arr.Add(new btnSet(this, "btn_1", "", 30, 30, 730, 170, btn_Click));
+            arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 200, 100, 35));
+            arr.Add(new btnSet(this, "btn_1", "", 30, 30, 330, 170, btn_Click));
 
-            arr.Add(new pictureBoxSet(this, 40, 40, 680, 165, " "));
-            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1110, 100, 35));
-            arr.Add(new btnSet(this, "btn_2", "", 30, 30, 1200, 170, btn2_Click));
-            arr.Add(new pictureBoxSet(this, 40, 40, 1150, 165, " "));
+            arr.Add(new pictureBoxSet(this, 40, 40, 280, 165, " "));
+            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 710, 100, 35));
+            arr.Add(new btnSet(this, "btn_2", "", 30, 30, 800, 170, btn2_Click));
+            arr.Add(new pictureBoxSet(this, 40, 40, 750, 165, " "));
 
             for (int i = 0; i < arr.Count; i++)
             {

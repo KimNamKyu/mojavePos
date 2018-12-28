@@ -73,7 +73,7 @@ namespace mojavePos.CHUN
                     ht.Add("m_bNo", abb);
                     ht.Add("m_Name", textbox1.Text);
                     ht.Add("m_Price",textbox2.Text);
-                    api.insert_Category("http://localhost:5000/mn_insert", ht);
+                    api.insert_Category("http://192.168.3.28:5000/mn_insert", ht);
                     break;
 
                 case "btn2":

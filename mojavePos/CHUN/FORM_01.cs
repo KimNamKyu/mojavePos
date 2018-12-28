@@ -30,11 +30,13 @@ namespace mojavePos
         public FORM_01()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_01_Load;
         }
 
         private void FORM_01_Load(object sender, EventArgs e)
         {
+           
             ClientSize = new Size(750, 430);  // 폼 사이즈 지정
             //this.ControlBox = false;
             BackColor = Color.Black;
@@ -154,15 +156,15 @@ namespace mojavePos
                 {   
                     F3.Show();
                 }
-                else if (텍스트박스1.Text != Correctid)
+                if (텍스트박스1.Text != Correctid)
                 {
                     MessageBox.Show("아이디를 잘못 입력하셨습니다.");
                 }
-                else if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
+                if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
                 {
                     MessageBox.Show("비밀번호를 잘못 입력하셨습니다.");
                 }
-                else if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
+                if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
                 {
                     MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
                 }

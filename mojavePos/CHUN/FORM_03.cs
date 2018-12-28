@@ -32,6 +32,7 @@ namespace mojavePos
         public FORM_03()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_03_Load;
           
         }
@@ -250,7 +251,10 @@ namespace mojavePos
         private void btn1_Click(object sender, EventArgs e)
         {
             ManagerForm MF = new ManagerForm();
-           
+            MF.StartPosition = FormStartPosition.Manual;
+            MF.Location = new Point(200, 0);
+            MF.Show();
+
             MF.Show();
 
         }

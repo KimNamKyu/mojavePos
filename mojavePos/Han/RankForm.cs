@@ -45,7 +45,7 @@ namespace mojavePos.Han
             get_panel();
             get_text();
             // get_panel();
-
+            BackgroundImage = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("배경화면1");
         }
         public void get_panel()
         {
@@ -53,42 +53,42 @@ namespace mojavePos.Han
             panel = new ArrayList();
             comm = new Commons();
 
-            pnSet pn1 = new pnSet(this, 433, 350, 100, 70);
+            pnSet pn1 = new pnSet(this, 393, 350, 10, 80);
             pasta = ct.panel(pn1);
             pasta.BackColor = Color.White;
             pasta.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(pasta);
             panel.Add(pasta);
 
-            pnSet pn2 = new pnSet(this, 433, 350, 533, 70);
+            pnSet pn2 = new pnSet(this, 393, 350, 403, 80);
             steake = ct.panel(pn2);
             steake.BackColor = Color.White;
             steake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(steake);
             panel.Add(steake);
 
-            pnSet pn3 = new pnSet(this, 433, 350, 966, 70);
+            pnSet pn3 = new pnSet(this, 393, 350, 796, 80);
             salad = ct.panel(pn3);
             salad.BackColor = Color.White;
             salad.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(salad);
             panel.Add(salad);
 
-            pnSet pn4 = new pnSet(this, 433, 350, 100, 420);
+            pnSet pn4 = new pnSet(this, 393, 350, 10, 430);
             beverage = ct.panel(pn4);
             beverage.BackColor = Color.White;
             beverage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(beverage);
             panel.Add(beverage);
 
-            pnSet pn5 = new pnSet(this, 433, 350, 533, 420);
+            pnSet pn5 = new pnSet(this, 393, 350, 403, 430);
             side = ct.panel(pn5);
             side.BackColor = Color.White;
             side.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             Controls.Add(side);
             panel.Add(side);
 
-            pnSet pn6 = new pnSet(this, 433, 350, 966, 420);
+            pnSet pn6 = new pnSet(this, 393, 350, 796, 430);
             dessert = ct.panel(pn6);
             dessert.BackColor = Color.White;
             dessert.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -100,7 +100,7 @@ namespace mojavePos.Han
         {
             comm = new Commons();
             ComboBox combo = new ComboBox();
-            comboboxSet cb1 = new comboboxSet(this, "month", 120, 35, 780, 35);
+            comboboxSet cb1 = new comboboxSet(this, "month", 120, 35, 600, 45);
             combo = ct.combobox(cb1);
             combo.Font = new Font("Verdana", 10.5f, FontStyle.Italic);
             combo.Text = "분기선택";
@@ -302,7 +302,7 @@ namespace mojavePos.Han
         {
             comm = new Commons();
             tb = new TextBox();
-            tbSet tbs = new tbSet(this, "year", 120, 24, 650, 35);
+            tbSet tbs = new tbSet(this, "year", 120, 24, 470, 45);
             tb = ct.txtbox(tbs);
             tb.KeyPress += Tb_KeyPress;
             tb.MaxLength = 4;

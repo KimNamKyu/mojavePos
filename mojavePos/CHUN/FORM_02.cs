@@ -36,6 +36,7 @@ namespace mojavePos
         public FORM_02()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_02_Load;
         }
 
