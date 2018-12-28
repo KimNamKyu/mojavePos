@@ -15,16 +15,17 @@ namespace mojavePos.Modal
     public partial class Cash : Form
     {
         _Create ct = new _Create();
-        TextBox textbox1,textbox2;
+        TextBox textbox1,textbox2,textbox3, textbox4;
         Button btn;
         private Hashtable ht;
         private WebAPI api;
-        private string tNo;
-        public Cash(string tNo)
+        private string tNo,Totalresult;
+        public Cash(string tNo,string Totalresult)
         {
             InitializeComponent();
             Load += Cash_Load;
             this.tNo = tNo;
+            this.Totalresult = Totalresult;
         }
 
         private void Cash_Load(object sender, EventArgs e)
@@ -39,13 +40,28 @@ namespace mojavePos.Modal
             tbSet tb = new tbSet(this, "tb4", 310, 30, 450, 100);
             textbox1 = ct.txtbox(tb);
             textbox1.ReadOnly = true;
+            textbox1.Font = new Font("굴림", 18, FontStyle.Bold);
             panel.Controls.Add(textbox1);
 
-            tbSet tb1 = new tbSet(this, "tb2", 200, 30, 150, 180);
-            textbox2 = ct.txtbox(tb1);
+            tbSet tb1 = new tbSet(this, "받은금액", 200, 30, 150, 180);
             textbox2 = ct.txtbox(tb1);
             textbox2.ReadOnly = true;
+            textbox2.Font = new Font("굴림", 18, FontStyle.Bold);
             panel.Controls.Add(textbox2);
+
+            tbSet tb2 = new tbSet(this, "거스름돈", 200, 30, 150, 260);
+            textbox3 = ct.txtbox(tb2);
+            textbox3.ReadOnly = true;
+            textbox3.Font = new Font("굴림", 18, FontStyle.Bold);
+            
+            panel.Controls.Add(textbox3);
+
+            tbSet tb3 = new tbSet(this, "받을금액", 200, 30, 150, 100);
+            textbox4 = ct.txtbox(tb3);
+            textbox4.Text = Totalresult;
+            textbox4.ReadOnly = true;
+            textbox4.Font = new Font("굴림", 18, FontStyle.Bold);
+            panel.Controls.Add(textbox4);
 
             ArrayList arr = new ArrayList();
             
@@ -53,9 +69,9 @@ namespace mojavePos.Modal
             arr.Add(new lbSet(this, "lb2", "결제 금액", 100, 30, 30, 100, 15));
             arr.Add(new lbSet(this, "lb3", "받은 금액", 100, 30, 30, 180, 15));
             arr.Add(new lbSet(this, "lb4", "거스름돈", 100, 30, 30, 260, 15));
-            arr.Add(new tbSet(this, "tb1", 200, 30, 150, 100));
+            //arr.Add(new tbSet(this, "tb1", 200, 30, 150, 100));
             //arr.Add(new tbSet(this, "tb2", 200, 30, 150, 180));
-            arr.Add(new tbSet(this, "tb3", 200, 30, 150, 260));
+            //arr.Add(new tbSet(this, "tb3", 200, 30, 150, 260));
             arr.Add(new btnSet(this, "결제완료", "결제완료", 315, 40, 35, 330, btn1_Click));
 
             //계산기
@@ -123,6 +139,7 @@ namespace mojavePos.Modal
                     break;
                 case "ENTER":
                     textbox2.Text = textbox1.Text;
+                   // textbox3.Text = (Convert.ToInt32(textbox1.Text) - Convert.ToInt32(textbox2.Text)).ToString();
                     break;
                 case "결제완료":
                     api = new WebAPI();

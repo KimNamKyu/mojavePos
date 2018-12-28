@@ -28,7 +28,10 @@ namespace mojavePos
         private string _tNo;
         private ArrayList list;
         private string _mNo;
-        private string _mName;
+        ArrayList Orderlist = new ArrayList();
+        int Total;
+        private TextBox textbox;
+        private string Totalresult;
 
         public CountView()
         {
@@ -41,15 +44,15 @@ namespace mojavePos
             this._tNo = tNo;
             this.list = list;
         }
-
+       
         private void CountView_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.White;
             listView();
-            btn_load();
             menu_view();
-            api = new WebAPI();
-            //MessageBox.Show(tNo);
+            beforeOrder();
+            //MessageBox.Show(_tNo);
+
             ArrayList arrayList = api.ListView(lv, list);
             if (list != null)
             {
@@ -59,23 +62,37 @@ namespace mojavePos
                     Controls.Add(lv);
                 }
             }
+            for (int i = 0; i < list.Count; i++)
+            {
+                JArray ja = (JArray)list[i];
+                string[] arr = new string[ja.Count];
+                //MessageBox.Show(ja.Count.ToString());
+                for (int j = 0; j < ja.Count; j++)
+                {
+                    arr[j] = ja[j].ToString();
+                }
+                Total += Convert.ToInt32(arr[4]);
+            }
+            Totalresult = Total.ToString();
+            textbox.Text = Totalresult;
         }
 
         public void listView()
         {
             ArrayList arr = new ArrayList();
-            arr.Add(new pnSet(this, 600, 780, 50, 10));
-            arr.Add(new lvSet(this, "", 500, 300, 50, 20, list_Click));
-            arr.Add(new lbSet(this, "lb1", "판매액", 150, 30, 100, 360, 20));
-            arr.Add(new lbSet(this, "lb1", "할인", 150, 30, 110, 410, 20));
-            arr.Add(new lbSet(this, "lb1", "총금액", 150, 30, 100, 460, 20));
-            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 360, 20));
-            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 410, 20));
-            arr.Add(new lbSet(this, "lb2", "", 150, 30, 350, 460, 20));
-            arr.Add(new btnSet(this, "btn1", "할인쿠폰", 230, 100, 50, 560, btn_Click));
-            arr.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 560, btn_Click));
-            arr.Add(new btnSet(this, "btn3", "주문", 230, 100, 50, 670, btn_Click));
-            arr.Add(new btnSet(this, "btn4", "카드결제", 230, 100, 320, 670, btn_Click));
+            arr.Add(new pnSet(this, 580, 760, 10, 10));
+            arr.Add(new lvSet(this, "", 300, 350, 5, 400, list_Click));
+            arr.Add(new btnSet(this, "btn1", "+", 130, 70, 12, 310, btn_Click));
+            arr.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 520, btn_Click));
+            arr.Add(new btnSet(this, "btn3", "주문", 230, 100, 320, 400, btn_Click));
+            arr.Add(new btnSet(this, "btn4", "카드결제", 230, 100, 320, 640, btn_Click));
+            arr.Add(new btnSet(this, "btn5", "-", 130, 70, 152, 310, btn_Click));
+            arr.Add(new btnSet(this, "btn6", "선택 취소", 130, 70, 292, 310, btn_Click));
+            arr.Add(new btnSet(this, "btn7", "전체 취소", 130, 70, 432, 310, btn_Click));
+            //arr.Add(new lbSet(this, "label1", "합계", 100, 40, 15, 420, 20));
+            arr.Add(new lbSet(this, "label2", "총 금 액", 200, 40, 15, 540, 20));
+            //arr.Add(new tbSet(this, "합계", 280, 40, 15, 460));
+            arr.Add(new tbSet(this, "총금액", 280, 40, 15, 580));
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -85,17 +102,18 @@ namespace mojavePos
                     panel.BackColor = Color.Gainsboro;
                     Controls.Add(panel);
                 }
-                else if (typeof(lvSet) == arr[i].GetType())
-                {
-                    lv = ct.listview((lvSet)arr[i]);
-                    lv.BackColor = Color.WhiteSmoke;
-                    panel.Controls.Add(lv);
-                    lv.Columns.Add("No", 30, HorizontalAlignment.Center);
-                    lv.Columns.Add("메뉴명", 160, HorizontalAlignment.Center);
-                    lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
-                    lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
-                    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
-                }
+                //else if (typeof(lvSet) == arr[i].GetType())
+                //{
+                //    lv = ct.listview((lvSet)arr[i]);
+                //    lv.BackColor = Color.WhiteSmoke;
+                //    panel.Controls.Add(lv);
+                //    lv.Columns.Add("No", 30, HorizontalAlignment.Center);
+                //    lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
+                //    lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
+                //    lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
+                //    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                //    lv.Font = new Font("굴림", 15, FontStyle.Bold);
+                //}
                 else if (typeof(btnSet) == arr[i].GetType())
                 {
                     Button button = ct.btn((btnSet)arr[i]);
@@ -104,8 +122,15 @@ namespace mojavePos
                 else if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
-                    if (label.Name == "lb2") label.BackColor = Color.White;
                     panel.Controls.Add(label);
+                }
+                else if(typeof(tbSet) == arr[i].GetType())
+                {
+                    textbox = ct.txtbox((tbSet)arr[i]);
+                    textbox.ReadOnly = true;
+                    textbox.Font = new Font("굴림", 18, FontStyle.Bold);
+                   
+                    panel.Controls.Add(textbox);
                 }
             }
         }
@@ -119,33 +144,7 @@ namespace mojavePos
             for (int i = 0; i < itemGroup.Count; i++)
             {
                 ListViewItem item = itemGroup[i];
-                _mName = item.SubItems[0].Text;
-
-                for(int j = 0; j < Orderlist.Count; j++)
-                {
-                    string[] row = (string[])Orderlist[j];
-                    if (_mName == row[0])
-                    {
-                        int cnt = Convert.ToInt32(row[3]);
-                        MessageBox.Show(cnt.ToString());
-                        cnt++;
-                        MessageBox.Show(cnt.ToString());
-                        row[3] = cnt.ToString();
-                        Orderlist[j] = row;
-                        ListCommon();
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void btn_load()
-        {
-            ArrayList arr2 = new ArrayList();
-
-            for (int i = 0; i < arr2.Count; i++)
-            {
-                ct.btn((btnSet)arr2[i]);
+                _mNo = item.SubItems[0].Text;
             }
         }
 
@@ -157,34 +156,92 @@ namespace mojavePos
             switch (btn.Name)
             {
                 case "btn1":
-                    api = new WebAPI();
-                    ht = new Hashtable();
-                    ht.Add("spName", "sp_Order_Update");
-                    ht.Add("tNo", _tNo);
-                    ht.Add("mNo", _mNo);
-                    ArrayList list = api.Select("http://localhost:5000/update", ht);
-                    ArrayList arrayList = api.ListView(lv, list);
-                    if (list != null)
+                    for (int j = 0; j < Orderlist.Count; j++)
                     {
-                        arrayList = api.ListView(lv, list);
-                        for (int i = 0; i < arrayList.Count; i++)
+                        string[] row = (string[])Orderlist[j];
+                        if (_mNo == row[0])
                         {
-                            Controls.Add(lv);
+                            int cnt = Convert.ToInt32(row[3]);
+                            //MessageBox.Show(cnt.ToString());
+                            cnt++;
+                            //MessageBox.Show(cnt.ToString());
+                            row[3] = cnt.ToString();
+                            Orderlist[j] = row;
+                            ListCommon();
+                            break;
                         }
-                    }
+                    }                   
                     break;
                 case "btn2":
-                    Cash cash = new Cash(_tNo);
+                    Cash cash = new Cash(_tNo, Totalresult);
                     cash.StartPosition = FormStartPosition.CenterParent;
                     cash.Show();
+
                     break;
+
                 case "btn3":
-                    this.Visible = false;
+                    api = new WebAPI();
+                    ht = new Hashtable();
                     
+                    for(int i = 0; i<Orderlist.Count; i++)
+                    {
+                        ht = new Hashtable();
+                        string[] arr = (string[])Orderlist[i];
+                        ht.Add("spName", "sp_Order_Insert");
+                        ht.Add("tNo", _tNo);
+                        ht.Add("mNo", arr[0]);
+                        ht.Add("oCount" ,arr[3]);
+                        if (!api.Post("http://localhost:5000/sp_insert", ht))
+                        {
+                            MessageBox.Show("주문오류");
+                            break;
+                        }
+                    }
+                    this.Visible = false;
                     break;
+
                 case "btn4":
                     MessageBox.Show("서비스준비중입니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
+
+                case "btn5":
+                    for (int j = 0; j < Orderlist.Count; j++)
+                    {
+                        string[] row = (string[])Orderlist[j];
+                        if (_mNo == row[0])
+                        {
+                            int cnt = Convert.ToInt32(row[3]);
+                            if (cnt > 1)
+                            {
+                                cnt--;
+                            }
+                            else if( cnt < 0)
+                            {
+                                cnt = 1;
+                            }
+                            row[3] = cnt.ToString();
+                            Orderlist[j] = row;
+                            ListCommon();
+                            break;
+                        }
+                    }
+                    break;
+                case "btn6":
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        JArray ja = (JArray)list[i];
+                        string[] arr = new string[ja.Count];
+                        //MessageBox.Show(ja.Count.ToString());
+                        if (_mNo == arr[0])
+                        {
+                            lv.Items.Remove(lv.SelectedItems[0]);
+                        }  
+                    }
+                    break;
+                case "btn7":
+                    lv.Items.Clear();
+                    break;
+
             }
         }
 
@@ -193,11 +250,11 @@ namespace mojavePos
         /// </summary>
         private void menu_view()
         {
-            pnSet pn1 = new pnSet(this, 100, 780, 750, 10);
+            pnSet pn1 = new pnSet(this, 100, 760, 600, 10);
             Panel panel = ct.panel(pn1);
             panel.BackColor = Color.Gainsboro;
             Controls.Add(panel);
-            pnSet pn2 = new pnSet(this, 600, 780, 850, 10);
+            pnSet pn2 = new pnSet(this, 570, 760, 700, 10);
             panel2 = ct.panel(pn2);
             panel2.BackColor = Color.Gainsboro;
             Controls.Add(panel2);
@@ -244,6 +301,7 @@ namespace mojavePos
             }
         }
 
+        
         /// <summary>
         ///  메뉴 클릭 버튼 이벤트
         /// </summary>
@@ -251,11 +309,8 @@ namespace mojavePos
         {
             Button btn = (Button)sender;
             _mNo = btn.Name;
-            
-            //MessageBox.Show(btn.Name);
-            //Commons(btn.Name);
-           // lv.Items.Clear();
-            //MessageBox.Show(list.Count.ToString());
+
+            lv.Items.Clear();
             for (int i = 0; i < list.Count; i++)
             {
                 JArray ja = (JArray)list[i];
@@ -263,19 +318,17 @@ namespace mojavePos
                 //MessageBox.Show(ja.Count.ToString());
                 for (int j = 0; j < ja.Count; j++)
                 {
-                    arr[j] = ja[j].ToString();                    
+                    arr[j] = ja[j].ToString();
                 }
-                if (_mNo == arr[0])
+                if (_mNo == arr[0]) //메뉴넘버와 배열 0번지가 같으면
                 {
-                    //MessageBox.Show(_mNo + " : " + arr[0]);
-                    // lv.Items.Add(new ListViewItem(arr));
-                    Orderlist.Add(arr);
+                    Orderlist.Add(arr);     //추가
                     break;
                 }
             }
             ListCommon();
-        }
-        ArrayList Orderlist = new ArrayList();
+        } 
+
         private void ListCommon()
         {
             lv.Items.Clear();
@@ -284,6 +337,26 @@ namespace mojavePos
                 string[] row = (string[]) Orderlist[i];
                 lv.Items.Add(new ListViewItem(row));
             }
+        }
+
+        private void beforeOrder()
+        {
+            ArrayList arr = new ArrayList();
+            arr.Add(new lvSet(this, "", 570, 300, 5, 5, list_Click));
+
+            for (int i = 0; i < arr.Count; i++)
+            {
+                lv = ct.listview((lvSet)arr[i]);
+                lv.BackColor = Color.WhiteSmoke;
+                panel.Controls.Add(lv);
+                lv.Columns.Add("", 0, HorizontalAlignment.Center);
+                lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
+                lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
+                lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
+                lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                lv.Font = new Font("굴림", 15, FontStyle.Bold);
+            }
+          
         }
     }
 }

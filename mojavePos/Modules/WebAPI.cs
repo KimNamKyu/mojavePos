@@ -199,7 +199,7 @@ namespace mojavePos.Modules
         }
         public bool Post(string url, Hashtable ht)
         {
-            MessageBox.Show(url);
+            //MessageBox.Show(url);
             try
             {
                 WebClient wc = new WebClient();
@@ -207,14 +207,14 @@ namespace mojavePos.Modules
 
                 foreach (DictionaryEntry data in ht)
                 {
-                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
+                    MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
                     param.Add(data.Key.ToString(), data.Value.ToString());
                 }
 
                 //byte로 반환
                 byte[] result = wc.UploadValues(url, "POST", param);
                 string resultStr = Encoding.UTF8.GetString(result);
-                MessageBox.Show(resultStr);
+                //MessageBox.Show(resultStr);
                 if ("1" == resultStr)
                 {
                     MessageBox.Show("성공");
