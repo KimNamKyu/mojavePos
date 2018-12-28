@@ -21,7 +21,6 @@ namespace mojavePos
         private Hashtable ht;
         private WebAPI api;
         private string tNo;
-      
 
         public MainPos()
         {
@@ -42,6 +41,7 @@ namespace mojavePos
             Mainup_Load();
             //button();
             btn_Load();
+            
         }
 
         //메인Pos 상단바 UI
@@ -123,7 +123,7 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_Table_Select");
             ht.Add("param", "");
-            ArrayList list = api.Select("http://localhost:5000/select", ht);
+            ArrayList list = api.Select("http://192.168.3.28:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button3(pn4, list, btn_Click);
@@ -136,7 +136,7 @@ namespace mojavePos
         }
         
         private ArrayList list;
-        string[] arr = { };
+
         //버튼 이벤트
         private void btn_Click(object sender, EventArgs e)
         {
@@ -147,9 +147,10 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_Order_Select");
             ht.Add("param", "_tNo:" + tNo);
-            list = api.Select("http://localhost:5000/select", ht);
+            list = api.Select("http://192.168.3.28:5000/select", ht);
 
-            CountView cv = new CountView(tNo, list);
+
+            CountView cv = new CountView(tNo,list);
             cv.MdiParent = this;
             cv.WindowState = FormWindowState.Maximized;
             cv.FormBorderStyle = FormBorderStyle.None;
