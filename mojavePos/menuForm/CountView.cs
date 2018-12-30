@@ -29,6 +29,7 @@ namespace mojavePos
         private ArrayList list;
         private string _mNo;
         private string _mNm;
+        private string _oCount;
         ArrayList Orderlist = new ArrayList();
         int Total;
         private TextBox textbox;
@@ -55,7 +56,7 @@ namespace mojavePos
             beforeOrder();
             Orderlist = api.ListView(lv, list);
             ListCommon();
-           
+            
         }
 
         public void listView()
@@ -87,7 +88,7 @@ namespace mojavePos
                     lv = ct.listview((lvSet)arr[i]);
                     lv.BackColor = Color.WhiteSmoke;
                     panel.Controls.Add(lv);
-                    lv.Columns.Add("", 0, HorizontalAlignment.Center);
+                    lv.Columns.Add("", 50, HorizontalAlignment.Center);
                     lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
@@ -135,6 +136,8 @@ namespace mojavePos
                 ListViewItem item = itemGroup[i];
                 _mNo = item.SubItems[0].Text;
                 _mNm = item.SubItems[1].Text;
+                _oCount = item.SubItems[3].Text;
+              
             }
         }
 
@@ -181,16 +184,19 @@ namespace mojavePos
                     {
                         ht = new Hashtable();
                         string[] arr = (string[])Orderlist[i];
-                        ht.Add("spName", "sp_Order_Insert");
-                        ht.Add("tNo", _tNo);
+                        ht.Add("spName", "sp_OInsert");
+                        ht.Add("oNo", _mNo);
                         ht.Add("mNo", arr[0]);
+                        ht.Add("tNo", _tNo);
                         ht.Add("oCount" ,arr[3]);
-                        if (!api.Post("http://192.168.3.28:5000/sp_insert", ht))
+                        ht.Add("upCount", arr[3]);
+                        if (!api.Post("http://localhost:5000/sp_upinsert", ht))
                         {
                             MessageBox.Show("주문오류");
                             break;
                         }
                     }
+                    
                     this.Visible = false;
                     break;
 
@@ -260,7 +266,7 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_MenuCategory_Select");
             ht.Add("param", "");
-            ArrayList list = api.Select("http://192.168.3.28:5000/select", ht);
+            ArrayList list = api.Select("http://localhost:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button(this, list, Category_Click);
@@ -286,7 +292,7 @@ namespace mojavePos
             ht.Add("spName", "sp_Menu_Select");
             ht.Add("param", "_bNo:" + _bNo);
             panel2.Controls.Clear();
-            list = api.Select("http://192.168.3.28:5000/select", ht);
+            list = api.Select("http://localhost:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button2(panel2, list, Menu_Click);
@@ -361,7 +367,6 @@ namespace mojavePos
             }
         }
 
-        
         private void beforeOrder()
         {
             for (int i = 0; i < list.Count; i++)
