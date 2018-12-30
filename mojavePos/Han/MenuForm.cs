@@ -46,7 +46,7 @@ namespace mojavePos.Han
             listview.Columns.Add(" ", 296, HorizontalAlignment.Center);
             Controls.Add(listview);
             api = new Module();
-            api.selectListView("http://192.168.3.20:5000/mc_select", listview);
+            api.selectListView("http://192.168.3.28:5000/mc_select", listview);
            
 
             lvSet lv2 = new lvSet(this, "lv2", 350, 500, 625, 230, lv2_mouseClick);
@@ -128,7 +128,7 @@ namespace mojavePos.Han
                     Me_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
                     Me_mo.ShowDialog();
                     api = new Module();
-                    api.selectListView("http://192.168.3.20:5000/mc_select", listview);
+                    api.selectListView("http://192.168.3.28:5000/mc_select", listview);
 
                     break;
             }
@@ -165,7 +165,7 @@ namespace mojavePos.Han
                 
                 this.No = camo_no;
             }
-            api.selectListView_Menu("http://192.168.3.20:5000/mn_select", listview2, no);
+            api.selectListView_Menu("http://192.168.3.28:5000/mn_select", listview2, no);
         }
         private void lv2_mouseClick(object o, EventArgs e)
         {
@@ -199,7 +199,7 @@ namespace mojavePos.Han
                    
                 }
                 api = new Module();
-                api.selectListView("http://192.168.3.20:5000/mc_select", listview);
+                api.selectListView("http://192.168.3.28:5000/mc_select", listview);
             }
             MessageBox.Show(camo_no);
         }
@@ -210,7 +210,7 @@ namespace mojavePos.Han
             {
                 MCUD.ShowDialog();
                 api = new Module();
-                api.selectListView("http://192.168.3.20:5000/mn_select", listview);
+                api.selectListView("http://192.168.3.28:5000/mn_select", listview);
                 for (int i = 0; i < slv.Count; i++)
                 {
                     item2 = slv2[i];
@@ -248,8 +248,8 @@ namespace mojavePos.Han
             Menu_Insert_modal ff2 = new Menu_Insert_modal();
             ff2.ShowDialog();
             api = new Module();
-            api.selectListView("http://192.168.3.20:5000/mc_select", listview);
-            api.selectListView("http://192.168.3.20:5000/mn_select", listview);
+            api.selectListView("http://192.168.3.28:5000/mc_select", listview);
+            api.selectListView("http://192.168.3.28:5000/mn_select", listview);
 
             string sql = no;
           

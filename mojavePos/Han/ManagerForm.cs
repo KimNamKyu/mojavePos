@@ -46,6 +46,7 @@ namespace mojavePos.Han
             PictureBox mojave = new PictureBox();
             mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("mojave");
             mojave.SizeMode = PictureBoxSizeMode.StretchImage;
+            mojave.BackColor = Color.FromArgb(19, 38, 78);
             mojave.Size = new Size(240, 100);
             mojave.Location = new Point(0, 0);
             head.Controls.Add(mojave);
@@ -71,6 +72,8 @@ namespace mojavePos.Han
             for (int i=0; i < btn_list.Count; i++)
             {
                 Button button = ct.btn((btnSet)btn_list[i]);
+                button.BackColor = Color.FromArgb(19, 38, 78);
+                button.ForeColor = Color.White;
                 head.Controls.Add(button);
             }
 

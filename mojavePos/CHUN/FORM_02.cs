@@ -149,7 +149,7 @@ namespace mojavePos
         {   
             F1 = new FORM_01();
             api = new Module();
-            string Correctid = api.getIdPass("http://192.168.3.20:5000/sp_Pos_Count");
+            string Correctid = api.getIdPass("http://192.168.3.28:5000/sp_Pos_Count");
 
             if (Correctid !=  "[[\"0\"]]")
             {
@@ -178,7 +178,7 @@ namespace mojavePos
                         ht.Add("ps_Rank", 포지션택박.Text);
                         ht.Add("ps_passwd", 패스워드택박.Text);
                         ht.Add("ps_code", 시리얼택박.Text);
-                        api.insert_Category("http://192.168.3.20:5000/SI_insert_Pos", ht);
+                        api.insert_Category("http://192.168.3.28:5000/SI_insert_Pos", ht);
                         Close();
                     }
                 }

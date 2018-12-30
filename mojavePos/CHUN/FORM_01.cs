@@ -23,7 +23,7 @@ namespace mojavePos
     public partial class FORM_01 : Form
     {
         _Create ct = new _Create();
-        RichTextBox textbox , 텍스트박스1;
+        RichTextBox 텍스트박스1;
         TextBox 텍스트박스2;
         FORM_01 F1;
         FORM_03 F3;
