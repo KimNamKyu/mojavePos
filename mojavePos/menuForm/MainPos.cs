@@ -96,8 +96,8 @@ namespace mojavePos
         private void Pnl3_Click(object sender, EventArgs e)
         {
             Dispose();
-            FORM_03 f3 = new FORM_03();
-            f3.Show();
+            //FORM_03 f3 = new FORM_03();
+            //f3.Show();
         }
 
 
