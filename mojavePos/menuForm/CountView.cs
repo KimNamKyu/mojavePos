@@ -93,7 +93,7 @@ namespace mojavePos
                     lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
-                    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                    lv.Columns.Add("금액", 130, HorizontalAlignment.Center);
                     lv.Font = new Font("Tahoma", 15, FontStyle.Bold);
                 }
                 else if (typeof(btnSet) == arr[i].GetType())

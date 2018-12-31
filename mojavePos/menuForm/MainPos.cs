@@ -16,7 +16,7 @@ namespace mojavePos
     public partial class MainPos : Form
     {
         _Create ct= new _Create();
-        private Panel pn4;
+        private Panel pn4,pn5;
         private Commons comm;
         private Hashtable ht;
         private WebAPI api;
@@ -85,6 +85,11 @@ namespace mojavePos
             //pn4.BackColor = Color.FromArgb(19, 38, 78);
             pn4.BackColor = Color.Beige;
             Controls.Add(pn4);
+
+            arr.Add(new pnSet(this, 1300, 800, 0, 100));
+            pn5 = ct.panel((pnSet)arr[4]);
+            pn5.BackColor = Color.FromArgb(19, 38, 78);
+            Controls.Add(pn5);
 
         }
         //종료버튼 클릭시 이벤트
