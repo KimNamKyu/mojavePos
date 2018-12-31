@@ -208,14 +208,41 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
+    <EmbeddedResource Include="CHUN\Category_Insert_modal.resx">
+      <DependentUpon>Category_Insert_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Category_Update_delete_modal.resx">
+      <DependentUpon>Category_Update_delete_modal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CHUN\FORM_01.resx">
       <DependentUpon>FORM_01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\FORM_02.resx">
+      <DependentUpon>FORM_02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\FORM_03.resx">
+      <DependentUpon>FORM_03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Menu_Insert_modal.resx">
+      <DependentUpon>Menu_Insert_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Menu_update_delete_modal.resx">
+      <DependentUpon>Menu_update_delete_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Han\ManagerForm.resx">
+      <DependentUpon>ManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Han\MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuForm\CountView.resx">
       <DependentUpon>CountView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuForm\MainPos.resx">
+      <DependentUpon>MainPos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\Cash.resx">
       <DependentUpon>Cash.cs</DependentUpon>

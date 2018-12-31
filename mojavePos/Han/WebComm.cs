@@ -124,7 +124,7 @@ namespace mojavePos.Han
 
                 StreamReader sr = new StreamReader(st);
                 string str = sr.ReadToEnd();
-                MessageBox.Show("결과 확인 : " + str);
+                
 
                 return true;
             }
