@@ -123,7 +123,7 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_Table_Select");
             ht.Add("param", "");
-            ArrayList list = api.Select("http://localhost:5000/select", ht);
+            ArrayList list = api.Select("http://192.168.3.28:5000/select", ht);
             if (list != null)
             {
                 ArrayList arrayList = api.Button3(pn4, list, btn_Click);
@@ -147,7 +147,7 @@ namespace mojavePos
             ht = new Hashtable();
             ht.Add("spName", "sp_Order_Select");
             ht.Add("param", "_tNo:" + tNo);
-            list = api.Select("http://localhost:5000/select", ht);
+            list = api.Select("http://192.168.3.28:5000/select", ht);
 
 
             CountView cv = new CountView(tNo,list);
