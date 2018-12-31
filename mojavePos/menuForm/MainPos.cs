@@ -68,7 +68,7 @@ namespace mojavePos
 
             Panel pnl3 = new Panel();
             pnl3 = ct.panel((pnSet)arr[1]);
-            pnl3.BackColor = Color.Silver;
+            pnl3.BackColor = Color.DimGray;
             pnl3.Click += Pnl3_Click;
             Controls.Add(pnl3);
             
