@@ -26,8 +26,9 @@ namespace mojavePos.Han
         }
         private void MemberForm_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(1500, 900);
+            ClientSize = new Size(1200, 900);
             this.IsMdiContainer = true;
+            this.ControlBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             Head();
 
@@ -37,18 +38,19 @@ namespace mojavePos.Han
         {
 
 
-            pnSet pn1 = new pnSet(this, 1500, 100, 0, 0);
+            pnSet pn1 = new pnSet(this, 1200, 100, 0, 0);
             Panel head = ct.panel(pn1);
             Controls.Add(head);
 
             PictureBox mojave = new PictureBox();
             mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("mojave");
             mojave.SizeMode = PictureBoxSizeMode.StretchImage;
-            mojave.Size = new Size(300, 100);
+            mojave.BackColor = Color.FromArgb(19, 38, 78);
+            mojave.Size = new Size(240, 100);
             mojave.Location = new Point(0, 0);
             head.Controls.Add(mojave);
 
-            pnSet pn2 = new pnSet(this, 1500, 800, 0, 100);
+            pnSet pn2 = new pnSet(this, 1200, 800, 0, 100);
            bottom = ct.panel(pn2); // 패널이름 : bottom
            Controls.Add(bottom);
 
@@ -61,14 +63,16 @@ namespace mojavePos.Han
             
             ArrayList btn_list = new ArrayList();
             //btn_list.Add(new btnSet(this, "image", "image", 300, 100, 0, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 300, 100, 300, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "money", "매출관리", 300, 100, 600, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "rank", "메뉴순위", 300, 100, 900, 0, Main_Click));
-            btn_list.Add(new btnSet(this, "exit", "종료", 300, 100, 1200, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "menu", "메뉴관리", 240, 100, 240, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "money", "매출관리", 240, 100, 480, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "rank", "메뉴순위", 240, 100, 720, 0, Main_Click));
+            btn_list.Add(new btnSet(this, "exit", "종료", 240, 100, 960, 0, Main_Click));
 
             for (int i=0; i < btn_list.Count; i++)
             {
                 Button button = ct.btn((btnSet)btn_list[i]);
+                button.BackColor = Color.FromArgb(19, 38, 78);
+                button.ForeColor = Color.White;
                 head.Controls.Add(button);
             }
 

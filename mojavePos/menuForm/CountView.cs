@@ -28,17 +28,19 @@ namespace mojavePos
         private string _tNo;
         private ArrayList list;
         private string _mNo;
+        private string _mNm;
         ArrayList Orderlist = new ArrayList();
         int Total;
         private TextBox textbox;
         private string Totalresult;
+
 
         public CountView()
         {
             InitializeComponent();
 
         }
-        public CountView(string tNo, ArrayList list)
+        public CountView(string tNo,ArrayList list)
         {
             Load += CountView_Load;
             this._tNo = tNo;
@@ -51,37 +53,16 @@ namespace mojavePos
             listView();
             menu_view();
             beforeOrder();
-            //MessageBox.Show(_tNo);
-
-            ArrayList arrayList = api.ListView(lv, list);
-            if (list != null)
-            {
-                arrayList = api.ListView(lv, list);
-                for (int i = 0; i < arrayList.Count; i++)
-                {
-                    Controls.Add(lv);
-                }
-            }
-            for (int i = 0; i < list.Count; i++)
-            {
-                JArray ja = (JArray)list[i];
-                string[] arr = new string[ja.Count];
-                //MessageBox.Show(ja.Count.ToString());
-                for (int j = 0; j < ja.Count; j++)
-                {
-                    arr[j] = ja[j].ToString();
-                }
-                Total += Convert.ToInt32(arr[4]);
-            }
-            Totalresult = Total.ToString();
-            textbox.Text = Totalresult;
+            Orderlist = api.ListView(lv, list);
+            ListCommon();
+           
         }
 
         public void listView()
         {
             ArrayList arr = new ArrayList();
             arr.Add(new pnSet(this, 580, 760, 10, 10));
-            arr.Add(new lvSet(this, "", 300, 350, 5, 400, list_Click));
+            arr.Add(new lvSet(this, "", 570, 300, 5, 5, list_Click));
             arr.Add(new btnSet(this, "btn1", "+", 130, 70, 12, 310, btn_Click));
             arr.Add(new btnSet(this, "btn2", "현금결제", 230, 100, 320, 520, btn_Click));
             arr.Add(new btnSet(this, "btn3", "주문", 230, 100, 320, 400, btn_Click));
@@ -89,9 +70,8 @@ namespace mojavePos
             arr.Add(new btnSet(this, "btn5", "-", 130, 70, 152, 310, btn_Click));
             arr.Add(new btnSet(this, "btn6", "선택 취소", 130, 70, 292, 310, btn_Click));
             arr.Add(new btnSet(this, "btn7", "전체 취소", 130, 70, 432, 310, btn_Click));
-            //arr.Add(new lbSet(this, "label1", "합계", 100, 40, 15, 420, 20));
+            arr.Add(new lbSet(this, "label1", "Table No. :", 150, 40, 15, 420, 20));
             arr.Add(new lbSet(this, "label2", "총 금 액", 200, 40, 15, 540, 20));
-            //arr.Add(new tbSet(this, "합계", 280, 40, 15, 460));
             arr.Add(new tbSet(this, "총금액", 280, 40, 15, 580));
 
             for (int i = 0; i < arr.Count; i++)
@@ -102,18 +82,18 @@ namespace mojavePos
                     panel.BackColor = Color.Gainsboro;
                     Controls.Add(panel);
                 }
-                //else if (typeof(lvSet) == arr[i].GetType())
-                //{
-                //    lv = ct.listview((lvSet)arr[i]);
-                //    lv.BackColor = Color.WhiteSmoke;
-                //    panel.Controls.Add(lv);
-                //    lv.Columns.Add("No", 30, HorizontalAlignment.Center);
-                //    lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
-                //    lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
-                //    lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
-                //    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
-                //    lv.Font = new Font("굴림", 15, FontStyle.Bold);
-                //}
+                else if (typeof(lvSet) == arr[i].GetType())
+                {
+                    lv = ct.listview((lvSet)arr[i]);
+                    lv.BackColor = Color.WhiteSmoke;
+                    panel.Controls.Add(lv);
+                    lv.Columns.Add("", 0, HorizontalAlignment.Center);
+                    lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
+                    lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
+                    lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
+                    lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
+                    lv.Font = new Font("굴림", 15, FontStyle.Bold);
+                }
                 else if (typeof(btnSet) == arr[i].GetType())
                 {
                     Button button = ct.btn((btnSet)arr[i]);
@@ -122,6 +102,7 @@ namespace mojavePos
                 else if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
+                    label.Font = new Font("굴림", 20, FontStyle.Bold);
                     panel.Controls.Add(label);
                 }
                 else if(typeof(tbSet) == arr[i].GetType())
@@ -133,8 +114,16 @@ namespace mojavePos
                     panel.Controls.Add(textbox);
                 }
             }
+            lbSet lb = new lbSet(this, "tNo", "", 100, 40, 170, 420, 20);
+            Label label2 = ct.lable(lb);
+            label2.Text = _tNo;
+            label2.Font = new Font("굴림",20, FontStyle.Bold);
+            panel.Controls.Add(label2);
         }
 
+        /// <summary>
+        /// 리스트 클릭 이벤트
+        /// </summary>
         private void list_Click(object sender, MouseEventArgs e)
         {
             ListView lv = (ListView)sender;
@@ -145,9 +134,13 @@ namespace mojavePos
             {
                 ListViewItem item = itemGroup[i];
                 _mNo = item.SubItems[0].Text;
+                _mNm = item.SubItems[1].Text;
             }
         }
 
+        /// <summary>
+        ///  예외처리 버튼
+        /// </summary>
         private void btn_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -155,7 +148,7 @@ namespace mojavePos
             ht = new Hashtable();
             switch (btn.Name)
             {
-                case "btn1":
+                case "btn1": // 수량 추가
                     for (int j = 0; j < Orderlist.Count; j++)
                     {
                         string[] row = (string[])Orderlist[j];
@@ -166,11 +159,12 @@ namespace mojavePos
                             cnt++;
                             //MessageBox.Show(cnt.ToString());
                             row[3] = cnt.ToString();
+                            row[4] = (Convert.ToInt64(row[2]) * Convert.ToInt64(row[3])).ToString();
                             Orderlist[j] = row;
                             ListCommon();
                             break;
                         }
-                    }                   
+                    }
                     break;
                 case "btn2":
                     Cash cash = new Cash(_tNo, Totalresult);
@@ -204,7 +198,7 @@ namespace mojavePos
                     MessageBox.Show("서비스준비중입니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
 
-                case "btn5":
+                case "btn5": // 수량 감소
                     for (int j = 0; j < Orderlist.Count; j++)
                     {
                         string[] row = (string[])Orderlist[j];
@@ -215,11 +209,12 @@ namespace mojavePos
                             {
                                 cnt--;
                             }
-                            else if( cnt < 0)
+                            else if (cnt < 0)
                             {
                                 cnt = 1;
                             }
                             row[3] = cnt.ToString();
+                            row[4] = (Convert.ToInt64(row[2]) * Convert.ToInt64(row[3])).ToString();
                             Orderlist[j] = row;
                             ListCommon();
                             break;
@@ -227,24 +222,26 @@ namespace mojavePos
                     }
                     break;
                 case "btn6":
-                    for (int i = 0; i < list.Count; i++)
+                    for (int i = 0; i < Orderlist.Count; i++)
                     {
-                        JArray ja = (JArray)list[i];
-                        string[] arr = new string[ja.Count];
-                        //MessageBox.Show(ja.Count.ToString());
-                        if (_mNo == arr[0])
+                        string[] arr = (string[])Orderlist[i];
+
+                        if (_mNm == arr[1])
                         {
-                            lv.Items.Remove(lv.SelectedItems[0]);
-                        }  
+                            Orderlist.RemoveAt(i);
+                            ListCommon();
+                            break;
+                        }
                     }
                     break;
-                case "btn7":
-                    lv.Items.Clear();
+                case "btn7": //전체 취소
+                    Orderlist = new ArrayList();
+                    ListCommon();
                     break;
-
             }
         }
 
+     
         /// <summary>
         /// 메뉴 카테고리 뷰 화면
         /// </summary>
@@ -308,27 +305,52 @@ namespace mojavePos
         private void Menu_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            _mNo = btn.Name;
+            string _mName = btn.Name;
 
-            lv.Items.Clear();
             for (int i = 0; i < list.Count; i++)
             {
                 JArray ja = (JArray)list[i];
-                string[] arr = new string[ja.Count];
+                string[] arr = new string[5];
                 //MessageBox.Show(ja.Count.ToString());
                 for (int j = 0; j < ja.Count; j++)
                 {
                     arr[j] = ja[j].ToString();
+                    //MessageBox.Show(j+":"+arr[j].ToString());
+
                 }
-                if (_mNo == arr[0]) //메뉴넘버와 배열 0번지가 같으면
+                if (_mName == arr[1]) //메뉴넘버와 배열 0번지가 같으면
                 {
-                    Orderlist.Add(arr);     //추가
+                    bool add = true;
+
+                    for (int r = 0; r < Orderlist.Count; r++)
+                    {
+                        string[] d = (string[])Orderlist[r];
+                        if (_mName == d[1])
+                        {
+                            add = false;
+                            int 가격 = Convert.ToInt32(d[2]);
+                            int 수량 = Convert.ToInt32(d[3]);
+                            수량++;
+                            d[3] = 수량.ToString();
+                            d[4] = (가격 * 수량).ToString();
+                            Orderlist[r] = d;
+                            break;
+                        }
+                    }
+                    if (add)
+                    {
+                        arr[4] = (Convert.ToInt32(arr[2]) * Convert.ToInt32(arr[3])).ToString();
+                        Orderlist.Add(arr);     //추가
+                    }
                     break;
                 }
             }
             ListCommon();
         } 
 
+        /// <summary>
+        /// 리스트 공통 부분
+        /// </summary>
         private void ListCommon()
         {
             lv.Items.Clear();
@@ -339,24 +361,23 @@ namespace mojavePos
             }
         }
 
+        
         private void beforeOrder()
         {
-            ArrayList arr = new ArrayList();
-            arr.Add(new lvSet(this, "", 570, 300, 5, 5, list_Click));
-
-            for (int i = 0; i < arr.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                lv = ct.listview((lvSet)arr[i]);
-                lv.BackColor = Color.WhiteSmoke;
-                panel.Controls.Add(lv);
-                lv.Columns.Add("", 0, HorizontalAlignment.Center);
-                lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
-                lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
-                lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
-                lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
-                lv.Font = new Font("굴림", 15, FontStyle.Bold);
+                JArray ja = (JArray)list[i];
+                string[] arr = new string[ja.Count];
+                //MessageBox.Show(ja.Count.ToString());
+                for (int j = 0; j < ja.Count; j++)
+                {
+                    arr[j] = ja[j].ToString();
+                }
+                Total += Convert.ToInt32(arr[4]);
             }
-          
+            Totalresult = Total.ToString();
+            textbox.Text = Totalresult;
+            }
         }
     }
-}
+

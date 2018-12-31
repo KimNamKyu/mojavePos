@@ -27,36 +27,51 @@ namespace mojavePos.CHUN
 
         private void Menu_Insert_modal_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(300, 100);
+            ClientSize = new Size(280, 50);
           
 
-            pnSet pn = new pnSet(this, 300, 100, 0, 0);
+            pnSet pn = new pnSet(this, 280, 50, 0, 0);
             Panel panel = ct.panel(pn);
             Controls.Add(panel);
 
-            tbSet tb = new tbSet(this, "tb1", 200, 50, 0, 0);
+            tbSet tb = new tbSet(this, "tb1", 130, 25, 50, 0);
             textbox1 = ct.txtbox(tb);
+            textbox1.Font = new Font("Tahoma", 10, FontStyle.Bold);
             panel.Controls.Add(textbox1);
 
-            tbSet tb2 = new tbSet(this, "tb2", 200, 50, 0, 50);
+            tbSet tb2 = new tbSet(this, "tb2", 130, 25, 50, 25);
             textbox2 = ct.txtbox(tb2);
+            textbox2.Font = new Font("Tahoma", 10, FontStyle.Bold);
             panel.Controls.Add(textbox2);
 
+
+
             ArrayList arr = new ArrayList();
-            arr.Add(new btnSet(this, "btn1", "추가", 50, 50, 200, 0, btn_click));
-            arr.Add(new btnSet(this, "btn2", "취소", 50, 50, 250, 0, btn_click));
+            arr.Add(new lbSet(this, "label1", "이름", 50, 25, 0, 0, 10));
+            arr.Add(new lbSet(this, "label2", "가격", 50, 25, 0, 25, 10));
+            arr.Add(new btnSet(this, "btn1", "추가", 50, 50, 180, 0, btn_click));
+            arr.Add(new btnSet(this, "btn2", "취소", 50, 50, 230, 0, btn_click));
 
             for (int i = 0; i < arr.Count; i++)
             {
                 if (typeof(btnSet) == arr[i].GetType())
                 {
                     Button button = ct.btn((btnSet)arr[i]);
+                    button.Font = new Font("Tahoma", 10, FontStyle.Bold);
                     panel.Controls.Add(button);
                 }
                 else if (typeof(tbSet) == arr[i].GetType())
                 {
                     TextBox textbox = ct.txtbox((tbSet)arr[i]);
+                    textbox.Font = new Font("Tahoma", 10, FontStyle.Bold);
                     panel.Controls.Add(textbox);
+                }
+
+                else if (typeof(lbSet) == arr[i].GetType())
+                {
+                    Label label = ct.lable((lbSet)arr[i]);
+                    label.Font = new Font("Tahoma", 10, FontStyle.Bold);
+                    panel.Controls.Add(label);
                 }
             }
         }
@@ -70,10 +85,11 @@ namespace mojavePos.CHUN
                 case "btn1":
                     Hashtable ht = new Hashtable();
                     api = new Module();
-                    ht.Add("m_bNo", abb);
+                    ht.Add("m_bNo", MenuForm.No);
                     ht.Add("m_Name", textbox1.Text);
                     ht.Add("m_Price",textbox2.Text);
-                    api.insert_Category("http://localhost:5000/mn_insert", ht);
+                    api.insert_Category("http://192.168.3.28:5000/mn_insert", ht);
+                    MessageBox.Show("추가 되었습니다.");
                     break;
 
                 case "btn2":

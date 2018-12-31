@@ -1,4 +1,5 @@
-﻿using mojavePos.Modules;
+﻿using mojavePos.Han;
+using mojavePos.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,6 +29,9 @@ namespace mojavePos.Modal
             this.Totalresult = Totalresult;
         }
 
+        /// <summary>
+        ///  화면 디자인
+        /// </summary>
         private void Cash_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.Silver;
@@ -37,18 +41,21 @@ namespace mojavePos.Modal
             panel.BackColor = Color.Gainsboro;
             Controls.Add(panel);
 
+            //계산내용
             tbSet tb = new tbSet(this, "tb4", 310, 30, 450, 100);
             textbox1 = ct.txtbox(tb);
             textbox1.ReadOnly = true;
             textbox1.Font = new Font("굴림", 18, FontStyle.Bold);
             panel.Controls.Add(textbox1);
 
+            //받은금액
             tbSet tb1 = new tbSet(this, "받은금액", 200, 30, 150, 180);
             textbox2 = ct.txtbox(tb1);
             textbox2.ReadOnly = true;
             textbox2.Font = new Font("굴림", 18, FontStyle.Bold);
             panel.Controls.Add(textbox2);
 
+            //거스름돈
             tbSet tb2 = new tbSet(this, "거스름돈", 200, 30, 150, 260);
             textbox3 = ct.txtbox(tb2);
             textbox3.ReadOnly = true;
@@ -56,6 +63,7 @@ namespace mojavePos.Modal
             
             panel.Controls.Add(textbox3);
 
+            //총금액
             tbSet tb3 = new tbSet(this, "받을금액", 200, 30, 150, 100);
             textbox4 = ct.txtbox(tb3);
             textbox4.Text = Totalresult;
@@ -118,7 +126,7 @@ namespace mojavePos.Modal
            
         }
 
-                    CountView cv = new CountView();
+        CountView cv = new CountView();
         private void btn1_Click(object sender, EventArgs e)
         {
             btn = (Button)sender;
@@ -139,13 +147,24 @@ namespace mojavePos.Modal
                     break;
                 case "ENTER":
                     textbox2.Text = textbox1.Text;
-                   // textbox3.Text = (Convert.ToInt32(textbox1.Text) - Convert.ToInt32(textbox2.Text)).ToString();
+                        textbox3.Text = (Convert.ToInt32(textbox2.Text) - Convert.ToInt32(textbox4.Text)).ToString();
+
+                    //if (Convert.ToInt32(textbox4.Text) > Convert.ToInt32(textbox2.Text))
+                    //{
+                    //}
+                    //textbox3.Text = (Convert.ToInt32(textbox1.Text) - Convert.ToInt32(textbox2.Text)).ToString();
                     break;
                 case "결제완료":
+                    cv.Visible = false;
                     api = new WebAPI();
                     ht = new Hashtable();
+                    WebComm wc = new WebComm();
+                    ht.Add("spName", "sp_Order_Delete");
                     ht.Add("tNo", tNo);
-                    api.Post("http://192.168.3.28:5000/delete", ht);
+                    api.Post("http://192.168.3.28:5000/sp_delete", ht);
+                    wc.Post2("http://192.168.3.28:5000/insert_CM");
+                    this.Dispose();
+                    
                     break;
             }
         }

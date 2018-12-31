@@ -18,8 +18,6 @@ namespace mojavePos.Modules
         /// <summary>
         /// Select API 작성
         /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
         public ArrayList Select(string url, Hashtable ht)
         {
             try
@@ -29,27 +27,27 @@ namespace mojavePos.Modules
 
                 foreach (DictionaryEntry data in ht)
                 {
-                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
                     param.Add(data.Key.ToString(), data.Value.ToString());
                 }
-                
+
                 //byte로 반환
                 byte[] results = wc.UploadValues(url, "POST", param);
                 string resultStr = Encoding.UTF8.GetString(results);
-                //MessageBox.Show(resultStr);
-                
+               
                 ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
-                
-                //MessageBox.Show("성공");
+                                
                 return list;
             }
             catch
             {
-                //MessageBox.Show("실패");
+                
                 return null;
             }
         }
 
+        /// <summary>
+        ///  공통 WebAPI 리스트뷰 
+        /// </summary>
         public ArrayList ListView(ListView listView, ArrayList list)
         {
             ArrayList arrayList = new ArrayList();
@@ -62,22 +60,22 @@ namespace mojavePos.Modules
                     string[] arr = new string[ja.Count];
                     for (int j = 0; j < ja.Count; j++)
                     {
-                        //MessageBox.Show(list.Count.ToString());
-                        //MessageBox.Show(ja[j].ToString());
                         arr[j] = ja[j].ToString();
                     }
-                    listView.Items.Add(new ListViewItem(arr));
+                    arrayList.Add(arr);
                 }
-                //MessageBox.Show("성공");
                 return arrayList;
             }
             catch
             {
                 //MessageBox.Show("실패");
                 return null;
-            }            
+            }
         }
 
+        /// <summary>
+        /// 카테고리 버튼 생성 api
+        /// </summary>
         public ArrayList Button(Form form, ArrayList list, EventHandler eh_btn)
         {
             ArrayList arrayList = new ArrayList();
@@ -92,15 +90,18 @@ namespace mojavePos.Modules
                         arr[j] = ja[j].ToString();
                     }
                     arrayList.Add(new btnSet(form, arr[0], arr[1], 100, 100, 0, (100 * i), eh_btn));
-                }                
+                }
                 return arrayList;
             }
             catch
             {
                 return null;
-            }            
+            }
         }
 
+        /// <summary>
+        /// 메뉴 버튼 생성 api
+        /// </summary>
         public ArrayList Button2(Control control, ArrayList list, EventHandler eh_btn)
         {
             ArrayList arrayList = new ArrayList();
@@ -110,15 +111,15 @@ namespace mojavePos.Modules
                 {
                     JArray ja = (JArray)list[i];
                     string[] arr = new string[ja.Count];
-                    
+
                     for (int j = 0; j < ja.Count; j++)
                     {
                         arr[j] = ja[j].ToString();
                     }
-                    arrayList.Add(new btnSet(control, arr[0], arr[1], 200, 100, 200 * (i % 3), 100 * (i / 3), eh_btn));
+                    arrayList.Add(new btnSet(control, arr[1], arr[1], 200, 100, 200 * (i % 3), 100 * (i / 3), eh_btn));
                     string Price = arr[2];
                     string Count = arr[3];
-                   // MessageBox.Show(Price);
+                    // MessageBox.Show(Price);
                     //MessageBox.Show(Count);
                 }
                 return arrayList;
@@ -129,6 +130,9 @@ namespace mojavePos.Modules
             }
         }
 
+        /// <summary>
+        ///  식당 테이블 생성 api
+        /// </summary>
         public ArrayList Button3(Control control, ArrayList list, EventHandler eh_btn)
         {
             ArrayList arrayList = new ArrayList();
@@ -165,7 +169,7 @@ namespace mojavePos.Modules
 
 
 
-            
+
             NameValueCollection param = new NameValueCollection();
             byte[] result = client.UploadValues(url, "POST", param);
             string strResult = Encoding.UTF8.GetString(result);
@@ -192,11 +196,12 @@ namespace mojavePos.Modules
                     {
                         arr[2] = (string)jp.Value;
                     }
-                   
+
                 }
             }
             return true;
         }
+
         public bool Post(string url, Hashtable ht)
         {
             //MessageBox.Show(url);
@@ -207,7 +212,7 @@ namespace mojavePos.Modules
 
                 foreach (DictionaryEntry data in ht)
                 {
-                    MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
+                    //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
                     param.Add(data.Key.ToString(), data.Value.ToString());
                 }
 
@@ -217,11 +222,11 @@ namespace mojavePos.Modules
                 //MessageBox.Show(resultStr);
                 if ("1" == resultStr)
                 {
-                    MessageBox.Show("성공");
+                    //MessageBox.Show("성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
+                    //MessageBox.Show("실패");
                 }
 
                 return true;
@@ -232,65 +237,6 @@ namespace mojavePos.Modules
                 return false;
             }
         }
-       
 
-
-        //public ArrayList Select(string url, Hashtable ht)
-        //{
-        //    try
-        //    {
-        //        WebClient wc = new WebClient();
-        //        NameValueCollection param = new NameValueCollection();
-
-        //        foreach (DictionaryEntry data in ht)
-        //        {
-        //            //MessageBox.Show(string.Format("{0},{1}", data.Key.ToString(), data.Value.ToString()));
-        //            param.Add(data.Key.ToString(), data.Value.ToString());
-        //        }
-
-        //        //byte로 반환
-        //        byte[] results = wc.UploadValues(url, "POST", param);
-        //        string resultStr = Encoding.UTF8.GetString(results);
-        //        //MessageBox.Show(resultStr);
-
-        //        ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
-
-        //        //MessageBox.Show("성공");
-        //        return list;
-        //    }
-        //    catch
-        //    {
-        //        //MessageBox.Show("실패");
-        //        return null;
-        //    }
-        //}
-
-        //public ArrayList ListView(ListView listView, ArrayList list)
-        //{
-        //    ArrayList arrayList = new ArrayList();
-        //    try
-        //    {
-        //        listView.Items.Clear();
-        //        for (int i = 0; i < list.Count; i++)
-        //        {
-        //            JArray ja = (JArray)list[i];
-        //            string[] arr = new string[ja.Count];
-        //            for (int j = 0; j < ja.Count; j++)
-        //            {
-        //                //MessageBox.Show(list.Count.ToString());
-        //                //MessageBox.Show(ja[j].ToString());
-        //                arr[j] = ja[j].ToString();
-        //            }
-        //            listView.Items.Add(new ListViewItem(arr));
-        //        }
-        //        MessageBox.Show("성공");
-        //        return arrayList;
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("실패");
-        //        return null;
-        //    }
-        //}
     }
 }

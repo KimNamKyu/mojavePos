@@ -16,22 +16,23 @@ namespace mojavePos
     public partial class FORM_03 : Form
     {
        
-        lbSet pn4_lb, pn5_lb;
+        lbSet pn4_lb;
         string lbText1 = "영업중이 아닙니다. 판매를 하시려면 영업시작을 눌러주십시오.";
         string lbText2 = "영업중 입니다. 판매를 종료하시려면 영업종료를 눌러주십시오.";
+        
         string lbText3 = "영업시작";
         string lbText4 = "영업종료";
-        TextBox 준비금텍스트박스;
-        Label 시간, 날짜, 경고문 , 영업시작 , 준비금;
+        //TextBox 준비금텍스트박스;
+        Label 시간, 날짜, 경고문 , 영업시작;
         Timer timer;
         _Create ct;
-        Panel 패널4;
         Module api;
         bool value = true;
         object a;
         public FORM_03()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_03_Load;
           
         }
@@ -60,6 +61,14 @@ namespace mojavePos
             시간.ForeColor = Color.White;
             Controls.Add(시간);
 
+            PictureBox mojave = new PictureBox();
+            mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("모자브포스3");
+            mojave.SizeMode = PictureBoxSizeMode.StretchImage;
+            mojave.Size = new Size(250, 110);
+            mojave.BackColor = Color.FromArgb(19, 38, 78);
+            mojave.Location = new Point(0, 0);
+            Controls.Add(mojave);
+
             //패널
             pnSet pn1 = new pnSet(this, 250, 350, 0, 0);
             Panel 패널1 = ct.panel(pn1);
@@ -67,18 +76,18 @@ namespace mojavePos
             Controls.Add(패널1);   //패널 화면 출력
             패널1.Controls.Add(날짜);
             패널1.Controls.Add(시간);
-
+            패널1.Controls.Add(mojave);
             //그림넣기
             //분기매출액 표현하기
 
             ArrayList arr = new ArrayList();
-            arr.Add(new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 70, 10));
-            arr.Add(new lbSet(this, "label1_1", "10,000,000", 100, 25, 60, 100, 10));
-            arr.Add(new lbSet(this, "label1_2", "원", 20, 25, 160, 100, 10));
-            arr.Add(new lbSet(this, "pn1_lb2", "분기 매출액", 110, 25, 70, 140, 10));
-            arr.Add(new lbSet(this, "pn1_lb2_0", "2", 20, 25, 58, 140, 10));
-            arr.Add(new lbSet(this, "pn1_lb2_1", "10,000,000", 100, 25, 60, 170, 10));
-            arr.Add(new lbSet(this, "pn1_lb2_2", "원", 20, 25, 160, 170, 10));
+            arr.Add(new lbSet(this, "label1", "오늘매출액", 100, 25, 70, 140, 10));
+            arr.Add(new lbSet(this, "label1_1", " ", 100, 25, 60, 170, 10));
+            arr.Add(new lbSet(this, "label1_2", "원", 20, 25, 160, 170, 10));
+           // arr.Add(new lbSet(this, "pn1_lb2", "분기 매출액", 110, 25, 70, 140, 10));
+           // arr.Add(new lbSet(this, "pn1_lb2_0", "2", 20, 25, 58, 140, 10));
+           // arr.Add(new lbSet(this, "pn1_lb2_1", "10,000,000", 100, 25, 60, 170, 10));
+           // arr.Add(new lbSet(this, "pn1_lb2_2", "원", 20, 25, 160, 170, 10));
             
             for(int i = 0; i< arr.Count; i++)
             {
@@ -109,7 +118,8 @@ namespace mojavePos
             btnSet pn2_btn_1 = new btnSet(this, "pn2_btn_1", " ", 80, 80, 50, 30, btn_Click);
             Button 영업시작버튼 = ct.btn(pn2_btn_1);
             영업시작버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            영업시작버튼.BackgroundImage = mojavePos.Properties.Resources.test2;
+            영업시작버튼.BackgroundImage = mojavePos.Properties.Resources.자물쇠잠김;
+            영업시작버튼.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
@@ -120,6 +130,7 @@ namespace mojavePos
             Controls.Add(영업시작);
 
             //준비금 라벨
+            /*
             lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,65, 155, 10);
             준비금 = ct.lable(pn2_lb2);
             준비금.TextAlign = ContentAlignment.MiddleCenter;
@@ -132,7 +143,7 @@ namespace mojavePos
             준비금텍스트박스.Font = new Font("Tahoma", 10, FontStyle.Bold);
             준비금텍스트박스.TextAlign = HorizontalAlignment.Center;
             Controls.Add(준비금텍스트박스);
-            
+            */
 
             //영업시작 패널
             pnSet pn2 = new pnSet(this, 180, 220, 300, 70);
@@ -141,8 +152,8 @@ namespace mojavePos
             Controls.Add(패널2);   //패널 화면 출력
             패널2.Controls.Add(영업시작버튼);
             패널2.Controls.Add(영업시작);
-            패널2.Controls.Add(준비금);
-            패널2.Controls.Add(준비금텍스트박스);
+            //패널2.Controls.Add(준비금);
+            //패널2.Controls.Add(준비금텍스트박스);
 
             
             //관리자 시작 파트
@@ -150,8 +161,8 @@ namespace mojavePos
             btnSet pn3_btn_1 = new btnSet(this, "pn3_btn_1", " ", 80, 80, 50, 30, btn1_Click);
             Button 관리자버튼 = ct.btn(pn3_btn_1);
             관리자버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
-           
-            관리자버튼.BackgroundImage = mojavePos.Properties.Resources.test2;
+            관리자버튼.BackColor = Color.FromArgb(232, 227, 227);
+            관리자버튼.BackgroundImage = mojavePos.Properties.Resources.가방수정;
           
 
             Controls.Add(관리자버튼);
@@ -183,6 +194,7 @@ namespace mojavePos
             pnSet pn4 = new pnSet(this, 750, 50, 0,380);
             Panel 패널4 = ct.panel(pn4);
             패널4.BackColor = Color.FromArgb(232, 227, 227);
+            패널4.Font = new Font("Tahoma", 20, FontStyle.Bold);
             Controls.Add(패널4);
             패널4.Controls.Add(경고문);
             
@@ -210,8 +222,8 @@ namespace mojavePos
 
                     경고문.Text = lbText2;
                     영업시작.Text = lbText4;
-                    준비금텍스트박스.Width = 0;
-                    준비금.Text = "";
+                    //준비금텍스트박스.Width = 0;
+                    //준비금.Text = "";
                     MP.Show();
 
                     value = false;
@@ -224,8 +236,8 @@ namespace mojavePos
                 {
                     경고문.Text = lbText1;
                     영업시작.Text = lbText3;
-                    준비금텍스트박스.Width = 120;
-                    준비금.Text = "준비금";
+                   //준비금텍스트박스.Width = 120;
+                    //준비금.Text = "준비금";
                     MessageBox.Show("영업을 종료 하였습니다.");
 
                     value = true;
@@ -250,10 +262,9 @@ namespace mojavePos
         private void btn1_Click(object sender, EventArgs e)
         {
             ManagerForm MF = new ManagerForm();
-           
+            MF.StartPosition = FormStartPosition.Manual;
+            MF.Location = new Point(350, 80);
             MF.Show();
-
         }
-      
     }
 }

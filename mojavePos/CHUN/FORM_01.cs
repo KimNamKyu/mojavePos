@@ -23,18 +23,20 @@ namespace mojavePos
     public partial class FORM_01 : Form
     {
         _Create ct = new _Create();
-        RichTextBox textbox , 텍스트박스1;
+        RichTextBox 텍스트박스1;
         TextBox 텍스트박스2;
         FORM_01 F1;
         FORM_03 F3;
         public FORM_01()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_01_Load;
         }
 
         private void FORM_01_Load(object sender, EventArgs e)
         {
+           
             ClientSize = new Size(750, 430);  // 폼 사이즈 지정
             //this.ControlBox = false;
             BackColor = Color.Black;
@@ -151,18 +153,19 @@ namespace mojavePos
             string Correctpw = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Pass");
            
                 if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
-                {   
+                {
                     F3.Show();
+                    //Dispose(false);
                 }
-                else if (텍스트박스1.Text != Correctid)
+                if (텍스트박스1.Text != Correctid)
                 {
                     MessageBox.Show("아이디를 잘못 입력하셨습니다.");
                 }
-                else if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
+                if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
                 {
                     MessageBox.Show("비밀번호를 잘못 입력하셨습니다.");
                 }
-                else if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
+                if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
                 {
                     MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
                 }
@@ -172,7 +175,7 @@ namespace mojavePos
         private void btn2_Click(object sender, EventArgs e)
         {
             FORM_02 F2 = new FORM_02();
-            F2.Show();
+            F2.ShowDialog();
         }
 
     }

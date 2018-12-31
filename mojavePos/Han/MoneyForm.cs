@@ -24,13 +24,14 @@ namespace mojavePos.Han
         {
             InitializeComponent();
             Load += MoneyForm_Load;
+            this.BackgroundImage = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("배경화면1");
         }
 
         private void MoneyForm_Load(object sender, EventArgs e)
         {
 
-            ClientSize = new Size(1500, 800);
-            this.BackColor = Color.Beige;
+            ClientSize = new Size(1200, 800);
+           
            
             //get_Combo();
             get_Date();
@@ -43,16 +44,16 @@ namespace mojavePos.Han
         {
             //uNo uName   uDate uNumber uRate uTotal  delYn regDate modDate
             ArrayList list = new ArrayList();
-            list.Add(new lvSet(this, "view", 960, 700, 270, 60, list_Click));
+            list.Add(new lvSet(this, "view", 960, 700, 120, 60, list_Click));
             lv = ct.listview((lvSet)list[0]);
             Controls.Add(lv);
 
-            lv.Columns.Add("번호", 50, HorizontalAlignment.Center);
-            lv.Columns.Add("날짜", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("메뉴", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("총금액", 160, HorizontalAlignment.Center);
-            lv.Columns.Add("등록자", 160, HorizontalAlignment.Center);
+            lv.Columns.Add("번호", 65, HorizontalAlignment.Center);
+            lv.Columns.Add("날짜", 215, HorizontalAlignment.Center);
+            lv.Columns.Add("메뉴", 215, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 115, HorizontalAlignment.Center);
+            lv.Columns.Add("금액", 175, HorizontalAlignment.Center);
+            lv.Columns.Add("등록자", 175, HorizontalAlignment.Center);
 
            
             api = new WebComm();
@@ -118,17 +119,19 @@ namespace mojavePos.Han
             ArrayList list = new ArrayList();
             dt1 = new DateTimePicker();
             dt2 = new DateTimePicker();
-            DateSet dts1 = new DateSet(this, "first", 150, 50, 270, 40);
-            DateSet dts2 = new DateSet(this, "second", 150, 50, 450, 40);
+            DateSet dts1 = new DateSet(this, "first", 150, 50, 120 , 40);
+            DateSet dts2 = new DateSet(this, "second", 150, 50, 300, 40);
             dt1 = ct.datepic(dts1);
             dt2 = ct.datepic(dts2);
 
 
-            lbSet ls = new lbSet(this, "lb1", " ~ ", 30, 15, 420, 40, 13);
+            lbSet ls = new lbSet(this, "lb1", " ~ ", 30, 15, 270, 43, 13);
 
             Label label1 = new Label();
             label1 = ct.lable(ls);
-            label1.BackColor = Color.Beige;
+            label1.BackColor = Color.Transparent;
+            label1.Parent = this;
+
             label1.Font = new Font(FontFamily.GenericSansSerif, 13.0F, FontStyle.Bold);
 
     
@@ -139,7 +142,7 @@ namespace mojavePos.Han
         {
             comm = new Commons();
             Button btn = new Button();
-            btnSet bs1 = new btnSet(this, "ok", "검색", 50, 22, 600, 40, ok_Click);
+            btnSet bs1 = new btnSet(this, "ok", "검색", 50, 22, 450, 39, ok_Click);
             btn = ct.btn(bs1);
             Controls.Add(btn);
         }
@@ -153,12 +156,14 @@ namespace mojavePos.Han
                 ListViewItem item = lv.Items[i];
                 total += Convert.ToInt64(item.SubItems[4].Text);
             }
-            ls1 = new lbSet(this, "lb2", "총 금액: " + total.ToString()+"원", 600, 50, 650, 20, 30);
+            ls1 = new lbSet(this, "lb2", "총 금액: " + total.ToString()+"원", 600, 50, 530, 25, 30);
 
             label2 = new Label();
             label2 = ct.lable(ls1);
-            label2.BackColor = Color.Beige;
-            label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
+            label2.BackColor = Color.Transparent;
+            label2.Parent = this;
+            label2.Font = new Font(FontFamily.GenericSansSerif, 25, FontStyle.Bold);
+            label2.ForeColor = Color.White;
             Controls.Add(label2);
         }
         private void ok_Click(object sender, EventArgs e)
@@ -192,7 +197,7 @@ namespace mojavePos.Han
                     ls1 = new lbSet(this, "lb2", arr2[0] + "원", 600, 50, 650, 20, 30);
 
                     label2.Text = "총 금액: " + arr2[0] + "원";
-                    label2.BackColor = Color.Beige;
+                    
                     label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
                 }
                 Controls.Add(label2);

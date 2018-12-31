@@ -93,9 +93,39 @@ namespace mojavePos.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap test2 {
+        internal static System.Drawing.Bitmap 가방수정 {
             get {
-                object obj = ResourceManager.GetObject("test2", resourceCulture);
+                object obj = ResourceManager.GetObject("가방수정", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 모자브포스 {
+            get {
+                object obj = ResourceManager.GetObject("모자브포스", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 모자브포스2 {
+            get {
+                object obj = ResourceManager.GetObject("모자브포스2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 모자브포스3 {
+            get {
+                object obj = ResourceManager.GetObject("모자브포스3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +146,26 @@ namespace mojavePos.Properties {
         internal static System.Drawing.Bitmap 버튼 {
             get {
                 object obj = ResourceManager.GetObject("버튼", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 자물쇠잠김 {
+            get {
+                object obj = ResourceManager.GetObject("자물쇠잠김", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap 자물쇠풀림 {
+            get {
+                object obj = ResourceManager.GetObject("자물쇠풀림", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

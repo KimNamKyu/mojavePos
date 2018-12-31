@@ -36,6 +36,7 @@ namespace mojavePos
         public FORM_02()
         {
             InitializeComponent();
+            this.CenterToScreen();
             Load += FORM_02_Load;
         }
 
@@ -147,28 +148,39 @@ namespace mojavePos
         private void btn_Click(object sender, EventArgs e)
         {   
             F1 = new FORM_01();
+            api = new Module();
+            string Correctid = api.getIdPass("http://192.168.3.28:5000/sp_Pos_Count");
 
-            if (네임택박.Text.Length == 0 || 포지션택박.Text.Length == 0 || 패스워드택박.Text.Length == 0 || 시리얼택박.Text.Length == 0)
+            if (Correctid !=  "[[\"0\"]]")
             {
-              
-                MessageBox.Show("값을 입력 받지 않았습니다.\n 확인 후 입력해주세요.");
+                MessageBox.Show("아이디가 존재 합니다.");
             }
             else
             {
-                if (시리얼택박.Text != "GUDI")
 
+                if (네임택박.Text.Length == 0 || 포지션택박.Text.Length == 0 || 패스워드택박.Text.Length == 0 || 시리얼택박.Text.Length == 0)
                 {
-                    MessageBox.Show("시리얼 번호가 맞지 않습니다. 다시 입력해주시기 바랍니다.");
+
+                    MessageBox.Show("값을 입력 받지 않았습니다.\n 확인 후 입력해주세요.");
                 }
                 else
                 {
-                    Hashtable ht = new Hashtable();
-                    api = new Module();
-                    ht.Add("ps_Id", 네임택박.Text);
-                    ht.Add("ps_Rank", 포지션택박.Text);
-                    ht.Add("ps_passwd", 패스워드택박.Text);
-                    ht.Add("ps_code", 시리얼택박.Text);
-                    api.insert_Category("http://192.168.3.28:5000/SI_insert_Pos", ht);
+                    if (시리얼택박.Text != "GUDI")
+
+                    {
+                        MessageBox.Show("시리얼 번호가 맞지 않습니다. 다시 입력해주시기 바랍니다.");
+                    }
+                    else
+                    {
+                        Hashtable ht = new Hashtable();
+
+                        ht.Add("ps_Id", 네임택박.Text);
+                        ht.Add("ps_Rank", 포지션택박.Text);
+                        ht.Add("ps_passwd", 패스워드택박.Text);
+                        ht.Add("ps_code", 시리얼택박.Text);
+                        api.insert_Category("http://192.168.3.28:5000/SI_insert_Pos", ht);
+                        Close();
+                    }
                 }
             }
         }

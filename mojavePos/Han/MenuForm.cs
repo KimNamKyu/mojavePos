@@ -15,16 +15,18 @@ namespace mojavePos.Han
 {
     public partial class MenuForm : Form
     {
-        public static string camo_no;
+        public static string camo_no , camo_no1;
         _Create ct = new _Create();
         Panel bottom, line;
         private Graphics gr;
         Module api = new Module();
-        Button button, 수정버튼;
+        Button button, 수정버튼 ,수정버튼2;
         public string no;
         Category_Update_delete_modal CUD;
-        ListView.SelectedListViewItemCollection slv;
-        public ListView listview2;
+        Menu_update_delete_modal MCUD;
+        ListView.SelectedListViewItemCollection slv, slv2;
+        ListViewItem item , item2;
+        public ListView listview2 , listview;
         public MenuForm()
         {
             InitializeComponent();
@@ -33,50 +35,57 @@ namespace mojavePos.Han
 
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            ClientSize = new Size(1500, 800);
+            ClientSize = new Size(1200, 800);
 
-            lvSet lv1 = new lvSet(this, "lv1", 300, 500, 570, 230, lv_mouseClick);
-            ListView listview = ct.listview(lv1);
+            lvSet lv1 = new lvSet(this, "lv1", 300, 265, 170, 230, lv_mouseClick);
+            listview = ct.listview(lv1);
             listview.Font = new Font("Tahoma", 20, FontStyle.Bold);
+            listview.Items.Clear();
             listview.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             listview.Columns.Add(" ", 0, HorizontalAlignment.Center);
             listview.Columns.Add(" ", 296, HorizontalAlignment.Center);
             Controls.Add(listview);
             api = new Module();
             api.selectListView("http://192.168.3.28:5000/mc_select", listview);
+           
 
-            lvSet lv2 = new lvSet(this, "lv2", 400, 500, 1000, 230, lv2_mouseClick);
+            lvSet lv2 = new lvSet(this, "lv2", 350, 500, 625, 230, lv2_mouseClick);
             listview2 = ct.listview(lv2);
             listview2.Font = new Font("Tahoma", 15, FontStyle.Bold);
             listview2.Columns.Add("", 0, HorizontalAlignment.Center);
             listview2.Columns.Add("메뉴명", 200, HorizontalAlignment.Center);
-            listview2.Columns.Add("가격", 100, HorizontalAlignment.Center);
+            listview2.Columns.Add("가격", 150, HorizontalAlignment.Center);
 
             //listview2.Columns.Add("변경/삭제", 100, HorizontalAlignment.Center);
 
-            btnSet btn1_1 = new btnSet(this, "btn_1_1", "--", 30, 30, 770, 170, btn3_Click);
+            btnSet btn1_1 = new btnSet(this, "btn_1_1", "--", 30, 30, 370, 170, btn3_Click);
             수정버튼 = ct.btn(btn1_1);
             Controls.Add(수정버튼);
 
-            pnSet pn3 = new pnSet(this, 950, 2, 500, 218);
+            btnSet btn2_1 = new btnSet(this, "btn_2_1", "--", 30, 30, 840, 170, btn4_Click);
+            수정버튼2 = ct.btn(btn2_1);
+            Controls.Add(수정버튼2);
+
+            pnSet pn3 = new pnSet(this, 950, 2, 100, 218);
             line = ct.panel(pn3);
             Controls.Add(line);
 
-            pnSet pn2 = new pnSet(this, 1500, 800, 0, 0);
+            pnSet pn2 = new pnSet(this, 1200, 800, 0, 0);
             bottom = ct.panel(pn2); // 패널이름 : bottom
             Controls.Add(bottom);
             bottom.Controls.Add(listview);
             bottom.Controls.Add(listview2);
             bottom.Controls.Add(수정버튼);
+            bottom.Controls.Add(수정버튼2);
 
             ArrayList arr = new ArrayList();
-            arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 600, 100, 35));
-            arr.Add(new btnSet(this, "btn_1", "", 30, 30, 730, 170, btn_Click));
+            arr.Add(new lbSet(this, "lb1", "Category", 250, 60, 200, 100, 35));
+            arr.Add(new btnSet(this, "btn_1", "", 30, 30, 330, 170, btn_Click));
 
-            arr.Add(new pictureBoxSet(this, 40, 40, 680, 165, " "));
-            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 1110, 100, 35));
-            arr.Add(new btnSet(this, "btn_2", "", 30, 30, 1200, 170, btn2_Click));
-            arr.Add(new pictureBoxSet(this, 40, 40, 1150, 165, " "));
+            arr.Add(new pictureBoxSet(this, 40, 40, 280, 165, " "));
+            arr.Add(new lbSet(this, "lb2", "Menu", 200, 50, 710, 100, 35));
+            arr.Add(new btnSet(this, "btn_2", "", 30, 30, 800, 170, btn2_Click));
+            arr.Add(new pictureBoxSet(this, 40, 40, 750, 165, " "));
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -117,7 +126,10 @@ namespace mojavePos.Han
                     Me_mo.Location = new Point(100, 100);
                     Me_mo.StartPosition = FormStartPosition.Manual;
                     Me_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
-                    Me_mo.Show();
+                    Me_mo.ShowDialog();
+                    api = new Module();
+                    api.selectListView("http://192.168.3.28:5000/mc_select", listview);
+
                     break;
             }
 
@@ -149,30 +161,65 @@ namespace mojavePos.Han
             {
                 ListViewItem item = slv[i];
                 no = item.SubItems[0].Text;
-               
+                camo_no = item.SubItems[0].Text;
+                
+                this.No = camo_no;
             }
             api.selectListView_Menu("http://192.168.3.28:5000/mn_select", listview2, no);
+        }
+        private void lv2_mouseClick(object o, EventArgs e)
+        {
+            수정버튼2 = new Button();
+            api = new Module();
+            button = new Button();
+            MCUD = new Menu_update_delete_modal();
+            ListView lv2 = (ListView)o;
+            slv2 = lv2.SelectedItems;
+            for(int i = 0; i<slv2.Count; i++)
+            {
+                ListViewItem item2 = slv2[i];
+                no = item2.SubItems[0].Text;
+                camo_no1 = item2.SubItems[0].Text;
+                
+                this.No1 = camo_no1;
+            }
+
         }
         private void btn3_Click(object o, EventArgs e)
         {
             if (MessageBox.Show("수정하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                CUD.Show();
+                CUD.ShowDialog();
+                
                 for (int i = 0; i < slv.Count; i++)
                 {
-                    ListViewItem item = slv[i];
+                    item = slv[i];
 
-                    camo_no = item.SubItems[0].Text;
-                    this.No = camo_no;
                     CUD.textbox1.Text = item.SubItems[1].Text;
+                   
+                }
+                api = new Module();
+                api.selectListView("http://192.168.3.28:5000/mc_select", listview);
+            }
+            MessageBox.Show(camo_no);
+        }
+        private void btn4_Click(object o, EventArgs e)
+        {
+            MenuForm mf = new MenuForm();
+            if (MessageBox.Show("수정하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                MCUD.ShowDialog();
+                api = new Module();
+                api.selectListView("http://192.168.3.28:5000/mn_select", listview);
+                for (int i = 0; i < slv.Count; i++)
+                {
+                    item2 = slv2[i];
+                    MCUD.textbox1.Text = item2.SubItems[1].Text;
+                    MCUD.textbox2.Text = item2.SubItems[2].Text;
                 }
             }
         }
-        private void lv2_mouseClick(object o, EventArgs e)
-        {
-
-
-        }
+        
         public string No
         {
             get
@@ -184,11 +231,26 @@ namespace mojavePos.Han
                 camo_no = value;
             }
         }
+        public string No1
+        {
+            get
+            {
+                return camo_no1;
+            }
+            set
+            {
+                camo_no1 = value;
+            }
+        }
         private delegate void del11();
         public void run2()
         {
             Menu_Insert_modal ff2 = new Menu_Insert_modal();
-            ff2.Show();
+            ff2.ShowDialog();
+            api = new Module();
+            api.selectListView("http://192.168.3.28:5000/mc_select", listview);
+            api.selectListView("http://192.168.3.28:5000/mn_select", listview);
+
             string sql = no;
           
             ff2.value1 = sql;
