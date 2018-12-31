@@ -29,6 +29,7 @@ namespace mojavePos
         private ArrayList list;
         private string _mNo;
         private string _mNm;
+        private string _oCount;
         ArrayList Orderlist = new ArrayList();
         int Total;
         private TextBox textbox;
@@ -55,7 +56,7 @@ namespace mojavePos
             beforeOrder();
             Orderlist = api.ListView(lv, list);
             ListCommon();
-           
+            
         }
 
         public void listView()
@@ -70,9 +71,10 @@ namespace mojavePos
             arr.Add(new btnSet(this, "btn5", "-", 130, 70, 152, 310, btn_Click));
             arr.Add(new btnSet(this, "btn6", "선택 취소", 130, 70, 292, 310, btn_Click));
             arr.Add(new btnSet(this, "btn7", "전체 취소", 130, 70, 432, 310, btn_Click));
-            arr.Add(new lbSet(this, "label1", "Table No. :", 150, 40, 15, 420, 20));
-            arr.Add(new lbSet(this, "label2", "총 금 액", 200, 40, 15, 540, 20));
-            arr.Add(new tbSet(this, "총금액", 280, 40, 15, 580));
+            arr.Add(new btnSet(this, "btn8", "주문 수정", 230, 100, 30, 400, btn_Click));
+            arr.Add(new lbSet(this, "label1", "Table No. :", 150, 40, 15, 580, 20));
+            arr.Add(new lbSet(this, "label2", "총 금 액", 200, 40, 15, 640, 20));
+            arr.Add(new tbSet(this, "총금액", 250, 40, 15, 680));
 
             for (int i = 0; i < arr.Count; i++)
             {
@@ -114,7 +116,7 @@ namespace mojavePos
                     panel.Controls.Add(textbox);
                 }
             }
-            lbSet lb = new lbSet(this, "tNo", "", 100, 40, 170, 420, 20);
+            lbSet lb = new lbSet(this, "tNo", "", 100, 40, 170, 580, 20);
             Label label2 = ct.lable(lb);
             label2.Text = _tNo;
             label2.Font = new Font("굴림",20, FontStyle.Bold);
@@ -135,6 +137,7 @@ namespace mojavePos
                 ListViewItem item = itemGroup[i];
                 _mNo = item.SubItems[0].Text;
                 _mNm = item.SubItems[1].Text;
+                _oCount = item.SubItems[3].Text;
             }
         }
 
@@ -184,12 +187,13 @@ namespace mojavePos
                         ht.Add("spName", "sp_Order_Insert");
                         ht.Add("tNo", _tNo);
                         ht.Add("mNo", arr[0]);
-                        ht.Add("oCount" ,arr[3]);
+                        ht.Add("oCount", arr[3]);
                         if (!api.Post("http://192.168.3.28:5000/sp_insert", ht))
                         {
                             MessageBox.Show("주문오류");
                             break;
                         }
+                        //MessageBox.Show(arr[1]);
                     }
                     this.Visible = false;
                     break;
@@ -233,10 +237,55 @@ namespace mojavePos
                             break;
                         }
                     }
+
+                    for (int i = 0; i < Orderlist.Count; i++)
+                    {
+                        ht = new Hashtable();
+                        string[] arr = (string[])Orderlist[i];
+                        ht.Add("spName", "sp_Delete");
+                        ht.Add("tNo", _tNo);
+                        ht.Add("mNo", _mNo);
+                        if (!api.Post("http://192.168.3.28:5000/sp_list_delete", ht))
+                        {
+                            MessageBox.Show("주문수정오류");
+                            break;
+                        }
+                    }
+
                     break;
                 case "btn7": //전체 취소
+                    for (int i = 0; i < Orderlist.Count; i++)
+                    {
+                        ht = new Hashtable();
+                        ht.Add("spName", "sp_Total_Delete");
+                        ht.Add("tNo", _tNo);
+                        if (!api.Post("http://192.168.3.28:5000/sp_delete", ht))
+                        {
+                            MessageBox.Show("전체 취소 오류");
+                            break;
+                        }
+                    }
+
                     Orderlist = new ArrayList();
                     ListCommon();
+                    break;
+
+                case "btn8":
+                    for (int i = 0; i < Orderlist.Count; i++)
+                    {
+                        ht = new Hashtable();
+                        string[] arr = (string[])Orderlist[i];
+                        ht.Add("spName", "sp_Order_Update");
+                        ht.Add("tNo", _tNo);
+                        ht.Add("mNo", _mNo);
+                        ht.Add("oCount", arr[3]);
+                        if (!api.Post("http://192.168.3.28:5000/sp_update", ht))
+                        {
+                            MessageBox.Show("주문수정오류");
+                            break;
+                        }
+                    }
+                    this.Visible = false;
                     break;
             }
         }
@@ -361,7 +410,6 @@ namespace mojavePos
             }
         }
 
-        
         private void beforeOrder()
         {
             for (int i = 0; i < list.Count; i++)
