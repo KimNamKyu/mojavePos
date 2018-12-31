@@ -194,11 +194,11 @@ namespace mojavePos.Han
                 if (arr2[0] == "") label2.Text = "총 금액: 0원";
                 else
                 {
-                    ls1 = new lbSet(this, "lb2", arr2[0] + "원", 600, 50, 650, 20, 30);
+                    ls1 = new lbSet(this, "lb2", arr2[0] + "원", 600, 50, 650,11, 30);
 
                     label2.Text = "총 금액: " + arr2[0] + "원";
                     
-                    label2.Font = new Font(FontFamily.GenericSansSerif, 30.0F, FontStyle.Bold);
+                    label2.Font = new Font(FontFamily.GenericSansSerif, 25.0F, FontStyle.Bold);
                 }
                 Controls.Add(label2);
             }
