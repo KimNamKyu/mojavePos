@@ -73,6 +73,8 @@ namespace mojavePos.Han
                 Button button = ct.btn((btnSet)btn_list[i]);
                 button.BackColor = Color.FromArgb(19, 38, 78);
                 button.ForeColor = Color.White;
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 0;
                 head.Controls.Add(button);
             }
 

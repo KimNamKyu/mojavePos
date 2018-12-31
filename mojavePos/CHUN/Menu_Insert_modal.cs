@@ -21,6 +21,7 @@ namespace mojavePos.CHUN
         string abb;
         public Menu_Insert_modal()
         {
+            this.ControlBox = false;
             InitializeComponent();
             Load += Menu_Insert_modal_Load;
         }

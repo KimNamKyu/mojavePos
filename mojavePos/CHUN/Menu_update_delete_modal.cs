@@ -22,6 +22,7 @@ namespace mojavePos.CHUN
 
         public Menu_update_delete_modal()
         {
+            this.ControlBox = false;
             InitializeComponent();
             Load += Menu_update_delete_modal_Load;
         }

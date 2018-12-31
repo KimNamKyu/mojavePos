@@ -123,9 +123,9 @@ namespace mojavePos.Han
             {
                 case "btn_1":
                     Category_Insert_modal Me_mo = new Category_Insert_modal();
-                    Me_mo.Location = new Point(100, 100);
+                    //Me_mo.Location = new Point(100, 100);
                     Me_mo.StartPosition = FormStartPosition.Manual;
-                    Me_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
+                    Me_mo.Location = new System.Drawing.Point(550, 420); //모달 처음 위치값 지정<나중에 바꾸기>
                     Me_mo.ShowDialog();
                     api = new Module();
                     api.selectListView("http://192.168.3.28:5000/mc_select", listview);
@@ -140,11 +140,7 @@ namespace mojavePos.Han
             switch (btn.Name)
             {
                 case "btn_2":
-                    Menu_Insert_modal Menu_mo = new Menu_Insert_modal();
-                    Menu_mo.Location = new Point(100, 100);
-                    Menu_mo.StartPosition = FormStartPosition.Manual;
-                    Menu_mo.Location = new System.Drawing.Point(240, 30); //모달 처음 위치값 지정<나중에 바꾸기>
-
+                    
                     run2();
                     break;
             }
@@ -189,6 +185,8 @@ namespace mojavePos.Han
         {
             if (MessageBox.Show("수정하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                CUD.StartPosition = FormStartPosition.Manual;
+                CUD.Location = new System.Drawing.Point(550, 420);
                 CUD.ShowDialog();
                 
                 for (int i = 0; i < slv.Count; i++)
@@ -201,13 +199,15 @@ namespace mojavePos.Han
                 api = new Module();
                 api.selectListView("http://192.168.3.28:5000/mc_select", listview);
             }
-            MessageBox.Show(camo_no);
+            //MessageBox.Show(camo_no);
         }
         private void btn4_Click(object o, EventArgs e)
         {
             MenuForm mf = new MenuForm();
             if (MessageBox.Show("수정하시겠습니까?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                MCUD.StartPosition = FormStartPosition.Manual;
+                MCUD.Location = new System.Drawing.Point(1000, 420);
                 MCUD.ShowDialog();
                 api = new Module();
                 api.selectListView("http://192.168.3.28:5000/mn_select", listview);
@@ -246,6 +246,9 @@ namespace mojavePos.Han
         public void run2()
         {
             Menu_Insert_modal ff2 = new Menu_Insert_modal();
+
+            ff2.StartPosition = FormStartPosition.Manual;
+            ff2.Location = new System.Drawing.Point(1000, 420); //모달 처음 위치값 지정<나중에 바꾸기>
             ff2.ShowDialog();
             api = new Module();
             api.selectListView("http://192.168.3.28:5000/mc_select", listview);

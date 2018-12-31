@@ -27,7 +27,8 @@ namespace mojavePos
         //static ToolStripStatusLabel StripLb;
         //StatusStrip statusStrip;
         _Create ct;
-        RichTextBox 네임택박, 포지션택박, 패스워드택박, 시리얼택박;
+        RichTextBox 네임택박, 포지션택박, 시리얼택박;
+        TextBox 패스워드택박;
         FORM_01 F1;
         FORM_02 F2;
         Module api;
@@ -42,6 +43,7 @@ namespace mojavePos
 
         private void FORM_02_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(750, 430);  //폼 사이즈
             this.ControlBox = false;        //최소화 최대화 버튼 없애기
 
@@ -60,9 +62,10 @@ namespace mojavePos
             Controls.Add(포지션택박);
 
             //Password 텍스트박스 출력
-            Richtb tx3 = new Richtb(this, "txt3", 170, 30, 30, 180);
-            패스워드택박 = ct.richbox(tx3);
-            패스워드택박.SelectionFont = new Font("Tahoma", 15, FontStyle.Bold);
+            tbSet tx3 = new tbSet(this, "txt3", 170, 30, 30, 180);
+            패스워드택박 = ct.txtbox(tx3);
+            패스워드택박.PasswordChar = '*';
+            패스워드택박.Font = new Font("Tahoma", 15, FontStyle.Bold);
             Controls.Add(패스워드택박);
 
             //Serial 텍스트박스 출력
@@ -103,24 +106,19 @@ namespace mojavePos
                     if (typeof(btnSet) == arr[i].GetType())
                     {
                         Button button = ct.btn((btnSet)arr[i]);
+                        button.FlatStyle = FlatStyle.Flat;
+                        button.FlatAppearance.BorderSize = 0;
                         button.Font = new Font("Tahoma", 8, FontStyle.Bold);
                         패널.Controls.Add(button);
                     }
                 }
             }
-            //사진넣기
-            //PictureBox mojave = new PictureBox();
-            //mojave.Image = (Bitmap)mojavePos.Properties.Resources.ResourceManager.GetObject("그림1");
-            //mojave.SizeMode = PictureBoxSizeMode.StretchImage;
-            //mojave.Size = new Size(300, 100);
-            //mojave.Location = new Point(0, 0);
-
+          
             pnSet pn2 = new pnSet(this, 420, 370, 300, 30);
             Panel 패널2 = ct.panel(pn2);
             패널2.BackColor = Color.FromArgb(232, 227, 227);
             Controls.Add(패널2);   //패널 화면 출력
-            //패널2.Controls.Add(mojave);
-
+           
             ArrayList arr2 = new ArrayList();
             arr2.Add(new lbSet(this, "label5", "ELBON the table     _", 140, 15, 35, 40, 10));
             arr2.Add(new lbSet(this, "label6", "Mojave of Pos", 200, 27, 180, 29, 30));
