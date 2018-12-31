@@ -32,7 +32,10 @@ namespace mojavePos
 
         private void MainPos_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.DarkBlue;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.ControlBox = false;
+            //this.BackColor = Color.DarkBlue;
+            this.BackColor = Color.FromArgb(19, 38, 78);
             comm = new Commons();
             this.IsMdiContainer = true;
             this.ClientSize = new Size(1300, 900);
@@ -53,7 +56,7 @@ namespace mojavePos
             
             Panel pnl2 = new Panel();
             pnl2 = ct.panel((pnSet)arr[0]);
-            pnl2.BackColor = Color.Gainsboro;
+            pnl2.BackColor = Color.FromArgb(19, 38, 78);
             Controls.Add(pnl2);
 
             PictureBox mojave = new PictureBox();
@@ -73,11 +76,13 @@ namespace mojavePos
             arr.Add(new lbSet(this, "라벨2", "종료", 150, 50, 100, 20, 35));
             
             Label label1 = ct.lable((lbSet)arr[2]);
+            label1.Font = new Font("Tahoma", 35, FontStyle.Bold);
             pnl3.Controls.Add(label1);
 
             arr.Add(new pnSet(this, 1280, 780, 10, 110));
             pn4 = new Panel();
             pn4 = ct.panel((pnSet)arr[3]);
+            //pn4.BackColor = Color.FromArgb(19, 38, 78);
             pn4.BackColor = Color.Beige;
             Controls.Add(pn4);
 
@@ -114,8 +119,11 @@ namespace mojavePos
                 if (typeof(btnSet) == array[i].GetType())
                 {
                     Button button = ct.btn((btnSet)array[i]);
-                    button.BackColor = Color.Gray;
+                    button.BackColor = Color.Silver;
                     button.Enabled = false;
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Font = new Font("Tahoma", 20, FontStyle.Bold);
                     pn4.Controls.Add(button);
                 }
             }
@@ -130,6 +138,9 @@ namespace mojavePos
                 for (int i = 0; i < arrayList.Count; i++)
                 {
                     Button button = ct.btn((btnSet)arrayList[i]);
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.FlatAppearance.BorderSize = 0;
+                    button.Font = new Font("Tahoma", 15, FontStyle.Bold);
                     pn4.Controls.Add(button);
                 }
             }

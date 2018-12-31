@@ -94,7 +94,7 @@ namespace mojavePos
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
                     lv.Columns.Add("금액", 100, HorizontalAlignment.Center);
-                    lv.Font = new Font("굴림", 15, FontStyle.Bold);
+                    lv.Font = new Font("Tahoma", 15, FontStyle.Bold);
                 }
                 else if (typeof(btnSet) == arr[i].GetType())
                 {
@@ -104,14 +104,14 @@ namespace mojavePos
                 else if (typeof(lbSet) == arr[i].GetType())
                 {
                     Label label = ct.lable((lbSet)arr[i]);
-                    label.Font = new Font("굴림", 20, FontStyle.Bold);
+                    label.Font = new Font("Tahoma", 20, FontStyle.Bold);
                     panel.Controls.Add(label);
                 }
                 else if(typeof(tbSet) == arr[i].GetType())
                 {
                     textbox = ct.txtbox((tbSet)arr[i]);
                     textbox.ReadOnly = true;
-                    textbox.Font = new Font("굴림", 18, FontStyle.Bold);
+                    textbox.Font = new Font("Tahoma", 18, FontStyle.Bold);
                    
                     panel.Controls.Add(textbox);
                 }
@@ -119,7 +119,7 @@ namespace mojavePos
             lbSet lb = new lbSet(this, "tNo", "", 100, 40, 170, 580, 20);
             Label label2 = ct.lable(lb);
             label2.Text = _tNo;
-            label2.Font = new Font("굴림",20, FontStyle.Bold);
+            label2.Font = new Font("Tahoma", 20, FontStyle.Bold);
             panel.Controls.Add(label2);
         }
 
