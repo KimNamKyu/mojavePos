@@ -78,7 +78,7 @@ namespace mojavePos
             arr.Add(new pnSet(this, 1280, 780, 10, 110));
             pn4 = new Panel();
             pn4 = ct.panel((pnSet)arr[3]);
-            pn4.BackColor = Color.Beige;
+            pn4.BackColor = Color.Gainsboro;
             Controls.Add(pn4);
 
         }
@@ -108,7 +108,7 @@ namespace mojavePos
                 if (typeof(pnSet) == array[i].GetType())
                 {
                     Panel panel = ct.panel((pnSet)array[i]);
-                    panel.BackColor = Color.Silver;
+                    panel.BackColor = Color.FromArgb(19, 38, 78);
                     pn4.Controls.Add(panel);
                 }
                 if (typeof(btnSet) == array[i].GetType())

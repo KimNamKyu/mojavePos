@@ -116,7 +116,7 @@ namespace mojavePos.Modules
                     {
                         arr[j] = ja[j].ToString();
                     }
-                    arrayList.Add(new btnSet(control, arr[1], arr[1], 200, 100, 200 * (i % 3), 100 * (i / 3), eh_btn));
+                    arrayList.Add(new btnSet(control, arr[1], arr[1], 190, 100, 190 * (i % 3), 100 * (i / 3), eh_btn));
                     string Price = arr[2];
                     string Count = arr[3];
                     // MessageBox.Show(Price);
