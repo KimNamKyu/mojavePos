@@ -18,7 +18,7 @@ namespace mojavePos
             panel.Location = (Point)hashtable["point"];
             panel.BackColor = (Color)hashtable["color"];
             panel.Name = hashtable["name"].ToString(); 
-            return panel;
+            return panel;//
         }
 
         public Button getButton(Hashtable hashtable)

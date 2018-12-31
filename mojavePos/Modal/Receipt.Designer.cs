@@ -1,6 +1,6 @@
-﻿namespace mojavePos.Han
+﻿namespace mojavePos.Modal
 {
-    partial class MenuForm
+    partial class Receipt
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
-            this.SuspendLayout();
-            // 
-            // MenuForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MenuForm";
-            this.Text = "MenuForm";
-            this.ResumeLayout(false);
-
+            this.Text = "Receipt";
         }
 
         #endregion

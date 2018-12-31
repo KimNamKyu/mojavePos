@@ -156,23 +156,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\LOGIN.cs">
+    <Compile Include="CHUN\FORM_01.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\LOGIN.Designer.cs">
-      <DependentUpon>LOGIN.cs</DependentUpon>
+    <Compile Include="CHUN\FORM_01.Designer.cs">
+      <DependentUpon>FORM_01.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\ID_Maker.cs">
+    <Compile Include="CHUN\FORM_02.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\ID_Maker.Designer.cs">
-      <DependentUpon>ID_Maker.cs</DependentUpon>
+    <Compile Include="CHUN\FORM_02.Designer.cs">
+      <DependentUpon>FORM_02.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\Common_Form.cs">
+    <Compile Include="CHUN\FORM_03.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\Common_Form.Designer.cs">
-      <DependentUpon>Common_Form.cs</DependentUpon>
+    <Compile Include="CHUN\FORM_03.Designer.cs">
+      <DependentUpon>FORM_03.cs</DependentUpon>
     </Compile>
     <Compile Include="lbSet.cs" />
     <Compile Include="lvSet.cs" />
@@ -194,6 +194,12 @@
     <Compile Include="Modal\Coupon.Designer.cs">
       <DependentUpon>Coupon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modal\Receipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modal\Receipt.Designer.cs">
+      <DependentUpon>Receipt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\WebAPI.cs" />
     <Compile Include="pictureBoxSet.cs" />
     <Compile Include="pnSet.cs" />
@@ -202,14 +208,41 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
-    <EmbeddedResource Include="CHUN\LOGIN.resx">
-      <DependentUpon>LOGIN.cs</DependentUpon>
+    <EmbeddedResource Include="CHUN\Category_Insert_modal.resx">
+      <DependentUpon>Category_Insert_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Category_Update_delete_modal.resx">
+      <DependentUpon>Category_Update_delete_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\FORM_01.resx">
+      <DependentUpon>FORM_01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\FORM_02.resx">
+      <DependentUpon>FORM_02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\FORM_03.resx">
+      <DependentUpon>FORM_03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Menu_Insert_modal.resx">
+      <DependentUpon>Menu_Insert_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CHUN\Menu_update_delete_modal.resx">
+      <DependentUpon>Menu_update_delete_modal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Han\ManagerForm.resx">
+      <DependentUpon>ManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Han\MenuForm.resx">
+      <DependentUpon>MenuForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuForm\CountView.resx">
       <DependentUpon>CountView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="menuForm\MainPos.resx">
+      <DependentUpon>MainPos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modal\Cash.resx">
       <DependentUpon>Cash.cs</DependentUpon>
