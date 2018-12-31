@@ -173,7 +173,7 @@ namespace mojavePos
                     Cash cash = new Cash(_tNo, Totalresult);
                     cash.StartPosition = FormStartPosition.CenterParent;
                     cash.Show();
-
+                    this.Visible = false;
                     break;
 
                 case "btn3":
