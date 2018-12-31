@@ -22,7 +22,6 @@ namespace mojavePos.Han
         public ManagerForm()
         {
             InitializeComponent();
-            this.CenterToScreen();
             Load += MemberForm_Load;
         }
         private void MemberForm_Load(object sender, EventArgs e)

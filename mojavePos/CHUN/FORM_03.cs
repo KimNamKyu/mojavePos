@@ -263,12 +263,8 @@ namespace mojavePos
         {
             ManagerForm MF = new ManagerForm();
             MF.StartPosition = FormStartPosition.Manual;
-            MF.Location = new Point(200, 0);
+            MF.Location = new Point(350, 80);
             MF.Show();
-
-            MF.Show();
-
         }
-      
     }
 }
