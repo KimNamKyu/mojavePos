@@ -164,7 +164,6 @@ namespace mojavePos.Modal
                     api.Post("http://192.168.3.28:5000/sp_delete", ht);
                     wc.Post2("http://192.168.3.28:5000/insert_CM");
                     this.Dispose();
-                    
                     break;
             }
         }
