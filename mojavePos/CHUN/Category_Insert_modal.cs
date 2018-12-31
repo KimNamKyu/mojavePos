@@ -13,7 +13,7 @@ using WindowsFormsApp;
 namespace mojavePos.CHUN
 {
     public partial class Category_Insert_modal : Form
-    {
+    {//
         _Create ct = new _Create();
         TextBox textbox1;
         private string no;
