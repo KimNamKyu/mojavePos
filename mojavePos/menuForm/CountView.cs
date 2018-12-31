@@ -88,7 +88,7 @@ namespace mojavePos
                     lv = ct.listview((lvSet)arr[i]);
                     lv.BackColor = Color.WhiteSmoke;
                     panel.Controls.Add(lv);
-                    lv.Columns.Add("", 50, HorizontalAlignment.Center);
+                    lv.Columns.Add("", 0, HorizontalAlignment.Center);
                     lv.Columns.Add("메뉴명", 250, HorizontalAlignment.Center);
                     lv.Columns.Add("단가", 100, HorizontalAlignment.Center);
                     lv.Columns.Add("수량", 85, HorizontalAlignment.Center);
@@ -137,7 +137,6 @@ namespace mojavePos
                 _mNo = item.SubItems[0].Text;
                 _mNm = item.SubItems[1].Text;
                 _oCount = item.SubItems[3].Text;
-              
             }
         }
 
@@ -196,7 +195,6 @@ namespace mojavePos
                             break;
                         }
                     }
-                    
                     this.Visible = false;
                     break;
 
