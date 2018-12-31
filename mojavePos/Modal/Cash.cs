@@ -155,7 +155,7 @@ namespace mojavePos.Modal
                     //textbox3.Text = (Convert.ToInt32(textbox1.Text) - Convert.ToInt32(textbox2.Text)).ToString();
                     break;
                 case "결제완료":
-                    if (textbox2 == null) MessageBox.Show("받은금액을 입력바랍니다.");
+                    if (textbox4 == null) MessageBox.Show("받은금액을 입력바랍니다.");
                     if (textbox2 != null)
                     { 
                         cv.Visible = false;

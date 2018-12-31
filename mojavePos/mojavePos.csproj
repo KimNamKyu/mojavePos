@@ -168,11 +168,11 @@
     <Compile Include="CHUN\ID_Maker.Designer.cs">
       <DependentUpon>ID_Maker.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\Common_Form.cs">
+    <Compile Include="CHUN\FORM_03.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\Common_Form.Designer.cs">
-      <DependentUpon>Common_Form.cs</DependentUpon>
+    <Compile Include="CHUN\FORM_03.Designer.cs">
+      <DependentUpon>FORM_03.cs</DependentUpon>
     </Compile>
     <Compile Include="lbSet.cs" />
     <Compile Include="lvSet.cs" />
@@ -202,6 +202,9 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
+    <EmbeddedResource Include="CHUN\FORM_03.resx">
+      <DependentUpon>FORM_03.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CHUN\LOGIN.resx">
       <DependentUpon>LOGIN.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +249,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\moicon_BaY_icon.ico" />
     <None Include="Resources\모자브포스3.png" />
     <None Include="Resources\모자브포스2.png" />
     <None Include="Resources\모자브포스.png" />
