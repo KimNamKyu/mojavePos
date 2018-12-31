@@ -156,23 +156,23 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_01.cs">
+    <Compile Include="CHUN\LOGIN.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_01.Designer.cs">
-      <DependentUpon>FORM_01.cs</DependentUpon>
+    <Compile Include="CHUN\LOGIN.Designer.cs">
+      <DependentUpon>LOGIN.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_02.cs">
+    <Compile Include="CHUN\ID_Maker.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_02.Designer.cs">
-      <DependentUpon>FORM_02.cs</DependentUpon>
+    <Compile Include="CHUN\ID_Maker.Designer.cs">
+      <DependentUpon>ID_Maker.cs</DependentUpon>
     </Compile>
-    <Compile Include="CHUN\FORM_03.cs">
+    <Compile Include="CHUN\Common_Form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CHUN\FORM_03.Designer.cs">
-      <DependentUpon>FORM_03.cs</DependentUpon>
+    <Compile Include="CHUN\Common_Form.Designer.cs">
+      <DependentUpon>Common_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="lbSet.cs" />
     <Compile Include="lvSet.cs" />
@@ -202,8 +202,8 @@
     <Compile Include="Richtb.cs" />
     <Compile Include="tbSet.cs" />
     <Compile Include="_Create.cs" />
-    <EmbeddedResource Include="CHUN\FORM_01.resx">
-      <DependentUpon>FORM_01.cs</DependentUpon>
+    <EmbeddedResource Include="CHUN\LOGIN.resx">
+      <DependentUpon>LOGIN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="menuForm\CountView.resx">
       <DependentUpon>CountView.cs</DependentUpon>

@@ -131,7 +131,7 @@ namespace mojavePos
             Controls.Add(패널4);   //패널 화면 출력
 
             ArrayList arr3 = new ArrayList();
-            arr3.Add(new lbSet(this, "lb3", "관리자 : (주)Mojav  연락처 : 1588-3000", 300, 20, 517, 3, 8));
+            arr3.Add(new lbSet(this, "lb3", "관리자 : (주)Mojave  연락처 : 1588-3000", 300, 20, 517, 3, 8));
             for (int i = 0; i < arr3.Count; i++)
             {
                 if (typeof(lbSet) == arr3[i].GetType())
