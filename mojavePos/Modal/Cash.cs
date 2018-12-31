@@ -146,7 +146,7 @@ namespace mojavePos.Modal
                     }
                     break;
                 case "ENTER":
-                    textbox2.Text = textbox1.Text;
+                        textbox2.Text = textbox1.Text;
                         textbox3.Text = (Convert.ToInt32(textbox2.Text) - Convert.ToInt32(textbox4.Text)).ToString();
 
                     //if (Convert.ToInt32(textbox4.Text) > Convert.ToInt32(textbox2.Text))
@@ -155,15 +155,21 @@ namespace mojavePos.Modal
                     //textbox3.Text = (Convert.ToInt32(textbox1.Text) - Convert.ToInt32(textbox2.Text)).ToString();
                     break;
                 case "결제완료":
-                    cv.Visible = false;
-                    api = new WebAPI();
-                    ht = new Hashtable();
-                    WebComm wc = new WebComm();
-                    ht.Add("spName", "sp_Order_Delete");
-                    ht.Add("tNo", tNo);
-                    api.Post("http://192.168.3.28:5000/sp_delete", ht);
-                    wc.Post2("http://192.168.3.28:5000/insert_CM");
-                    this.Dispose();
+                    if (textbox2.Text == "") MessageBox.Show("받은금액을 입력바랍니다.");
+                    if (textbox2.Text != "")
+                    {
+                        api = new WebAPI();
+                        ht = new Hashtable();
+                        WebComm wc = new WebComm();
+                        ht.Add("spName", "sp_Order_Delete");
+                        ht.Add("tNo", tNo);
+                        api.Post("http://192.168.3.28:5000/sp_delete", ht);
+                        wc.Post2("http://192.168.3.28:5000/insert_CM");
+                        MessageBox.Show("거스름돈은 " + textbox3.Text + " 원입니다.");
+
+                        this.Dispose();
+                    }
+                   
                     break;
             }
         }
