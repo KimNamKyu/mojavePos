@@ -40,7 +40,6 @@ namespace mojavePos
             ClientSize = new Size(750, 430);  // 폼 사이즈 지정
             //this.ControlBox = false;
             BackColor = Color.Black;
-
             // 제목 패널
             pnSet pn1 = new pnSet(this, 750, 110, 0, 0);
             Panel 패널 = ct.panel(pn1);
