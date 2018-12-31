@@ -222,11 +222,11 @@ namespace mojavePos.Modules
                 //MessageBox.Show(resultStr);
                 if ("1" == resultStr)
                 {
-                    //MessageBox.Show("성공");
+                    //MessageBox.Show("결제가 완료 되었습니다.!");
                 }
                 else
                 {
-                    //MessageBox.Show("실패");
+                    //MessageBox.Show("결제 실패!!");
                 }
 
                 return true;
