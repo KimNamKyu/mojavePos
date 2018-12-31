@@ -63,11 +63,11 @@ namespace WindowsFormsApp
                 string resultStr = Encoding.UTF8.GetString(result);
                 if ("1" == resultStr)
                 {
-                    MessageBox.Show("성공");
+                   // MessageBox.Show("성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
+                    //MessageBox.Show("실패");
                 }
                 MessageBox.Show(resultStr);
                 return true;
