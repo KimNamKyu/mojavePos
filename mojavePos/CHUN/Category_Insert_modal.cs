@@ -20,6 +20,7 @@ namespace mojavePos.CHUN
 
         public Category_Insert_modal()
         {
+            this.ControlBox = false;
             InitializeComponent();
             Load += Menu_modal_Load;
         }
@@ -77,7 +78,5 @@ namespace mojavePos.CHUN
                     break;
             }
         }
-       
-      
     }
 }

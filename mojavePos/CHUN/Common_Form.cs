@@ -39,7 +39,7 @@ namespace mojavePos
 
         public void FORM_03_Load(object sender, EventArgs e)
         {
-            
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(750, 430);
             ct = new _Create();
             BackColor = Color.FromArgb(191, 191, 191);
@@ -99,8 +99,7 @@ namespace mojavePos
                     {
                         api = new Module();
                         string total_money = api.getIdPass("http://192.168.3.28:5000/F3_total_day");
-                        //MessageBox.Show(Correctid);
-                       // MessageBox.Show(total_money);
+                     
                         if (total_money == null)
                         {
                             label.Text = "0";
@@ -120,6 +119,8 @@ namespace mojavePos
             영업시작버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
             영업시작버튼.BackgroundImage = mojavePos.Properties.Resources.자물쇠잠김;
             영업시작버튼.BackColor = Color.FromArgb(232, 227, 227);
+            영업시작버튼.FlatStyle = FlatStyle.Flat;
+            영업시작버튼.FlatAppearance.BorderSize = 0;
             Controls.Add(영업시작버튼);
 
             //영업시작 라벨
@@ -127,24 +128,10 @@ namespace mojavePos
            영업시작 = ct.lable(pn2_lb1);
             영업시작.TextAlign = ContentAlignment.MiddleCenter;
              영업시작.Font = new Font("Tahoma", 20, FontStyle.Bold);
+
             Controls.Add(영업시작);
 
-            //준비금 라벨
-            /*
-            lbSet pn2_lb2 = new lbSet(this, "pn2_lb2", "준비금", 55, 15,65, 155, 10);
-            준비금 = ct.lable(pn2_lb2);
-            준비금.TextAlign = ContentAlignment.MiddleCenter;
-            준비금.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            Controls.Add(준비금);
-
-            //준비금 텍스트박스
-            tbSet pn2_txbox = new tbSet(this, "pn2_txbox", 120, 20, 33, 175);
-            준비금텍스트박스 = ct.txtbox(pn2_txbox);
-            준비금텍스트박스.Font = new Font("Tahoma", 10, FontStyle.Bold);
-            준비금텍스트박스.TextAlign = HorizontalAlignment.Center;
-            Controls.Add(준비금텍스트박스);
-            */
-
+           
             //영업시작 패널
             pnSet pn2 = new pnSet(this, 180, 220, 300, 70);
             Panel 패널2 = ct.panel(pn2);
@@ -152,9 +139,6 @@ namespace mojavePos
             Controls.Add(패널2);   //패널 화면 출력
             패널2.Controls.Add(영업시작버튼);
             패널2.Controls.Add(영업시작);
-            //패널2.Controls.Add(준비금);
-            //패널2.Controls.Add(준비금텍스트박스);
-
             
             //관리자 시작 파트
             //관리자 버튼
@@ -162,6 +146,8 @@ namespace mojavePos
             Button 관리자버튼 = ct.btn(pn3_btn_1);
             관리자버튼.Font = new Font("Tahoma", 10, FontStyle.Bold);
             관리자버튼.BackColor = Color.FromArgb(232, 227, 227);
+            관리자버튼.FlatStyle = FlatStyle.Flat;
+            관리자버튼.FlatAppearance.BorderSize = 0;
             관리자버튼.BackgroundImage = mojavePos.Properties.Resources.가방수정;
           
 
@@ -222,8 +208,7 @@ namespace mojavePos
 
                     경고문.Text = lbText2;
                     영업시작.Text = lbText4;
-                    //준비금텍스트박스.Width = 0;
-                    //준비금.Text = "";
+                   
                     MP.Show();
 
                     value = false;
@@ -236,8 +221,7 @@ namespace mojavePos
                 {
                     경고문.Text = lbText1;
                     영업시작.Text = lbText3;
-                   //준비금텍스트박스.Width = 120;
-                    //준비금.Text = "준비금";
+                 
                     MessageBox.Show("영업을 종료 하였습니다.");
 
                     value = true;

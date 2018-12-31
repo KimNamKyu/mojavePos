@@ -36,7 +36,7 @@ namespace mojavePos
 
         private void FORM_01_Load(object sender, EventArgs e)
         {
-           
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             ClientSize = new Size(750, 430);  // 폼 사이즈 지정
             //this.ControlBox = false;
             BackColor = Color.Black;
@@ -92,9 +92,9 @@ namespace mojavePos
 
 
             ArrayList arr1 = new ArrayList();
-            arr1.Add(new lbSet(this, "lb3", "Name ", 150, 20, 190, 50,15));
+            arr1.Add(new lbSet(this, "lb3", "Name ", 150, 20, 190, 50, 15));
             arr1.Add(new lbSet(this, "lb4", "Password", 150, 20, 190, 100, 15));
-           
+
             for (int i = 0; i < arr1.Count; i++)
             {
                 if (typeof(lbSet) == arr1[i].GetType())
@@ -119,17 +119,19 @@ namespace mojavePos
                 {
                     Button button = ct.btn((btnSet)arr2[i]);
                     button.Font = new Font("Tahoma", 8, FontStyle.Regular);
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.FlatAppearance.BorderSize = 0;
                     패널3.Controls.Add(button);
                 }
             }
-            
+
             pnSet pn4 = new pnSet(this, 750, 19, 0, 411);
             Panel 패널4 = ct.panel(pn4);
             패널4.BackColor = Color.White;
             Controls.Add(패널4);   //패널 화면 출력
 
             ArrayList arr3 = new ArrayList();
-            arr3.Add(new lbSet(this, "lb3", "관리자 : (주)Mojav  연락처 : 1588-3000", 300, 20, 517, 3, 8));
+            arr3.Add(new lbSet(this, "lb3", "관리자 : (주)Mojave  연락처 : 1588-3000", 300, 20, 517, 3, 8));
             for (int i = 0; i < arr3.Count; i++)
             {
                 if (typeof(lbSet) == arr3[i].GetType())
@@ -140,37 +142,38 @@ namespace mojavePos
                 }
             }
         }
-        //비밀번호가 5회 이상 틀렸으면 아이디 정지시키고 연락해달라고 할것.
-        private void btn_Click(object sender, EventArgs e) 
+       
+        private void btn_Click(object sender, EventArgs e)
         {
             Module api = new Module();
             api = new Module();
-          
+
             F3 = new FORM_03();
             F1 = new FORM_01();
-           
+
             string Correctid = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Id");
             string Correctpw = api.getIdPass("http://192.168.3.28:5000/SI_select_Pos_Pass");
-           
-                if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
-                {
-                    F3.Show();
-                    //Dispose(false);
-                }
-                if (텍스트박스1.Text != Correctid)
-                {
-                    MessageBox.Show("아이디를 잘못 입력하셨습니다.");
-                }
-                if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
-                {
-                    MessageBox.Show("비밀번호를 잘못 입력하셨습니다.");
-                }
-                if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
-                {
-                    MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
-                }
-           }
-        
+
+            if (텍스트박스1.Text == Correctid && 텍스트박스2.Text == Correctpw)
+            {
+                F3.Show();
+                Dispose(false);
+            }
+            if (텍스트박스1.Text.Length == 0 || 텍스트박스2.Text.Length == 0)
+            {
+                MessageBox.Show("입력을 받지 않았습니다. 다시 입력해주시기 바랍니다.");
+            }
+            else if (텍스트박스1.Text != Correctid)
+            {
+                MessageBox.Show("아이디를 잘못 입력하셨습니다.");
+            }
+            else if (텍스트박스1.Text == Correctid && 텍스트박스2.Text != Correctpw)
+            {
+                MessageBox.Show("비밀번호를 잘못 입력하셨습니다.");
+            }
+
+        }
+
 
         private void btn2_Click(object sender, EventArgs e)
         {
